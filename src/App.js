@@ -31,7 +31,9 @@ function App() {
       </div>
 
       <div className="result p-5">
-        {output}
+        <pre>
+          {output}
+        </pre>
       </div>
     </div>
   );
