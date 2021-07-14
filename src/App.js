@@ -2,19 +2,17 @@ import { useState } from 'react';
 import appConfig from './config/app';
 import { app } from '@tauri-apps/api';
 import { Command } from '@tauri-apps/api/shell';
+import execute from './executor';
 
-async function execute(...args) {
-  const output = await new Command(...args).execute();
-
-  return output;
-}
 
 function App() {
   const [code, setCode] = useState("ls")
   const [output, setOutput] = useState('con meo to');
 
   const runCode = function () {
-    execute(code)
+    execute({
+      code: code
+    })
       .then(result => setOutput(result.stdout))
       .catch(error => console.log('error', error))
   }
@@ -27,6 +25,7 @@ function App() {
         <textarea
           value={code}
           onChange={e => setCode(e.target.value)}
+          autocorrect="off"
           className="w-full h-full bg-gray-500 focus:outline-none" />
       </div>
 
