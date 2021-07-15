@@ -1,20 +1,24 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import appConfig from './config/app';
 import StatusBar from './StatusBar';
 import Playground from './Playground';
 
 function App() {
-    const workingDirectory = appConfig.defaultDirectory;
+    const [directory, setDirectory] = useState(appConfig.defaultDirectory);
+
+    const changeDir = function(dir) {
+        setDirectory(dir)
+    }
 
     useEffect(() => {
-        document.title = workingDirectory;
+        document.title = directory;
     })
 
     return (
         <div className="h-screen flex flex-col bg-gray-500 overflow-hidden">
-            <Playground workingDirectory={workingDirectory} />
+            <Playground directory={directory} />
 
-            <StatusBar workingDirectory={workingDirectory} />
+            <StatusBar directory={directory} changeDirectory={changeDir} />
         </div>
     );
 }

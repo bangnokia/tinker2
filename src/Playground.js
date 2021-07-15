@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import execute from './executor';
 
-function Playground({ workingDirectory }) {
+function Playground({ directory }) {
     const [code, setCode] = useState("ls")
     const [output, setOutput] = useState('Press cmd + Enter to execute the code.');
 
     const runCode = function () {
         execute({
-            code: code,
-            target: workingDirectory
+            code,
+            directory
         })
             .then(result => setOutput(result.stdout))
             .catch(error => console.log('error', error))

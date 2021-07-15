@@ -1,16 +1,16 @@
 import { open } from "@tauri-apps/api/dialog";
 
-function StatusBar({ workingDirectory }) {
+function StatusBar({ directory, changeDirectory }) {
     const openFolderDialog = function () {
         open({
             multiple: false,
             directory: true
-        }).then(data => console.log(data));
+        }).then(dir => changeDirectory(dir));
     };
 
     return (
         <div className="status-bar flex items-center justify-between bg-gray-700 h-6 px-3 text-sm font-mono text-white">
-            <div className="flex-end">{workingDirectory}</div>
+            <div className="flex-end">{directory}</div>
             <div>
                 <span onClick={openFolderDialog}>
                     <OpenFolderIcon />
