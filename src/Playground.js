@@ -26,9 +26,9 @@ function Playground({ workingDirectory }) {
             </div>
 
             <div className="result p-5 break-words whitespace-pre-wrap">
-                <div className="break-words break-all whitespace-pre-line font-mono">
+                <pre className="">
                     {output}
-                </div>
+                </pre>
             </div>
         </div>
     )
