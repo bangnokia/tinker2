@@ -7,12 +7,12 @@
     "distDir": "../build",
     "devPath": "http://localhost:3000",
     "beforeDevCommand": "",
-    "beforeBuildCommand": ""
+    "beforeBuildCommand": "yarn build"
   },
   "tauri": {
     "bundle": {
       "active": true,
-      "targets": "all",
+      "targets": ["app"],
       "identifier": "com.tauri.dev",
       "icon": [
         "icons/32x32.png",
@@ -21,7 +21,9 @@
         "icons/icon.icns",
         "icons/icon.ico"
       ],
-      "resources": [],
+      "resources": [
+        "../bin"
+      ],
       "externalBin": [],
       "copyright": "",
       "category": "DeveloperTool",
