@@ -1,9 +1,15 @@
 import { useState } from 'react';
 import execute from './executor';
+import { appDir, resourceDir } from '@tauri-apps/api/path';
 
 function Playground({ directory }) {
     const [code, setCode] = useState("ls")
     const [output, setOutput] = useState('Press cmd + Enter to execute the code.');
+
+    resourceDir().then(data => {
+        console.log('resource dir', data)
+        setOutput(data)
+    })
 
     const runCode = function () {
         execute({
