@@ -1,5 +1,5 @@
 import { Command } from '@tauri-apps/api/shell';
-import { currentDir, resourceDir } from '@tauri-apps/api/path';
+import { configDir, currentDir, resourceDir } from '@tauri-apps/api/path';
 
 async function execute({ code, directory, type = 'local' }) {
     const base64Code = Buffer.from(code).toString('base64');

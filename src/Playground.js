@@ -1,14 +1,22 @@
 import { useState } from 'react';
 import execute from './executor';
+import { Command } from '@tauri-apps/api/shell';
 
 function Playground({ directory }) {
     const [code, setCode] = useState("User::first()")
     const [output, setOutput] = useState('Press cmd + Enter to execute the code.');
 
     const runCode = function () {
-        execute({ code, directory })
-            .then(result => setOutput(result.stdout))
-            .catch(error => console.log('error', error))
+        const command = new Command('ls', ['-la']);
+        command.stdout.on('data', line => console.log('line', line))
+        command.spawn()
+
+        // execute({ code, directory })
+        //     .then(result => {
+        //         setOutput(result.stdout)
+        //         console.log(result.stdout)
+        //     })
+        //     .catch(error => console.log('error', error))
     }
 
     return (
