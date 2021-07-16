@@ -16,9 +16,13 @@ function App() {
 
     return (
         <div className="h-screen flex flex-col bg-gray-500 overflow-hidden">
-            <Playground directory={directory} />
+            <div className="flex-grow flex-shrink h-full overflow-scroll">
+                <Playground directory={directory} />
+            </div>
 
-            <StatusBar directory={directory} changeDirectory={changeDir} />
+            <div className="flex-end">
+                <StatusBar directory={directory} changeDirectory={changeDir} />
+            </div>
         </div>
     );
 }

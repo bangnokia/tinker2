@@ -5,17 +5,17 @@ function StatusBar({ directory, changeDirectory }) {
         open({
             multiple: false,
             directory: true
-        }).then(dir => changeDirectory(dir));
+        }).then(dir => dir && changeDirectory(dir));
     };
 
     return (
-        <div className="status-bar flex items-center justify-between bg-gray-700 h-6 px-3 text-sm font-mono text-white">
-            <div className="flex-end">{directory}</div>
-            <div>
-                <span onClick={openFolderDialog}>
+        <div className="status-bar flex-shrink-0 flex items-center justify-between bg-gray-700 h-6 px-3 text-sm font-mono text-white">
+            <div className="">
+                <span onClick={openFolderDialog} className="cursor-pointer hover:text-indigo-500">
                     <OpenFolderIcon />
                 </span>
             </div>
+            <div>{directory}</div>
         </div>
     );
 }
