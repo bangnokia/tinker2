@@ -1,21 +1,12 @@
 import { useState } from 'react';
 import execute from './executor';
-import { appDir, resourceDir } from '@tauri-apps/api/path';
 
 function Playground({ directory }) {
-    const [code, setCode] = useState("ls")
+    const [code, setCode] = useState("User::first()")
     const [output, setOutput] = useState('Press cmd + Enter to execute the code.');
 
-    resourceDir().then(data => {
-        console.log('resource dir', data)
-        setOutput(data)
-    })
-
     const runCode = function () {
-        execute({
-            code,
-            directory
-        })
+        execute({ code, directory })
             .then(result => setOutput(result.stdout))
             .catch(error => console.log('error', error))
     }
@@ -27,7 +18,7 @@ function Playground({ directory }) {
                 <textarea
                     value={code}
                     onChange={e => setCode(e.target.value)}
-                    autocorrect="off"
+                    autoCorrect="off"
                     className="w-full h-full bg-gray-500 focus:outline-none" />
             </div>
 

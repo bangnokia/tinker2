@@ -22,7 +22,7 @@
         "icons/icon.ico"
       ],
       "resources": [
-        "../bin"
+        "./bin/"
       ],
       "externalBin": [],
       "copyright": "",
@@ -52,6 +52,12 @@
     },
     "allowlist": {
       "all": false,
+      "fs": {
+        "path": true
+      },
+      "shell": {
+        "all": true
+      },
       "dialog": {
         "open": true,
         "all": false,
