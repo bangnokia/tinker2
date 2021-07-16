@@ -7,16 +7,12 @@ function Playground({ directory }) {
     const [output, setOutput] = useState('Press cmd + Enter to execute the code.');
 
     const runCode = function () {
-        const command = new Command('ls', ['-la']);
-        command.stdout.on('data', line => console.log('line', line))
-        command.spawn()
-
-        // execute({ code, directory })
-        //     .then(result => {
-        //         setOutput(result.stdout)
-        //         console.log(result.stdout)
-        //     })
-        //     .catch(error => console.log('error', error))
+        execute({ code, directory })
+            .then(result => {
+                setOutput(Buffer.from(result.stdout, 'base64').toString('ascii'))
+                console.log(result.stdout)
+            })
+            .catch(error => console.log('error', error))
     }
 
     return (

@@ -1,7 +1,6 @@
 const appConfig = {
     mode: 'local',
-    defaultDirectory: '/Users/daudau/Code/laravel8',
-    psycho: '/Users/daudau/Code/bangnokia/tinker2/bin/psycho.phar'
+    defaultDirectory: '/Users/daudau/Code/laravel8'
 };
 
 export default appConfig;
