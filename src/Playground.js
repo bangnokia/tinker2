@@ -15,7 +15,8 @@ function Playground({ project }) {
         }
     }, [project])
 
-    const runCode = function () {
+    const runCode = function (e) {
+        e.preventDefault();
         setLoading(true)
         execute({ code, project })
             .then(({ stdout }) => {
@@ -31,14 +32,15 @@ function Playground({ project }) {
 
     return (
         <div className="h-full grid grid-cols-2 divide-x-2 divide-gray-800">
-            <div className="p-5 overflow-y-scroll">
-                <button onClick={runCode} className="border bg-red-500">Execute</button>
-                <textarea
+            <form className="p-5 overflow-y-scroll" onSubmit={runCode}>
+                <input
                     value={code}
                     onChange={e => setCode(e.target.value)}
                     autoCorrect="off"
-                    className="w-full h-full bg-gray-500 focus:outline-none" />
-            </div>
+                    autoFocus="true"
+                    className="w-full bg-gray-500 focus:outline-none" />
+                <button onClick={runCode} className="border bg-red-500">Execute</button>
+            </form>
 
             <div className="result p-5 break-all whitespace-pre-wrap overflow-scroll">
                 <div className="text-normal font-mono">
