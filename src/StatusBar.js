@@ -1,11 +1,14 @@
 import { open } from "@tauri-apps/api/dialog";
 
-function StatusBar({ directory, changeDirectory }) {
+function StatusBar({ project, changeProject }) {
     const openFolderDialog = function () {
         open({
             multiple: false,
             directory: true
-        }).then(dir => dir && changeDirectory(dir));
+        }).then(dir => dir && changeProject({
+            type: 'local',
+            path: dir
+        }));
     };
 
     return (
@@ -15,7 +18,7 @@ function StatusBar({ directory, changeDirectory }) {
                     <OpenFolderIcon />
                 </span>
             </div>
-            <div>{directory}</div>
+            <div>{project.path}</div>
         </div>
     );
 }

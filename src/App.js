@@ -4,24 +4,27 @@ import StatusBar from './StatusBar';
 import Playground from './Playground';
 
 function App() {
-    const [directory, setDirectory] = useState(appConfig.defaultDirectory);
+    const [project, setProject] = useState({
+        type: 'local',
+        path: appConfig.defaultDirectory
+    });
 
-    const changeDir = function(dir) {
-        setDirectory(dir)
+    const changeProject = function (project) {
+        setProject(project)
     }
 
     useEffect(() => {
-        document.title = directory;
+        document.title = project.path;
     })
 
     return (
         <div className="h-screen flex flex-col bg-gray-500 overflow-hidden">
             <div className="flex-grow flex-shrink h-full overflow-scroll">
-                <Playground directory={directory} />
+                <Playground project={project} />
             </div>
 
             <div className="flex-end">
-                <StatusBar directory={directory} changeDirectory={changeDir} />
+                <StatusBar project={project} changeProject={changeProject} />
             </div>
         </div>
     );

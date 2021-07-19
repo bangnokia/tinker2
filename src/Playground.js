@@ -1,17 +1,17 @@
 import { useState } from 'react';
 import execute from './executor';
-import { isBase64 } from './helpers';
 
-function Playground({ directory }) {
+function Playground({ project }) {
     const [code, setCode] = useState("User::first()")
     const [output, setOutput] = useState('Press cmd + Enter to execute the code.');
     const [loading, setLoading] = useState(false);
 
     const runCode = function () {
         setLoading(true)
-
-        execute({ code, directory })
+        execute({ code, directory: project.path })
             .then(({ stdout }) => {
+                // if we can parse json output, then it's the success response
+                // else just display the
                 try {
                     const result = JSON.parse(stdout.trim())
                     setOutput(result.output)
