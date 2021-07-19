@@ -1,17 +1,24 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import execute from './executor';
+import { uploadPsycho } from './executor';
 
 function Playground({ project }) {
-    const [code, setCode] = useState("User::first()")
-    const [output, setOutput] = useState('Press cmd + Enter to execute the code.');
-    const [loading, setLoading] = useState(false);
+    const [code, setCode] = useState("base_path()")
+    const [output, setOutput] = useState('Press cmd + Enter to execute the code.')
+    const [loading, setLoading] = useState(false)
+
+    useEffect(() => {
+        if (project.type === 'ssh') {
+            uploadPsycho(project).then(function () {
+                console.log('uploaded psycho' + (new Date()).toString())
+            })
+        }
+    }, [project])
 
     const runCode = function () {
         setLoading(true)
-        execute({ code, directory: project.path })
+        execute({ code, project })
             .then(({ stdout }) => {
-                // if we can parse json output, then it's the success response
-                // else just display the
                 try {
                     const result = JSON.parse(stdout.trim())
                     setOutput(result.output)
