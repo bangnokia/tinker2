@@ -12,12 +12,13 @@ function Playground({ directory }) {
 
         execute({ code, directory })
             .then(({ stdout }) => {
-                const output = stdout.trim()
-                setOutput(
-                    isBase64(output) ? Buffer.from(output, 'base64').toString('ascii') : output
-                )
+                try {
+                    const result = JSON.parse(stdout.trim())
+                    setOutput(result.output)
+                } catch (ex) {
+                    setOutput(stdout.trim())
+                }
             })
-            .catch(error => console.log('error', error))
             .finally(() => setLoading(false))
     }
 
