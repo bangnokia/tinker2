@@ -3,6 +3,7 @@ import appConfig from './config/app';
 import StatusBar from './StatusBar';
 import Playground from './Playground';
 import ServersPanel from './panels/ServersPanel';
+import Settings from './Settings';
 
 // local project
 const defaultLocalProject = {
@@ -43,9 +44,7 @@ function App() {
                 <Playground project={project} />
 
                 {/* System preferences */}
-                <div className="absolute left-0 top-0 h-full w-full backdrop-filter backdrop-blur-sm flex">
-                    <ServersPanel />
-                </div>
+                <Settings />
             </div>
 
             <div className="flex-end">

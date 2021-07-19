@@ -10,7 +10,6 @@ function ServersPanel() {
         'google.com'
     ])
 
-
     return (
         <Panel name="List of servers">
             <div className="w-64">
