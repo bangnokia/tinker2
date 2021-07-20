@@ -25,7 +25,7 @@ const defaultSSHProject = {
 
 function App() {
     const [project, setProject] = useState(defaultSSHProject);
-    const [settingsPanel, setSettingsPanel] = useState('')
+    const [settingsPanel, setSettingsPanel] = useState('servers')
 
     useEffect(() => {
         document.title = project.path;

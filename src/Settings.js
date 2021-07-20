@@ -9,7 +9,7 @@ function Settings({ setSettingsPanel, settingsPanel: panel }) {
     return (
         <div className="absolute left-0 top-0 h-full w-full backdrop-filter backdrop-blur-sm flex">
             {panel === 'servers' && (
-                <Panel closePanel={closePanel}>
+                <Panel closePanel={closePanel} name="List servers">
                     <ServersPanel />
                 </Panel>
             )}
