@@ -1,7 +1,9 @@
 import { useState } from "react"
 import ActionButton from "../buttons/ActionButton";
+import Button from "../buttons/Button";
+import RemoteServerService from "../services/RemoteServerService";
 
-function ServerForm() {
+function ServerForm({ reloadServers, setOpenForm }) {
     const [server, setServer] = useState({
         type: 'ssh',
         label: '',
@@ -26,7 +28,8 @@ function ServerForm() {
 
     const submit = function (e) {
         e.preventDefault();
-        console.log(server);
+
+        (new RemoteServerService()).store(server).then(() => reloadServers())
     }
 
     return (
@@ -37,11 +40,13 @@ function ServerForm() {
             <FormGroup label="User" name="user" id="user" required="required" value={server.user} onChange={handleChange} />
             <FormGroup label="Private key" name="private_key" required="required" id="private_key" value={server.private_key} onChange={handleChange} />
             <FormGroup label="Passpharse" name="passpharse" id="passpharse" value={server.passpharse} onChange={handleChange} />
-            <FormGroup label="Project path" placeholder="/var/www/daudau.cc" name="project_path" id="project_path" required="required" value={server.path} onChange={handleChange} />
+            <FormGroup label="Project path" placeholder="/var/www/daudau.cc" name="path" id="path" required="required" value={server.path} onChange={handleChange} />
             <FormGroup label="PHP binary" name="php_binary" id="php_binary" value={server.php_binary} required="required" onChange={handleChange} />
 
-            <div className="mt-5">
+            <div className="mt-10 flex justify-end space-x-2">
                 <ActionButton type="submit">Create</ActionButton>
+                <Button type="button"
+                    onClick={() => setOpenForm(false)}>Cancel</Button>
             </div>
         </form>
     )
@@ -54,7 +59,7 @@ function FormGroup({ label, id, name, value, type = 'text', required, onChange, 
                 {label} {required && <span className="text-red-500">*</span>}
             </label>
             <div className="mt-1 sm:mt-0 sm:col-span-2">
-                <input {...{ type, name, id, value, onChange }} {...otherProps} className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md" />
+                <input {...{ type, name, id, value, onChange, required }} {...otherProps} className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md" />
             </div>
         </div>
     )

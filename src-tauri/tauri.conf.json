@@ -51,7 +51,10 @@
         "allowlist": {
             "all": false,
             "fs": {
-                "path": true
+                "path": true,
+                "readTextFile": true,
+                "writeFile": true,
+                "createDir": true
             },
             "shell": {
                 "all": true
