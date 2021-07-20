@@ -31,14 +31,14 @@ function ServerForm() {
 
     return (
         <form className="w-96" onSubmit={submit}>
-            <FormGroup label="Label" name="label" id="label" value={server.label} onChange={handleChange} />
-            <FormGroup label="Host" name="host" id="host" value={server.host} onChange={handleChange} />
-            <FormGroup label="Port" name="port" id="port" value={server.port} onChange={handleChange} />
-            <FormGroup label="User" name="user" id="user" value={server.user} onChange={handleChange} />
-            <FormGroup label="Private key" name="private_key" id="private_key" value={server.private_key} onChange={handleChange} />
+            <FormGroup label="Label" name="label" id="label" required="required" value={server.label} onChange={handleChange} />
+            <FormGroup label="Host" name="host" id="host" required="required" value={server.host} onChange={handleChange} />
+            <FormGroup label="Port" name="port" id="port" required="required" value={server.port} onChange={handleChange} />
+            <FormGroup label="User" name="user" id="user" required="required" value={server.user} onChange={handleChange} />
+            <FormGroup label="Private key" name="private_key" required="required" id="private_key" value={server.private_key} onChange={handleChange} />
             <FormGroup label="Passpharse" name="passpharse" id="passpharse" value={server.passpharse} onChange={handleChange} />
-            <FormGroup label="Project path" placeholder="/var/www/daudau.cc" name="project_path" id="project_path" value={server.path} onChange={handleChange} />
-            <FormGroup label="PHP binary" name="php_binary" id="php_binary" value={server.php_binary} onChange={handleChange} />
+            <FormGroup label="Project path" placeholder="/var/www/daudau.cc" name="project_path" id="project_path" required="required" value={server.path} onChange={handleChange} />
+            <FormGroup label="PHP binary" name="php_binary" id="php_binary" value={server.php_binary} required="required" onChange={handleChange} />
 
             <div className="mt-5">
                 <ActionButton type="submit">Create</ActionButton>
@@ -47,11 +47,11 @@ function ServerForm() {
     )
 }
 
-function FormGroup({ label, id, name, value, type = 'text', onChange, ...otherProps }) {
+function FormGroup({ label, id, name, value, type = 'text', required, onChange, ...otherProps }) {
     return (
         <div className="grid grid-cols-3 gap-4 items-start pt-5">
             <label htmlFor={name} className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
-                {label}
+                {label} {required && <span className="text-red-500">*</span>}
             </label>
             <div className="mt-1 sm:mt-0 sm:col-span-2">
                 <input {...{ type, name, id, value, onChange }} {...otherProps} className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md" />
