@@ -1,6 +1,6 @@
 import { open } from "@tauri-apps/api/dialog";
 
-function StatusBar({ project, changeProject, manageRemoteServers }) {
+function StatusBar({ project, changeProject, setSettingsPanel }) {
     const openFolderDialog = function () {
         open({
             multiple: false,
@@ -20,7 +20,7 @@ function StatusBar({ project, changeProject, manageRemoteServers }) {
                     <OpenFolderIcon />
                 </span>
                 <span
-                    onClick={manageRemoteServers}
+                    onClick={() => setSettingsPanel('servers')}
                     className="cursor-pointer hover:text-indigo-500"
                     title="SSH Servers" >
                     <ServerIcon />

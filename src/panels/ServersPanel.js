@@ -1,8 +1,8 @@
 import { useState } from "react";
-import Panel from "../Panel"
+import Panel from "./Panel"
 
 
-function ServersPanel() {
+function ServersPanel({ closePanel }) {
     const [servers, setServers] = useState([
         'daudau.cc',
         'hhtq.daudau.cc',
@@ -11,17 +11,15 @@ function ServersPanel() {
     ])
 
     return (
-        <Panel name="List of servers">
-            <div className="w-64">
-                <ul>
-                    {
-                        servers.map((server, index) => (
-                            <li key={index}>{server}</li>
-                        ))
-                    }
-                </ul>
-            </div>
-        </Panel>
+        <div className="w-64">
+            <ul>
+                {
+                    servers.map((server, index) => (
+                        <li key={index}>{server}</li>
+                    ))
+                }
+            </ul>
+        </div>
     )
 }
 

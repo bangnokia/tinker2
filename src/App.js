@@ -25,6 +25,7 @@ const defaultSSHProject = {
 
 function App() {
     const [project, setProject] = useState(defaultSSHProject);
+    const [settingsPanel, setSettingsPanel] = useState('')
 
     useEffect(() => {
         document.title = project.path;
@@ -34,23 +35,19 @@ function App() {
         setProject(project)
     }
 
-    const manageRemoteServers = function () {
-
-    }
-
     return (
         <div className="h-screen flex flex-col bg-gray-500 overflow-hidden">
             <div className="flex-grow flex-shrink h-full overflow-scroll relative">
                 <Playground project={project} />
 
                 {/* System preferences */}
-                <Settings />
+                {settingsPanel && <Settings settingsPanel={settingsPanel} setSettingsPanel={setSettingsPanel} />}
             </div>
 
             <div className="flex-end">
                 <StatusBar project={project}
                     changeProject={changeProject}
-                    openManageServers={manageRemoteServers}
+                    setSettingsPanel={setSettingsPanel}
                 />
             </div>
         </div>

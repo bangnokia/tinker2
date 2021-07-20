@@ -1,7 +1,4 @@
-function Panel({ name = 'Untitle', children }) {
-    const closePanel = function () {
-        console.log("How we can close this panel")
-    }
+function Panel({ name = 'Untitle', closePanel, children }) {
     return (
         <div className="h-full bg-white shadow-xl rounded-md p-5 relative">
 
