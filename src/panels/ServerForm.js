@@ -54,7 +54,7 @@ function FormGroup({ label, id, name, value, type = 'text', onChange, ...otherPr
                 {label}
             </label>
             <div className="mt-1 sm:mt-0 sm:col-span-2">
-                <input type="text" name={name} id={id} value={value} onChange={onChange} {...otherProps} className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md" />
+                <input {...{ type, name, id, value, onChange }} {...otherProps} className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md" />
             </div>
         </div>
     )
