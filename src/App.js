@@ -2,30 +2,29 @@ import { useEffect, useState } from 'react';
 import appConfig from './config/app';
 import StatusBar from './StatusBar';
 import Playground from './Playground';
-import ServersPanel from './panels/ServersPanel';
 import Settings from './Settings';
 
 // local project
 const defaultLocalProject = {
     type: 'local',
-    path: appConfig.defaultDirectory
+    path: ""
 }
 
 // ssh remote project
-const defaultSSHProject = {
-    type: 'ssh',
-    host: '178.128.127.19',
-    port: '22',
-    path: '/home/forge/lab.daudau.cc',
-    user: 'forge',
-    private_key: '~/.ssh/id_rsa',
-    passpharse: '',
-    php_binary: 'php',
-}
+// const defaultSSHProject = {
+//     type: 'ssh',
+//     host: '178.128.127.19',
+//     port: '22',
+//     path: '/home/forge/lab.daudau.cc',
+//     user: 'forge',
+//     private_key: '~/.ssh/id_rsa',
+//     passpharse: '',
+//     php_binary: 'php',
+// }
 
 function App() {
-    const [project, setProject] = useState(defaultSSHProject);
-    const [settingsPanel, setSettingsPanel] = useState('servers')
+    const [project, setProject] = useState(defaultLocalProject);
+    const [settingsPanel, setSettingsPanel] = useState()
 
     useEffect(() => {
         document.title = project.path;
