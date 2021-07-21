@@ -1,6 +1,6 @@
 {
     "package": {
-        "productName": "Tinker2",
+        "productName": "Tinker 2",
         "version": "0.1.0"
     },
     "build": {
@@ -63,11 +63,14 @@
                 "open": true,
                 "all": false,
                 "save": false
+            },
+            "globalShortcut": {
+                "all": true
             }
         },
         "windows": [
             {
-                "title": "Tinker2",
+                "title": "Tinker 2",
                 "width": 800,
                 "height": 500,
                 "resizable": true,
