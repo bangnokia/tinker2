@@ -1,6 +1,6 @@
 function Panel({ name = 'Untitle', closePanel, children }) {
     return (
-        <div className="h-full bg-white shadow-xl rounded-md p-5 relative">
+        <div className="h-full bg-white shadow-xl rounded-md p-5 relative overflow-y-auto">
 
             <h1 className="text-indigo-600 text-2xl font-semibold tracking-tight">{name}</h1>
 

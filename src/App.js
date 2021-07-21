@@ -36,7 +36,7 @@ function App() {
     }
 
     return (
-        <div className="h-screen flex flex-col bg-gray-500 overflow-hidden">
+        <div className="font-sans h-screen flex flex-col bg-gray-500 overflow-hidden">
             <div className="flex-grow flex-shrink h-full overflow-scroll relative">
                 <Playground project={project} />
 

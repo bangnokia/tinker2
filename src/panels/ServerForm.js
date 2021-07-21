@@ -50,7 +50,7 @@ function ServerForm({ server: serverObject, index = null, loadServers, setOpenFo
             <FormGroup label="Project path" placeholder="/var/www/daudau.cc" name="path" id="path" required="required" value={server.path} onChange={handleChange} />
             <FormGroup label="PHP binary" name="php_binary" id="php_binary" value={server.php_binary} required="required" onChange={handleChange} />
 
-            <div className="mt-10 flex justify-end space-x-2">
+            <div className="mt-5 flex justify-end space-x-2">
                 <ActionButton type="submit">{server.id ? 'Update' : 'Create'}</ActionButton>
                 <Button type="button"
                     onClick={() => setOpenForm(false)}>Cancel</Button>
@@ -61,7 +61,7 @@ function ServerForm({ server: serverObject, index = null, loadServers, setOpenFo
 
 function FormGroup({ label, id, name, value, type = 'text', required, onChange, ...otherProps }) {
     return (
-        <div className="grid grid-cols-3 gap-4 items-start pt-5">
+        <div className="grid grid-cols-3 gap-4 items-start pt-3">
             <label htmlFor={name} className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
                 {label} {required && <span className="text-red-500">*</span>}
             </label>
