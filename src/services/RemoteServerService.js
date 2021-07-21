@@ -15,9 +15,19 @@ class RemoteServerService {
     }
 
     async store(server) {
-        (await this.index()).unshift(server)
+        server['id'] = (new Date()).getTime();
+
+        (await this.index()).unshift(server);
 
         return await this.persist();
+    }
+
+    async update(id, server) {
+        const servers = await this.index();
+        const index = servers.findIndex(server => server.id === id);
+        servers[index] = server;
+
+        return await this.sync(servers);
     }
 
     async sync(servers) {
@@ -51,7 +61,7 @@ class RemoteServerService {
 
         return await writeFile({
             path: this.dataFile,
-            contents: JSON.stringify(data)
+            contents: JSON.stringify(data, null, 4)
         }, { dir: BaseDirectory.Data })
     }
 

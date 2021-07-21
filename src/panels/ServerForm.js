@@ -3,8 +3,9 @@ import ActionButton from "../buttons/ActionButton";
 import Button from "../buttons/Button";
 import RemoteServerService from "../services/RemoteServerService";
 
-function ServerForm({ reloadServers, setOpenForm }) {
-    const [server, setServer] = useState({
+function ServerForm({ server: serverObject, index = null, loadServers, setOpenForm }) {
+    const [server, setServer] = useState(serverObject || {
+        id: '',
         type: 'ssh',
         label: '',
         path: '',
@@ -29,7 +30,13 @@ function ServerForm({ reloadServers, setOpenForm }) {
     const submit = function (e) {
         e.preventDefault();
 
-        (new RemoteServerService()).store(server).then(() => reloadServers())
+        const remoteServerService = new RemoteServerService();
+
+        if (!server.id) {
+            remoteServerService.store(server).then(() => loadServers())
+        } else {
+            remoteServerService.update(server.id, server).then(() => loadServers())
+        }
     }
 
     return (
@@ -44,7 +51,7 @@ function ServerForm({ reloadServers, setOpenForm }) {
             <FormGroup label="PHP binary" name="php_binary" id="php_binary" value={server.php_binary} required="required" onChange={handleChange} />
 
             <div className="mt-10 flex justify-end space-x-2">
-                <ActionButton type="submit">Create</ActionButton>
+                <ActionButton type="submit">{server.id ? 'Update' : 'Create'}</ActionButton>
                 <Button type="button"
                     onClick={() => setOpenForm(false)}>Cancel</Button>
             </div>
