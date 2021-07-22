@@ -1,5 +1,6 @@
 import ServersPanel from "./panels/ServersPanel";
 import Panel from "./panels/Panel";
+import PreferencesPanel from "./panels/PreferencesPanel";
 
 function Settings({ setSettingsPanel, settingsPanel: panel }) {
     const closePanel = function () {
@@ -11,6 +12,12 @@ function Settings({ setSettingsPanel, settingsPanel: panel }) {
             {panel === 'servers' && (
                 <Panel closePanel={closePanel} name="List servers">
                     <ServersPanel />
+                </Panel>
+            )}
+
+            {panel === 'preferences' && (
+                <Panel closePanel={closePanel} name="Preferences">
+                    <PreferencesPanel />
                 </Panel>
             )}
         </div>
