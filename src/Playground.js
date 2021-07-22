@@ -37,7 +37,7 @@ function Playground({ project }) {
                     value={code}
                     onChange={e => setCode(e.target.value)}
                     autoCorrect="off"
-                    autoFocus="true"
+                    autoFocus={true}
                     className="w-full bg-gray-500 focus:outline-none" />
                 <button onClick={runCode} className="border bg-red-500">Execute</button>
             </form>

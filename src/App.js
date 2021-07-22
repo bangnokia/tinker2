@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
-import appConfig from './config/app';
+import { useState } from 'react';
 import StatusBar from './StatusBar';
 import Playground from './Playground';
 import Settings from './Settings';
+import { SettingsProvider } from './contexts/SettingsContext';
 
 // local project
 const defaultLocalProject = {
@@ -26,30 +26,28 @@ function App() {
     const [project, setProject] = useState(defaultLocalProject);
     const [settingsPanel, setSettingsPanel] = useState()
 
-    useEffect(() => {
-        document.title = project.path;
-    })
-
     const changeProject = function (project) {
         setProject(project)
     }
 
     return (
-        <div className="font-sans h-screen flex flex-col bg-gray-500 overflow-hidden">
-            <div className="flex-grow flex-shrink h-full overflow-scroll relative">
-                <Playground project={project} />
+        <SettingsProvider>
+            <div className="font-sans h-screen flex flex-col bg-gray-500 overflow-hidden">
+                <div className="flex-grow flex-shrink h-full overflow-scroll relative">
+                    <Playground project={project} />
 
-                {/* System preferences */}
-                {settingsPanel && <Settings settingsPanel={settingsPanel} setSettingsPanel={setSettingsPanel} />}
-            </div>
+                    {/* System preferences */}
+                    {settingsPanel && <Settings settingsPanel={settingsPanel} setSettingsPanel={setSettingsPanel} />}
+                </div>
 
-            <div className="flex-end">
-                <StatusBar project={project}
-                    changeProject={changeProject}
-                    setSettingsPanel={setSettingsPanel}
-                />
+                <div className="flex-end">
+                    <StatusBar project={project}
+                        changeProject={changeProject}
+                        setSettingsPanel={setSettingsPanel}
+                    />
+                </div>
             </div>
-        </div>
+        </SettingsProvider>
     );
 }
 
