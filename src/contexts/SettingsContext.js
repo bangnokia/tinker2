@@ -4,18 +4,20 @@ import DatabaseService from "../services/DatabaseService";
 
 export const SettingsContext = createContext();
 
-export function SettingsProvider(props) {
-    const [settings, setSettings] = usePersistState('settings', {
-        default_php_binary: '',
+export function SettingsProvider({ defaultValue = null, ...otherProps }) {
+    const [settings, setSettings] = usePersistState('settings', defaultValue || {
+        default_php_binary: 'php',
         default_project: ''
     })
 
     useEffect(() => {
         const database = new DatabaseService();
-        database.get('settings').then(value => setSettings(value))
+        database.get('settings').then(value => {
+            setSettings(value)
+        })
     }, [setSettings])
 
     return (
-        <SettingsContext.Provider value={[settings, setSettings]} {...props} />
+        <SettingsContext.Provider value={[settings, setSettings]} {...otherProps} />
     );
 }

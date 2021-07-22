@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import StatusBar from './StatusBar';
 import Playground from './Playground';
 import Settings from './Settings';
 import { SettingsProvider } from './contexts/SettingsContext';
+import DatabaseService from './services/DatabaseService';
 
 // local project
 const defaultLocalProject = {
@@ -25,13 +26,24 @@ const defaultLocalProject = {
 function App() {
     const [project, setProject] = useState(defaultLocalProject);
     const [settingsPanel, setSettingsPanel] = useState()
+    const [defaultSettings, setDetaultSettings] = useState({
+        default_php_binary: 'php',
+        default_project: ''
+    })
 
     const changeProject = function (project) {
         setProject(project)
     }
 
+    useEffect(() => {
+        const database = new DatabaseService();
+        database.get('settings').then(value => {
+            setDetaultSettings(value)
+        })
+    }, [])
+
     return (
-        <SettingsProvider>
+        <SettingsProvider defaultValue={defaultSettings}>
             <div className="font-sans h-screen flex flex-col bg-gray-500 overflow-hidden">
                 <div className="flex-grow flex-shrink h-full overflow-scroll relative">
                     <Playground project={project} />
