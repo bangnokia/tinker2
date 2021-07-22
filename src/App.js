@@ -46,7 +46,7 @@ function App() {
                 })
             }
         })
-    }, [])
+    }, [project.path])
 
     return (
         <SettingsProvider defaultValue={defaultSettings}>
@@ -54,7 +54,12 @@ function App() {
                 <div className="flex-grow flex-shrink h-full overflow-scroll relative">
                     <Playground project={project} />
 
-                    {settingsPanel && <Settings settingsPanel={settingsPanel} setSettingsPanel={setSettingsPanel} />}
+                    {
+                        settingsPanel && <Settings
+                            changeProject={changeProject}
+                            settingsPanel={settingsPanel}
+                            setSettingsPanel={setSettingsPanel} />
+                    }
                 </div>
 
                 <div className="flex-end">

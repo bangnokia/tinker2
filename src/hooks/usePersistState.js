@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import DatabaseService from "../services/DatabaseService";
 
 function usePersistState(key, defaultValue = '') {

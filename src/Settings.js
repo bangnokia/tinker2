@@ -2,16 +2,21 @@ import ServersPanel from "./panels/ServersPanel";
 import Panel from "./panels/Panel";
 import PreferencesPanel from "./panels/PreferencesPanel";
 
-function Settings({ setSettingsPanel, settingsPanel: panel }) {
+function Settings({ setSettingsPanel, settingsPanel: panel, changeProject }) {
     const closePanel = function () {
         setSettingsPanel('')
+    }
+
+    const useProject = function (server) {
+        closePanel();
+        changeProject(server)
     }
 
     return (
         <div className="absolute left-0 top-0 h-full w-full backdrop-filter backdrop-blur-sm flex">
             {panel === 'servers' && (
                 <Panel closePanel={closePanel} name="List servers">
-                    <ServersPanel />
+                    <ServersPanel changeProject={useProject} />
                 </Panel>
             )}
 

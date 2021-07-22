@@ -30,7 +30,7 @@ function StatusBar({ project, changeProject, setSettingsPanel }) {
                     <ServerIcon />
                 </span>
             </div>
-            <div>{project.path || '/blackhole :)'}</div>
+            <div><span>{project.type}</span> {project.path || '/blackhole :)'}</div>
         </div>
     );
 }

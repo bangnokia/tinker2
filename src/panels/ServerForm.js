@@ -35,7 +35,10 @@ function ServerForm({ server: serverObject, index = null, loadServers, setOpenFo
         if (!server.id) {
             remoteServerService.store(server).then(() => loadServers())
         } else {
-            remoteServerService.update(server.id, server).then(() => loadServers())
+            remoteServerService.update(server.id, server).then(() => {
+                loadServers()
+                setOpenForm(false)
+            })
         }
     }
 
