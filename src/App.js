@@ -37,8 +37,14 @@ function App() {
 
     useEffect(() => {
         const database = new DatabaseService();
-        database.get('settings').then(value => {
-            setDetaultSettings(value)
+        database.get('settings').then(settings => {
+            setDetaultSettings(settings)
+            if (!project.path) {
+                setProject({
+                    type: 'local',
+                    path: settings.default_project
+                })
+            }
         })
     }, [])
 
@@ -48,7 +54,6 @@ function App() {
                 <div className="flex-grow flex-shrink h-full overflow-scroll relative">
                     <Playground project={project} />
 
-                    {/* System preferences */}
                     {settingsPanel && <Settings settingsPanel={settingsPanel} setSettingsPanel={setSettingsPanel} />}
                 </div>
 

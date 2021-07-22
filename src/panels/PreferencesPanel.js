@@ -36,7 +36,10 @@ function PreferencesPanel() {
                     PHP binary
                 </label>
                 <div className="mt-1 sm:mt-0 sm:col-span-2 flex space-x-1">
-                    <input value={settings.default_php_binary} readOnly={true} type="text" id="default_php_binary" className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md" />
+                    <input value={settings.default_php_binary} onChange={(e) => setSettings({
+                        ...settings,
+                        'default_php_binary': e.target.value
+                    })} type="text" id="default_php_binary" className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md" />
                     <Button onClick={selectPhpBinary}>Select</Button>
                 </div>
             </div>

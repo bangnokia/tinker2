@@ -1,5 +1,6 @@
 import { Command } from '@tauri-apps/api/shell';
 import { currentDir, resourceDir } from '@tauri-apps/api/path';
+import DatabaseService from './services/DatabaseService';
 
 async function execute({ code, project }) {
     const base64Code = Buffer.from(code).toString('base64');
@@ -8,8 +9,11 @@ async function execute({ code, project }) {
     // The problem here is where is the path of psycho.phar when we build the production app
     switch (project.type) {
         case 'local':
+            const database = new DatabaseService();
+            const phpBinary = (await database.get('settings')).default_php_binary
+
             return await new Command(
-                'php',
+                phpBinary,
                 [
                     psychoPath,
                     '--target=' + project.path,
