@@ -54,6 +54,7 @@
                 "path": true,
                 "readTextFile": true,
                 "writeFile": true,
+                "readDir": true,
                 "createDir": true
             },
             "shell": {

@@ -1,9 +1,10 @@
 import { BaseDirectory, readTextFile, writeFile } from "@tauri-apps/api/fs";
+import { dataFile } from "../helpers";
 
 class RemoteServerService {
     constructor() {
         this.servers = [];
-        this.dataFile = 'tinker2/data.json';
+        this.dataFile = dataFile();
     }
 
     async index() {

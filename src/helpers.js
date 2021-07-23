@@ -1,4 +1,4 @@
-import { readTextFile, createDir, writeFile, BaseDirectory } from "@tauri-apps/api/fs"
+import { readTextFile, createDir, writeFile, BaseDirectory, readDir } from "@tauri-apps/api/fs"
 
 export function dataFile() {
     return process.env.NODE_ENV === 'development' ? "tinker2/data_dev.json" : "tinker2/data.json"
@@ -15,9 +15,9 @@ export async function ensureDataFileExists() {
     try {
         await readTextFile(filePath, options)
     } catch (exception) {
-        console.log('trying to create data.json file.');
-
-        await createDir('tinker2', options)
+        if (! await (readDir('tinker2', options))) {
+            await createDir('tinker2', options)
+        }
 
         await writeFile({
             path: filePath,
