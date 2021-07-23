@@ -44,7 +44,7 @@ function ServerForm({ server: serverObject, index = null, loadServers, setOpenFo
 
     return (
         <form className="w-96" onSubmit={submit}>
-            <FormGroup label="Label" name="label" id="label" required="required" value={server.label} onChange={handleChange} />
+            <FormGroup label="Label" name="label" id="label" required="required" value={server.label} autoFocus={true} onChange={handleChange} />
             <FormGroup label="Host" name="host" id="host" required="required" value={server.host} onChange={handleChange} />
             <FormGroup label="Port" name="port" id="port" required="required" value={server.port} onChange={handleChange} />
             <FormGroup label="User" name="user" id="user" required="required" value={server.user} onChange={handleChange} />
