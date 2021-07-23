@@ -35,7 +35,7 @@ function Playground({ project }) {
 
     return (
         <div
-            className={`h-full grid  divide-gray-800 ` + layoutClasses}>
+            className={`h-full grid  divide-gray-800 transition transform ` + layoutClasses}>
             <form className="p-5 overflow-y-scroll" onSubmit={runCode}>
                 <input
                     value={code}

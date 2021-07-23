@@ -26,38 +26,43 @@ function StatusBar({ project, changeProject, setSettingsPanel }) {
 
             {/* Settings */}
             <div className="flex space-x-2">
-                <span onClick={() => setSettingsPanel('preferences')}
+                <button onClick={() => setSettingsPanel('preferences')}
+                    type="button"
                     className="cursor-pointer hover:text-indigo-500" title="Settings">
                     <SettingsIcon />
-                </span>
+                </button>
             </div>
 
             {/* Open projects */}
             <div className="flex space-x-1 items-center">
-                <span onClick={openFolderDialog}
+                <button onClick={openFolderDialog}
+                    type="button"
                     className="cursor-pointer hover:text-indigo-500"
                     title="Open folder">
                     <OpenFolderIcon />
-                </span>
-                <span
-                    onClick={() => setSettingsPanel('servers')}
+                </button>
+                <button onClick={() => setSettingsPanel('servers')}
+                    type="button"
                     className="cursor-pointer hover:text-indigo-500"
                     title="SSH Servers" >
                     <ServerIcon />
-                </span>
+                </button>
             </div>
 
             {/* Switch layout */}
             <div className="flex">
-                <span
-                    onClick={() => toggleLayout()}
+                <button onClick={() => toggleLayout()}
+                    type="button"
                     className={`cursor-pointer hover:text-indigo-500 transition transform ` + (settings.layout === 'vertical' ? 'rotate-180' : 'rotate-90')}
                     title="toggle layout">
                     <VerticalIcon />
-                </span>
+                </button>
             </div>
 
-            <div className="flex-grow text-right"><BadgeType project={project} /> {project.path || '/blackhole :)'}</div>
+            <div className="flex-grow text-right">
+                <BadgeType project={project} />
+                <span className="ml-2">{project.path || '/blackhole :)'}</span>
+            </div>
 
         </div>
     );
