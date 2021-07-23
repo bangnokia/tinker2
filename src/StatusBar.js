@@ -70,7 +70,7 @@ function StatusBar({ project, changeProject, setSettingsPanel }) {
 
 function VerticalIcon() {
     return (
-        <svg class="w-5 h-5" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 1.5C8 1.22386 7.77614 1 7.5 1C7.22386 1 7 1.22386 7 1.5V14.5C7 14.7761 7.22386 15 7.5 15C7.77614 15 8 14.7761 8 14.5V1.5ZM6 13V12H3C2.44772 12 2 11.5523 2 11V5C2 4.44772 2.44772 4 3 4H6V3H3C1.89543 3 1 3.89543 1 5V11C1 12.1046 1.89543 13 3 13H6ZM12 13H9V12H12C12.5523 12 13 11.5523 13 11V5C13 4.44772 12.5523 4 12 4H9V3H12C13.1046 3 14 3.89543 14 5V11C14 12.1046 13.1046 13 12 13Z" fill="currentColor"></path></svg>
+        <svg className="w-5 h-5" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 1.5C8 1.22386 7.77614 1 7.5 1C7.22386 1 7 1.22386 7 1.5V14.5C7 14.7761 7.22386 15 7.5 15C7.77614 15 8 14.7761 8 14.5V1.5ZM6 13V12H3C2.44772 12 2 11.5523 2 11V5C2 4.44772 2.44772 4 3 4H6V3H3C1.89543 3 1 3.89543 1 5V11C1 12.1046 1.89543 13 3 13H6ZM12 13H9V12H12C12.5523 12 13 11.5523 13 11V5C13 4.44772 12.5523 4 12 4H9V3H12C13.1046 3 14 3.89543 14 5V11C14 12.1046 13.1046 13 12 13Z" fill="currentColor"></path></svg>
     )
 }
 
@@ -91,7 +91,7 @@ function OpenFolderIcon() {
 function ServerIcon() {
     return (
         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" stroke-linejoin="round" strokeWidth="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
         </svg>
     )
 }
