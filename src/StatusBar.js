@@ -1,5 +1,4 @@
 import { open } from "@tauri-apps/api/dialog";
-import { useState } from "react";
 import { useSettings } from "./hooks/useSettings";
 
 function StatusBar({ project, changeProject, setSettingsPanel }) {
@@ -53,7 +52,7 @@ function StatusBar({ project, changeProject, setSettingsPanel }) {
                 <span
                     onClick={() => toggleLayout()}
                     className={`cursor-pointer hover:text-indigo-500 transition transform ` + (settings.layout === 'vertical' ? 'rotate-180' : 'rotate-90')}
-                    title="switch to vertical">
+                    title="toggle layout">
                     <VerticalIcon />
                 </span>
             </div>
