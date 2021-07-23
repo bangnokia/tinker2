@@ -1,10 +1,30 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import execute from './executor';
 import { uploadPsycho } from './executor';
 import { useSettings } from './hooks/useSettings';
+import Editor, { useMonaco } from "@monaco-editor/react"
+import { registerPHPSnippetLanguage } from "./utils/registerPHPSnippetLanguage";
+
+const editorOptions = {
+    lineHeight: 32,
+    fontSize: 16,
+    smoothScrolling: true,
+    wordWrap: 'on',
+    renderLineHighlight: 'none',
+    renderWhitespace: false,
+    scrollbar: {
+        verticalScrollbarSize: 0,
+        verticalSliderSize: 10
+    },
+    semanticHighlighting: {
+        enabled: true
+    },
+    minimap: {
+        enabled: false
+    }
+}
 
 function Playground({ project }) {
-    const [code, setCode] = useState("base_path()")
     const [output, setOutput] = useState('Press cmd + Enter to execute the code.')
     const [loading, setLoading] = useState(false)
     const [settings,] = useSettings()
@@ -18,38 +38,16 @@ function Playground({ project }) {
         }
     }, [project])
 
-    const runCode = function (e) {
-        e.preventDefault();
-        setLoading(true)
-        execute({ code, project })
-            .then(({ stdout }) => {
-                try {
-                    const result = JSON.parse(stdout.trim())
-                    setOutput(result.output)
-                } catch (ex) {
-                    setOutput(stdout.trim())
-                }
-            })
-            .finally(() => setLoading(false))
-    }
-
     return (
         <div
-            className={`h-full grid  divide-gray-800 transition transform ` + layoutClasses}>
-            <form className="p-5 overflow-y-scroll" onSubmit={runCode}>
-                <input
-                    value={code}
-                    onChange={e => setCode(e.target.value)}
-                    autoCorrect="off"
-                    autoFocus={true}
-                    className="w-full bg-gray-500 focus:outline-none" />
-                <button onClick={runCode} className="border bg-red-500">Execute</button>
-            </form>
+            className={`h-full grid divide-gray-800 transition transform ` + layoutClasses}>
+            <div className="editor overflow-auto">
+                <Input {...{ setLoading, setOutput, project }} />
+            </div>
 
-            <div className="result p-5 break-all whitespace-pre-wrap overflow-scroll relative">
-                <div className="text-normal font-mono">
-                    {output}
-                </div>
+            <div className="result relative">
+                {/* {outputComponent} */}
+                <Output output={output} />
 
                 {
                     loading && (
@@ -61,7 +59,79 @@ function Playground({ project }) {
                     )
                 }
             </div>
+
         </div>
+    )
+}
+
+function Input({ setLoading, setOutput, project }) {
+    const [code, setCode] = useState("range(1, 10)")
+    const monaco = useMonaco()
+    const editorRef = useRef(null)
+
+    const runCode = useCallback(() => {
+        setLoading(true)
+        execute({ code, project })
+            .then(({ stdout }) => {
+                try {
+                    const result = JSON.parse(stdout.trim())
+                    setOutput(result.output)
+                } catch (ex) {
+                    setOutput(stdout.trim())
+                }
+            })
+            .finally(() => setLoading(false))
+    }, [code, project, setLoading, setOutput])
+
+
+    useEffect(() => {
+        if (monaco) {
+            registerPHPSnippetLanguage(monaco.languages)
+        }
+        if (editorRef.current) {
+            editorRef.current.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter, function () {
+                runCode()
+            })
+        }
+    }, [monaco, editorRef, runCode])
+
+    function handleEditorDidMount(editor, monaco) {
+        editorRef.current = editor;
+    }
+    return (
+        <Editor
+            key="tinker-pad"
+            theme="vs-dark"
+            language="php-snippet"
+            defaultValue={code}
+            onChange={(value) => setCode(value)}
+            onMount={handleEditorDidMount}
+            options={editorOptions}
+        />
+    )
+}
+
+function Output({ output }) {
+    console.log('output')
+    return (
+        <>
+            <div className="h-full">
+                <Editor
+                    key="output"
+                    language="php-snippet"
+                    theme="vs-dark"
+                    value={output}
+                    options={{
+                        ...editorOptions,
+                        readOnly: true,
+                        wordWrap: 'off',
+                        renderIndentGuides: false,
+                        contextmenu: false,
+                    }}
+                />
+            </div>
+
+        </>
     )
 }
 
