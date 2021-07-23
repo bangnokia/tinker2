@@ -46,7 +46,7 @@ function Playground({ project }) {
                 <button onClick={runCode} className="border bg-red-500">Execute</button>
             </form>
 
-            <div className="result p-5 break-all whitespace-pre-wrap overflow-scroll">
+            <div className="result p-5 break-all whitespace-pre-wrap overflow-scroll relative">
                 <div className="text-normal font-mono">
                     {output}
                 </div>
