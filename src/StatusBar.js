@@ -67,7 +67,10 @@ function StatusBar({ project, changeProject, setSettingsPanel }) {
             </div>
 
             <div>
-                <button onClick={() => switchToDefaultProject()} className="hover:text-indigo-500">useDefault</button>
+                <button
+                    onClick={() => switchToDefaultProject()}
+                    className="hover:text-indigo-500"
+                    title="Switch to default project">useDefault</button>
             </div>
 
             <div className="flex-grow text-right">
