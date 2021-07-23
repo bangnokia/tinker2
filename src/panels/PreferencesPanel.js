@@ -2,9 +2,11 @@ import Button from "../buttons/Button"
 import { open } from "@tauri-apps/api/dialog"
 import { useSettings } from "../hooks/useSettings"
 import { Command } from "@tauri-apps/api/shell";
+import { useState } from "react";
 
 function PreferencesPanel() {
-    const [settings, setSettings] = useSettings();
+    const [settings, setSettings] = useSettings()
+    const [detecting, setDetecting] = useState(false)
 
     const selectPhpBinary = function () {
         open({
@@ -31,7 +33,9 @@ function PreferencesPanel() {
     }
 
     const detectPhpPath = async function () {
+        setDetecting(true)
         const result = await (new Command('which', 'php')).execute()
+        setDetecting(false)
         setSettings({
             ...settings,
             'default_php_binary': result.stdout
@@ -50,7 +54,9 @@ function PreferencesPanel() {
                         'default_php_binary': e.target.value
                     })} type="text" id="default_php_binary" className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md" />
                     <Button onClick={selectPhpBinary}>Select</Button>
-                    {!settings.default_php_binary && <Button onClick={detectPhpPath}>Detect</Button>}
+                    {!settings.default_php_binary &&
+                        <Button onClick={detectPhpPath} className={detecting ? 'animate-spin' : ''}>Detect</Button>
+                    }
                 </div>
             </div>
 

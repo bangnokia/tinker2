@@ -30,9 +30,17 @@ function StatusBar({ project, changeProject, setSettingsPanel }) {
                     <ServerIcon />
                 </span>
             </div>
-            <div><span>{project.type}</span> {project.path || '/blackhole :)'}</div>
+            <div><BadgeType project={project} /> {project.path || '/blackhole :)'}</div>
+
         </div>
     );
+}
+
+function BadgeType({ project }) {
+    const className = project.type === 'local' ? 'text-gray-500 bg-gray-300' : 'bg-red-500'
+    return (
+        <span className={`px-1 py-0.5 text-xs border border-none rounded ` + className}>{project.label || project.type}</span>
+    )
 }
 
 function OpenFolderIcon() {
