@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react';
 import execute from './executor';
 import { uploadPsycho } from './executor';
+import { useSettings } from './hooks/useSettings';
 
 function Playground({ project }) {
     const [code, setCode] = useState("base_path()")
     const [output, setOutput] = useState('Press cmd + Enter to execute the code.')
     const [loading, setLoading] = useState(false)
+    const [settings,] = useSettings()
+    const layoutClasses = settings.layout === 'vertical' ? 'grid-cols-2 divide-x-2' : 'grid-cols-1 divide-y-2';
 
     useEffect(() => {
         if (project.type === 'ssh') {
@@ -31,7 +34,8 @@ function Playground({ project }) {
     }
 
     return (
-        <div className="h-full grid grid-cols-2 divide-x-2 divide-gray-800">
+        <div
+            className={`h-full grid  divide-gray-800 ` + layoutClasses}>
             <form className="p-5 overflow-y-scroll" onSubmit={runCode}>
                 <input
                     value={code}

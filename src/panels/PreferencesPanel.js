@@ -69,6 +69,21 @@ function PreferencesPanel() {
                     <Button onClick={selectDefaultProject}>Select</Button>
                 </div>
             </div>
+
+            <div className="grid grid-cols-3 gap-4 items-start pt-3">
+                <label htmlFor="layout" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+                    Layout
+                </label>
+                <div className="mt-1 sm:mt-0 sm:col-span-2 flex space-x-1">
+                    <select className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md" value={settings.layout} onChange={(e) => setSettings({
+                        ...settings,
+                        layout: e.target.value
+                    })}>
+                        <option value="vertical">Vertical</option>
+                        <option value="horizontal">Horizontal</option>
+                    </select>
+                </div>
+            </div>
         </form>
     )
 }

@@ -28,7 +28,8 @@ function App() {
     const [settingsPanel, setSettingsPanel] = useState()
     const [defaultSettings, setDetaultSettings] = useState({
         default_php_binary: 'php',
-        default_project: ''
+        default_project: '',
+        layout: 'vertical'
     })
 
     const changeProject = function (project) {
