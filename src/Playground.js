@@ -96,19 +96,7 @@ function Input({ setOutput, project }) {
     const monaco = useMonaco()
     const editorRef = useRef(null)
 
-    const runCode = useCallback(() => {
-        setLoading(true)
-        execute({ code, project })
-            .then(({ stdout }) => {
-                try {
-                    const result = JSON.parse(stdout.trim())
-                    setOutput(result.output)
-                } catch (ex) {
-                    setOutput(stdout.trim())
-                }
-            })
-            .finally(() => setLoading(false))
-    }, [code, project, setLoading, setOutput])
+
 
 
     useEffect(() => {
@@ -116,11 +104,26 @@ function Input({ setOutput, project }) {
             registerPHPSnippetLanguage(monaco.languages)
         }
         if (editorRef.current) {
+            function runCode() {
+                setLoading(true)
+                execute({ code: editorRef.current.getValue(), project })
+                    .then(({ stdout }) => {
+                        try {
+                            const result = JSON.parse(stdout.trim())
+                            setOutput(result.output)
+                        } catch (ex) {
+                            setOutput(stdout.trim())
+                        }
+                    })
+                    .finally(() => setLoading(false))
+            }
+
             editorRef.current.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter, function () {
+                console.log('run code')
                 runCode()
             })
         }
-    }, [monaco, editorRef, runCode])
+    }, [monaco, editorRef, setLoading, project, setOutput])
 
     function handleEditorDidMount(editor, monaco) {
         editorRef.current = editor;
@@ -130,8 +133,8 @@ function Input({ setOutput, project }) {
             key="tinker-pad"
             theme="vs-dark"
             language="php-snippet"
-            defaultValue={code}
-            onChange={(value) => setCode(value)}
+            value={code}
+            // onChange={(value) => setCode(value)}
             onMount={handleEditorDidMount}
             options={editorOptions}
         />
@@ -139,7 +142,6 @@ function Input({ setOutput, project }) {
 }
 
 function Output({ output }) {
-    console.log('output')
     return (
         <>
             <div className="h-full">
@@ -157,7 +159,6 @@ function Output({ output }) {
                     }}
                 />
             </div>
-
         </>
     )
 }
