@@ -4,14 +4,14 @@ import { useSettings } from "./hooks/useSettings";
 function StatusBar({ project, changeProject, setSettingsPanel }) {
     const [settings, setSettings] = useSettings();
 
-    const toggleLayout = function () {
+    function toggleLayout() {
         setSettings({
             ...settings,
             'layout': settings.layout === 'vertical' ? 'horizontal' : 'vertical'
         })
     }
 
-    const openFolderDialog = function () {
+    function openFolderDialog() {
         open({
             multiple: false,
             directory: true
@@ -20,6 +20,13 @@ function StatusBar({ project, changeProject, setSettingsPanel }) {
             path: dir
         }));
     };
+
+    function switchToDefaultProject() {
+        changeProject({
+            type: 'local',
+            path: settings.default_project
+        });
+    }
 
     return (
         <div className="status-bar w-full flex-shrink-0 flex flex-wrap items-center space-x-5 bg-gray-700 h-6 px-3 text-sm font-mono text-white">
@@ -57,6 +64,10 @@ function StatusBar({ project, changeProject, setSettingsPanel }) {
                     title="toggle layout">
                     <VerticalIcon />
                 </button>
+            </div>
+
+            <div>
+                <button onClick={() => switchToDefaultProject()} className="hover:text-indigo-500">useDefault</button>
             </div>
 
             <div className="flex-grow text-right">
