@@ -18,7 +18,7 @@ fn make_menu() -> Menu {
   let main_submenu = Submenu::new(
     "Tinker 2",
     Menu::new()
-      .add_native_item(MenuItem::About("About Tinker 2".to_string()))
+      .add_native_item(MenuItem::About("Tinker 2".to_string()))
       .add_native_item(MenuItem::EnterFullScreen)
       .add_native_item(MenuItem::Quit),
   );
