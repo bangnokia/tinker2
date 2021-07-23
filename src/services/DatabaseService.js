@@ -14,8 +14,6 @@ export default class DatabaseService {
     async set(key, value) {
         await this.ensureDataLoaded()
 
-        console.log('in set database ', key, value)
-
         this.data[key] = value;
 
         this.persist()

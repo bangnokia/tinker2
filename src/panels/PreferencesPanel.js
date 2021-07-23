@@ -1,6 +1,7 @@
 import Button from "../buttons/Button"
 import { open } from "@tauri-apps/api/dialog"
 import { useSettings } from "../hooks/useSettings"
+import { Command } from "@tauri-apps/api/shell";
 
 function PreferencesPanel() {
     const [settings, setSettings] = useSettings();
@@ -29,8 +30,16 @@ function PreferencesPanel() {
         })
     }
 
+    const detectPhpPath = async function () {
+        const result = await (new Command('which', 'php')).execute()
+        setSettings({
+            ...settings,
+            'default_php_binary': result.stdout
+        })
+    }
+
     return (
-        <form className="w-full" style={{ width: '500px' }}>
+        <form className="w-full" style={{ width: '690px' }}>
             <div className="grid grid-cols-3 gap-4 items-start pt-3">
                 <label htmlFor="default_php_binary" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
                     PHP binary
@@ -41,6 +50,7 @@ function PreferencesPanel() {
                         'default_php_binary': e.target.value
                     })} type="text" id="default_php_binary" className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md" />
                     <Button onClick={selectPhpBinary}>Select</Button>
+                    {!settings.default_php_binary && <Button onClick={detectPhpPath}>Detect</Button>}
                 </div>
             </div>
 
