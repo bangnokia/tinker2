@@ -47,7 +47,7 @@ function PlaygroundProvider(props) {
 function Playground({ project }) {
     const [output, setOutput] = useState('')
     const [settings,] = useSettings()
-    const layoutClasses = settings.layout === 'vertical' ? 'grid-cols-2 divide-x-2' : 'grid-cols-1 divide-y-2';
+    const layoutClasses = settings.layout === 'vertical' ? 'grid-cols-2 divide-x-2' : 'grid-rows-2 divide-y-2';
 
     useEffect(() => {
         if (project.type === 'ssh') {
@@ -60,7 +60,9 @@ function Playground({ project }) {
     return (
         <PlaygroundProvider>
             <div
-                className={`h-full grid divide-gray-800 transition transform ` + layoutClasses}>
+                className={`h-full grid divide-gray-800 transition transform ` + layoutClasses} style={{
+                    backgroundColor: 'rgb(23, 23, 23)'
+                }}>
                 <div className="editor overflow-auto relative">
                     <Input setOutput={setOutput} project={project} />
                 </div>
