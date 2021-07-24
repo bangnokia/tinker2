@@ -1,9 +1,10 @@
-import { useState, useEffect, useRef, createContext, useContext, useCallback } from 'react';
+import { useState, useEffect, useRef, createContext, useContext, useCallback, useLayoutEffect } from 'react';
 import execute from './executor';
 import { uploadPsycho } from './executor';
 import { useSettings } from './hooks/useSettings';
 import Editor, { useMonaco } from "@monaco-editor/react"
 import { registerPHPSnippetLanguage } from "./utils/registerPHPSnippetLanguage";
+import Split from 'split.js'
 
 const editorOptions = {
     lineHeight: 32,
@@ -47,7 +48,8 @@ function PlaygroundProvider(props) {
 function Playground({ project }) {
     const [output, setOutput] = useState('')
     const [settings,] = useSettings()
-    const layoutClasses = settings.layout === 'vertical' ? 'grid-cols-2 divide-x-2' : 'grid-rows-2 divide-y-2';
+    const splitInstance = useRef(null)
+    const layout = settings.layout === 'vertical' ? 'horizontal' : 'vertical'
 
     useEffect(() => {
         if (project.type === 'ssh') {
@@ -57,19 +59,29 @@ function Playground({ project }) {
         }
     }, [project])
 
+    useLayoutEffect(() => {
+        if (splitInstance.current) {
+            splitInstance.current.destroy()
+        }
+        splitInstance.current = Split(['.pg-input', '.pg-output'], {
+            direction: layout,
+            gutterSize: 4
+        })
+    }, [layout])
+
     return (
         <PlaygroundProvider>
             <div
-                className={`h-full grid divide-gray-800 transition transform ` + layoutClasses} style={{
+                className={`flex h-full w-full ` + (layout === 'vertical' ? 'flex-col' : '')}
+                style={{
                     backgroundColor: 'rgb(23, 23, 23)'
                 }}>
-                <div className="editor overflow-auto relative">
+                <div className="pg-input overflow-auto">
                     <Input setOutput={setOutput} project={project} />
                 </div>
 
-                <div className="result overflow-auto relative">
+                <div className="pg-output overflow-auto relative">
                     <Output output={output} />
-
                     <LoadingIndicator />
                 </div>
 
