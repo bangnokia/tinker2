@@ -32,17 +32,17 @@ function App({ settings }) {
     }
 
     useEffect(() => {
-        if (defaultSettings.default_project) {
+        if (defaultSettings.default_php_binary) {
             if (!project.path) {
                 setProject({
                     type: 'local',
-                    path: defaultSettings.default_project
+                    path: defaultSettings.default_project || ''
                 })
             }
         } else {
             setSettingsPanel('preferences')
         }
-    }, [defaultSettings.default_project, project.path, settings])
+    }, [])
 
     return (
         <SettingsProvider defaultValue={defaultSettings}>
