@@ -45,7 +45,7 @@ function PlaygroundProvider(props) {
 }
 
 function Playground({ project }) {
-    const [output, setOutput] = useState('Press cmd + Enter to execute the code.')
+    const [output, setOutput] = useState('')
     const [settings,] = useSettings()
     const layoutClasses = settings.layout === 'vertical' ? 'grid-cols-2 divide-x-2' : 'grid-cols-1 divide-y-2';
 
