@@ -3,7 +3,6 @@ import StatusBar from './StatusBar';
 import Playground from './Playground';
 import Settings from './Settings';
 import { SettingsProvider } from './contexts/SettingsContext';
-import DatabaseService from './services/DatabaseService';
 
 // local project
 const defaultLocalProject = {
@@ -23,64 +22,49 @@ const defaultLocalProject = {
 //     php_binary: 'php',
 // }
 
-function App() {
-    console.log('in app')
+function App({ settings }) {
     const [project, setProject] = useState(defaultLocalProject);
-    const [loaded, setLoaded] = useState(false)
     const [settingsPanel, setSettingsPanel] = useState()
-    const [defaultSettings, setDetaultSettings] = useState({
-        default_php_binary: 'php',
-        default_project: '',
-        layout: 'vertical'
-    })
+    const [defaultSettings,] = useState(settings)
 
     const changeProject = function (project) {
         setProject(project)
     }
 
     useEffect(() => {
-        const database = new DatabaseService();
-        database.get('settings').then(settings => {
-            if (settings) {
-                setDetaultSettings(settings)
-
-                if (!project.path) {
-                    setProject({
-                        type: 'local',
-                        path: settings.default_project
-                    })
-                }
-            } else {
-                setSettingsPanel('preferences')
+        if (defaultSettings.default_project) {
+            if (!project.path) {
+                setProject({
+                    type: 'local',
+                    path: defaultSettings.default_project
+                })
             }
-
-            setLoaded(true)
-        })
-    }, [project.path])
+        } else {
+            setSettingsPanel('preferences')
+        }
+    }, [defaultSettings.default_project, project.path, settings])
 
     return (
-        <>
-            {loaded && <SettingsProvider defaultValue={defaultSettings}>
-                <div className="font-sans h-screen flex flex-col bg-gray-500 overflow-hidden">
-                    <div className="flex-grow flex-shrink h-full overflow-scroll relative">
-                        <Playground project={project} />
-                        {
-                            settingsPanel && <Settings
-                                changeProject={changeProject}
-                                settingsPanel={settingsPanel}
-                                setSettingsPanel={setSettingsPanel} />
-                        }
-                    </div>
-
-                    <div className="flex-end">
-                        <StatusBar project={project}
+        <SettingsProvider defaultValue={defaultSettings}>
+            <div className="font-sans h-screen flex flex-col bg-gray-500 overflow-hidden">
+                <div className="flex-grow flex-shrink h-full overflow-scroll relative">
+                    <Playground project={project} />
+                    {
+                        settingsPanel && <Settings
                             changeProject={changeProject}
-                            setSettingsPanel={setSettingsPanel}
-                        />
-                    </div>
+                            settingsPanel={settingsPanel}
+                            setSettingsPanel={setSettingsPanel} />
+                    }
                 </div>
-            </SettingsProvider>}
-        </>
+
+                <div className="flex-end">
+                    <StatusBar project={project}
+                        changeProject={changeProject}
+                        setSettingsPanel={setSettingsPanel}
+                    />
+                </div>
+            </div>
+        </SettingsProvider>
     );
 }
 

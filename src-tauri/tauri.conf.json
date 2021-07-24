@@ -72,8 +72,8 @@
         "windows": [
             {
                 "title": "Tinker 2",
-                "width": 800,
-                "height": 500,
+                "width": 900,
+                "height": 600,
                 "resizable": true,
                 "fullscreen": false
             }

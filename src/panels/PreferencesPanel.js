@@ -52,7 +52,7 @@ function PreferencesPanel() {
                     <input value={settings.default_php_binary} onChange={(e) => setSettings({
                         ...settings,
                         'default_php_binary': e.target.value
-                    })} type="text" id="default_php_binary" className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md" />
+                    })} type="text" id="default_php_binary" placeholder="php" className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md" />
                     <Button onClick={selectPhpBinary}>Select</Button>
                     {!settings.default_php_binary &&
                         <Button onClick={detectPhpPath} className={detecting ? 'animate-spin' : ''}>Detect</Button>
