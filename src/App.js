@@ -8,7 +8,7 @@ import DatabaseService from './services/DatabaseService';
 // local project
 const defaultLocalProject = {
     type: 'local',
-    path: ""
+    path: ''
 }
 
 // ssh remote project
@@ -24,6 +24,7 @@ const defaultLocalProject = {
 // }
 
 function App() {
+    console.log('in app')
     const [project, setProject] = useState(defaultLocalProject);
     const [loaded, setLoaded] = useState(false)
     const [settingsPanel, setSettingsPanel] = useState()
@@ -40,13 +41,19 @@ function App() {
     useEffect(() => {
         const database = new DatabaseService();
         database.get('settings').then(settings => {
-            setDetaultSettings(settings)
-            if (!project.path) {
-                setProject({
-                    type: 'local',
-                    path: settings.default_project
-                })
+            if (settings) {
+                setDetaultSettings(settings)
+
+                if (!project.path) {
+                    setProject({
+                        type: 'local',
+                        path: settings.default_project
+                    })
+                }
+            } else {
+                setSettingsPanel('preferences')
             }
+
             setLoaded(true)
         })
     }, [project.path])
