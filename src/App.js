@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import StatusBar from './StatusBar';
 import Playground from './Playground';
 import Settings from './Settings';
