@@ -3,8 +3,10 @@ import { ensureDataFileExists } from "./helpers"
 import DatabaseService from "./services/DatabaseService"
 import App from "./App"
 import SplashScreen from "./SplashScreen"
+import { SettingsProvider } from "./contexts/SettingsContext"
 
 export default function Tinker2() {
+    console.log('in tinker2')
     const [hasDataFile, setHasDataFile] = useState(false)
     const [loaded, setLoaded] = useState(false)
     const [defaultSettings, setDetaultSettings] = useState({
@@ -18,6 +20,7 @@ export default function Tinker2() {
             setHasDataFile(true)
 
             const db = new DatabaseService();
+
             db.get('settings').then(settings => {
                 if (settings) {
                     setDetaultSettings(settings)
@@ -27,8 +30,18 @@ export default function Tinker2() {
         })
     }, [])
 
+    const ready = hasDataFile && loaded;
+
 
     return (
-        <>{(hasDataFile && loaded) ? <App settings={defaultSettings} /> : <SplashScreen />}</>
+        <>{
+            ready
+                ?
+                <SettingsProvider defaultValue={defaultSettings}>
+                    <App />
+                </SettingsProvider>
+                :
+                <SplashScreen />
+        }</>
     )
 }

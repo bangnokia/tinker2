@@ -15,16 +15,17 @@ export async function ensureDataFileExists() {
     try {
         await readTextFile(filePath, options)
     } catch (exception) {
+        console.log('cant read data.json')
         try {
             await readDir('tinker2', options)
         } catch (ex) {
-            console.log('create tinker 2 dir', ex)
+            console.log('cant cread tinker2 folder, create tinker2/', ex)
             await createDir('tinker2', options)
+            console.log('create data.json')
             await writeFile({
                 path: filePath,
                 contents: "{}"
             }, options)
-            console.log('create data.json')
         }
     }
 }

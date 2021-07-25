@@ -65,7 +65,7 @@ function PreferencesPanel() {
                     Default project
                 </label>
                 <div className="mt-1 sm:mt-0 sm:col-span-2 flex space-x-1">
-                    <input value={settings.default_project} readOnly={true} type="text" id="default_project" className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md" />
+                    <input value={settings.default_project} readOnly={true} placeholder="/Users/yourname/Code/dummy-laravel8" type="text" id="default_project" className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md" />
                     <Button onClick={selectDefaultProject}>Select</Button>
                 </div>
             </div>
@@ -74,14 +74,42 @@ function PreferencesPanel() {
                 <label htmlFor="layout" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
                     Layout
                 </label>
-                <div className="mt-1 sm:mt-0 sm:col-span-2 flex space-x-1">
-                    <select className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md" value={settings.layout} onChange={(e) => setSettings({
-                        ...settings,
-                        layout: e.target.value
-                    })}>
-                        <option value="vertical">Vertical</option>
-                        <option value="horizontal">Horizontal</option>
-                    </select>
+                <div className="mt-1 sm:mt-0 sm:col-span-2 flex space-x-5">
+                    <div className="flex items-center space-x-2 block pt-2">
+                        <input
+                            id="layout-vertical"
+                            name="layout"
+                            type="radio"
+                            value="vertical"
+                            className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
+                            checked={settings.layout === 'vertical'}
+                            onChange={(e) => setSettings({
+                                ...settings,
+                                layout: e.target.value
+                            })}
+                        />
+                        <label htmlFor="layout-vertical" className="ml-3 block text-sm font-medium text-gray-700">
+                            Vertical
+                        </label>
+                    </div>
+
+                    <div className="flex items-center space-x-2 block pt-2">
+                        <input
+                            id="layout-horizontal"
+                            name="layout"
+                            type="radio"
+                            value="horizontal"
+                            className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
+                            checked={settings.layout === 'horizontal'}
+                            onChange={(e) => setSettings({
+                                ...settings,
+                                layout: e.target.value
+                            })}
+                        />
+                        <label htmlFor="layout-horizontal" className="ml-3 block text-sm font-medium text-gray-700">
+                            Horizontal
+                        </label>
+                    </div>
                 </div>
             </div>
         </form>
