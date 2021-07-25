@@ -12,7 +12,7 @@
     "tauri": {
         "bundle": {
             "active": true,
-            "targets": ["app"],
+            "targets": ["all"],
             "identifier": "com.daudau.tinker2",
             "icon": [
                 "icons/32x32.png",
