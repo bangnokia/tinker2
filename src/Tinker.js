@@ -6,7 +6,6 @@ import SplashScreen from "./SplashScreen"
 import { SettingsProvider } from "./contexts/SettingsContext"
 
 export default function Tinker2() {
-    console.log('in tinker2')
     const [hasDataFile, setHasDataFile] = useState(false)
     const [loaded, setLoaded] = useState(false)
     const [defaultSettings, setDetaultSettings] = useState({
@@ -14,6 +13,8 @@ export default function Tinker2() {
         default_project: '',
         layout: 'vertical'
     })
+
+    const ready = hasDataFile && loaded;
 
     useEffect(() => {
         ensureDataFileExists().then(() => {
@@ -29,9 +30,6 @@ export default function Tinker2() {
             })
         })
     }, [])
-
-    const ready = hasDataFile && loaded;
-
 
     return (
         <>{
