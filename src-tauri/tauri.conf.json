@@ -46,7 +46,12 @@
             }
         },
         "updater": {
-            "active": false
+            "active": true,
+            "endpoints": [
+                "http://tinker2.com.test/update/{{target}}/{{current_version}}"
+            ],
+            "dialog": true,
+            "pubkey": ""
         },
         "allowlist": {
             "all": false,
