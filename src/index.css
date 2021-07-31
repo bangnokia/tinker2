@@ -5,3 +5,7 @@
 .gutter {
     @apply transition hover:bg-blue-500;
 }
+
+.sidebar-icon {
+    @apply w-12 h-12 place-self-end flex items-center justify-center text-gray-500 hover:text-white;
+}

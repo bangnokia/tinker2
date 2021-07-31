@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import StatusBar from './StatusBar';
 import Playground from './Playground';
 import Settings from './Settings';
+import Sidebar from './Sidebar';
 import { useSettings } from './hooks/useSettings';
 
 // local project
@@ -47,7 +48,8 @@ function App() {
 
     return (
         <div className="font-sans h-screen flex flex-col bg-gray-500 overflow-hidden">
-            <div className="flex-grow flex-shrink h-full overflow-scroll relative">
+            <div className="flex flex-grow flex-shrink h-full overflow-scroll relative">
+                <Sidebar />
                 <Playground project={project} />
                 {
                     settingsPanel && <Settings
