@@ -4,6 +4,7 @@ import Playground from './Playground';
 import Settings from './Settings';
 import Sidebar from './Sidebar';
 import { useSettings } from './hooks/useSettings';
+import DatabaseService from './services/DatabaseService';
 
 // local project
 const defaultLocalProject = {
@@ -52,13 +53,15 @@ function App() {
                 <Sidebar changeProject={changeProject}
                     setSettingsPanel={setSettingsPanel} />
 
-                <Playground project={project} />
-                {
-                    settingsPanel && <Settings
-                        changeProject={changeProject}
-                        settingsPanel={settingsPanel}
-                        setSettingsPanel={setSettingsPanel} />
-                }
+                <div className="flex w-full h-full relative">
+                    <Playground project={project} />
+                    {
+                        settingsPanel && <Settings
+                            changeProject={changeProject}
+                            settingsPanel={settingsPanel}
+                            setSettingsPanel={setSettingsPanel} />
+                    }
+                </div>
             </div>
 
             <div className="flex-end">
