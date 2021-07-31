@@ -4,7 +4,6 @@ import Playground from './Playground';
 import Settings from './Settings';
 import Sidebar from './Sidebar';
 import { useSettings } from './hooks/useSettings';
-import DatabaseService from './services/DatabaseService';
 
 // local project
 const defaultLocalProject = {
@@ -49,7 +48,7 @@ function App() {
 
     return (
         <div className="font-sans h-screen flex flex-col bg-gray-500 overflow-hidden">
-            <div className="flex flex-grow flex-shrink h-full overflow-scroll relative">
+            <div className="flex flex-grow flex-shrink h-full overflow-hidden relative">
                 <Sidebar changeProject={changeProject}
                     setSettingsPanel={setSettingsPanel} />
 
