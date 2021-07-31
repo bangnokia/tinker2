@@ -49,7 +49,9 @@ function App() {
     return (
         <div className="font-sans h-screen flex flex-col bg-gray-500 overflow-hidden">
             <div className="flex flex-grow flex-shrink h-full overflow-scroll relative">
-                <Sidebar />
+                <Sidebar changeProject={changeProject}
+                    setSettingsPanel={setSettingsPanel} />
+
                 <Playground project={project} />
                 {
                     settingsPanel && <Settings
