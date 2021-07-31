@@ -16,7 +16,7 @@
         "web-vitals": "^1.0.1"
     },
     "scripts": {
-        "dev": "BROWSER=none craco start",
+        "dev": "cross-env BROWSER=none craco start",
         "build": "craco build",
         "test": "craco test",
         "eject": "react-scripts eject",
@@ -43,6 +43,7 @@
     "devDependencies": {
         "@tauri-apps/cli": "^1.0.0-beta.5",
         "autoprefixer": "^9.8.6",
+        "cross-env": "^7.0.3",
         "postcss": "^7.0.36",
         "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.4"
     }

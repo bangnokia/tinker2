@@ -34,7 +34,11 @@ function PreferencesPanel() {
 
     const detectPhpPath = async function () {
         setDetecting(true)
-        const result = await (new Command('which', 'php')).execute()
+        const result = await (new Command(
+            //process.platform === 'win32' ? 'where' : 'which',
+            'where',
+            'php'))
+            .execute()
         setDetecting(false)
         setSettings({
             ...settings,

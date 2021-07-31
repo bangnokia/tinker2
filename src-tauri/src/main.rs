@@ -23,6 +23,13 @@ fn make_menu() -> Menu {
       .add_native_item(MenuItem::Quit),
   );
 
+  let file_submenu = Submenu::new(
+    "File",
+    Menu::new()
+      .add_native_item(MenuItem::Minimize)
+      .add_native_item(MenuItem::Quit),
+  );
+
   let edit_submenu = Submenu::new(
     "Edit",
     Menu::new()
@@ -38,5 +45,6 @@ fn make_menu() -> Menu {
 
   Menu::new()
     .add_submenu(main_submenu)
+    .add_submenu(file_submenu)
     .add_submenu(edit_submenu)
 }

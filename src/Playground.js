@@ -76,11 +76,11 @@ function Playground({ project }) {
                 style={{
                     backgroundColor: 'rgb(23, 23, 23)'
                 }}>
-                <div className="pg-input overflow-auto">
+                <div className="pg-input overflow-hidden">
                     <Input setOutput={setOutput} project={project} />
                 </div>
 
-                <div className="pg-output overflow-auto relative">
+                <div className="pg-output overflow-hidden relative">
                     <Output output={output} />
                     <LoadingIndicator />
                 </div>

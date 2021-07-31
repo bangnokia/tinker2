@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import StatusBar from './StatusBar';
 import Playground from './Playground';
 import Settings from './Settings';
+import Sidebar from './Sidebar';
 import { useSettings } from './hooks/useSettings';
 
 // local project
@@ -47,14 +48,19 @@ function App() {
 
     return (
         <div className="font-sans h-screen flex flex-col bg-gray-500 overflow-hidden">
-            <div className="flex-grow flex-shrink h-full overflow-scroll relative">
-                <Playground project={project} />
-                {
-                    settingsPanel && <Settings
-                        changeProject={changeProject}
-                        settingsPanel={settingsPanel}
-                        setSettingsPanel={setSettingsPanel} />
-                }
+            <div className="flex flex-grow flex-shrink h-full overflow-hidden relative">
+                <Sidebar changeProject={changeProject}
+                    setSettingsPanel={setSettingsPanel} />
+
+                <div className="flex w-full h-full relative">
+                    <Playground project={project} />
+                    {
+                        settingsPanel && <Settings
+                            changeProject={changeProject}
+                            settingsPanel={settingsPanel}
+                            setSettingsPanel={setSettingsPanel} />
+                    }
+                </div>
             </div>
 
             <div className="flex-end">
