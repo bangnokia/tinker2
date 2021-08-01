@@ -4,6 +4,7 @@ function Sidebar({ changeProject, setSettingsPanel }) {
     function playCode() {
         // how can we make the playground run the code
     }
+
     function openFolderDialog() {
         open({
             multiple: false,
