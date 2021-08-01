@@ -5,6 +5,7 @@ import { useSettings } from './hooks/useSettings';
 import Editor, { useMonaco } from "@monaco-editor/react"
 import { registerPHPSnippetLanguage } from "./utils/registerPHPSnippetLanguage";
 import Split from 'split.js'
+import { PlaygroundProvider, useLoading } from './contexts/PlaygroundContext';
 
 const editorOptions = {
     lineHeight: 32,
@@ -25,25 +26,6 @@ const editorOptions = {
     }
 }
 
-const PlaygroundContext = createContext();
-
-function useLoading() {
-    const context = useContext(PlaygroundContext);
-
-    if (!context) {
-        throw new Error("useSettings must be use within a SettingsProvider.")
-    }
-
-    return context
-}
-
-function PlaygroundProvider(props) {
-    const [loading, setLoading] = useState(false)
-
-    return (
-        <PlaygroundContext.Provider value={[loading, setLoading]} {...props} />
-    )
-}
 
 function Playground({ project }) {
     const [output, setOutput] = useState('')
