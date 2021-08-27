@@ -56,7 +56,6 @@
         "allowlist": {
             "all": false,
             "fs": {
-                "path": true,
                 "readTextFile": true,
                 "writeFile": true,
                 "readDir": true,
@@ -71,6 +70,9 @@
                 "save": false
             },
             "globalShortcut": {
+                "all": true
+            },
+            "path": {
                 "all": true
             }
         },
