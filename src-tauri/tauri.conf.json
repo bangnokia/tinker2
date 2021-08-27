@@ -50,8 +50,7 @@
             "endpoints": [
                 "http://tinker2.com.test/update/{{target}}/{{current_version}}"
             ],
-            "dialog": true,
-            "pubkey": ""
+            "dialog": true
         },
         "allowlist": {
             "all": false,
