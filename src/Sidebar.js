@@ -12,9 +12,7 @@ function Sidebar({ changeProject, setSettingsPanel }) {
     };
 
     return (
-        <div className="w-12 flex-grow-0 flex-shrink-0 flex flex-col justify-between bg-gray-700" style={{
-            backgroundColor: 'rgb(53, 53, 53)'
-        }}>
+        <div className="h-full w-12 flex-grow-0 flex-shrink-0 flex flex-col justify-between bg-transparent">
             <div>
                 <button
                     title="Play code"
@@ -46,7 +44,7 @@ function Sidebar({ changeProject, setSettingsPanel }) {
                     <SettingsIcon />
                 </button>
             </div>
-        </div>
+        </div >
     );
 }
 

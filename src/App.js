@@ -11,18 +11,6 @@ const defaultLocalProject = {
     path: ''
 }
 
-// ssh remote project
-// const defaultSSHProject = {
-//     type: 'ssh',
-//     host: '178.128.127.19',
-//     port: '22',
-//     path: '/home/forge/lab.daudau.cc',
-//     user: 'forge',
-//     private_key: '~/.ssh/id_rsa',
-//     passpharse: '',
-//     php_binary: 'php',
-// }
-
 function App() {
     const [project, setProject] = useState(defaultLocalProject);
     const [settingsPanel, setSettingsPanel] = useState()
@@ -47,7 +35,8 @@ function App() {
     }, [project.path, settings.default_php_binary, settings.default_project])
 
     return (
-        <div className="font-sans h-screen flex flex-col bg-gray-500 overflow-hidden">
+        <div className="font-sans h-screen flex flex-col bg-gray-500 overflow-hidden"
+            style={{ backgroundColor: 'rgb(30, 30, 30)' }}>
             <div className="flex flex-grow flex-shrink h-full overflow-hidden relative">
                 <Sidebar changeProject={changeProject}
                     setSettingsPanel={setSettingsPanel} />
