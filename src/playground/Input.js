@@ -35,6 +35,12 @@ export default function Input({ setOutput, project, editorOptions }) {
         }
     }, [monaco, runCode])
 
+    useEffect(() => {
+        console.log('in use effect')
+        // The play button on the sidebar
+        document.getElementById('play-code-button').addEventListener('click', () => runCode(), [runCode])
+    })
+
     function handleEditorDidMount(editor, monaco) {
         editorRef.current = editor;
         editorRef.current.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter, runCode)

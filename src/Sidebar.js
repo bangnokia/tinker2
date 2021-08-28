@@ -1,10 +1,6 @@
 import { open } from "@tauri-apps/api/dialog";
 
 function Sidebar({ changeProject, setSettingsPanel }) {
-    function playCode() {
-        // how can we make the playground run the code
-    }
-
     function openFolderDialog() {
         open({
             multiple: false,
@@ -21,9 +17,9 @@ function Sidebar({ changeProject, setSettingsPanel }) {
         }}>
             <div>
                 <button
-                    onClick={playCode}
                     title="Play code"
                     className="sidebar-icon"
+                    id="play-code-button"
                     type="button">
                     <PlayIcon />
                 </button>
