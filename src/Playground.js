@@ -16,7 +16,7 @@ const editorOptions = {
     renderWhitespace: false,
     scrollbar: {
         verticalScrollbarSize: 0,
-        verticalSliderSize: 10
+        verticalSliderSize: 0
     },
     semanticHighlighting: {
         enabled: true

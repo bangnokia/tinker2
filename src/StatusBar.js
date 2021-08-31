@@ -18,11 +18,11 @@ function StatusBar({ project, changeProject }) {
     }
 
     return (
-        <div className="status-bar w-full flex-shrink-0 flex flex-wrap items-center space-x-5 bg-gray-700 h-6 px-3 text-sm font-mono text-white">
+        <div className="status-bar w-full flex-shrink-0 flex flex-wrap items-center space-x-5 bg-dark-gray-100 h-6 px-3 text-sm font-mono text-white">
             <div>
                 <button
                     onClick={() => switchToDefaultProject()}
-                    className="hover:text-indigo-500"
+                    className="hover:text-cyan-500"
                     title="Switch to default project">useDefault</button>
             </div>
 
@@ -30,7 +30,7 @@ function StatusBar({ project, changeProject }) {
             <div className="flex">
                 <button onClick={() => toggleLayout()}
                     type="button"
-                    className={`cursor-pointer hover:text-indigo-500 transition transform ` + (settings.layout === 'vertical' ? '' : 'rotate-90')}
+                    className={`cursor-pointer hover:text-cyan-500 transition transform ` + (settings.layout === 'vertical' ? '' : 'rotate-90')}
                     title="toggle layout">
                     <VerticalIcon />
                 </button>

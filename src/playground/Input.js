@@ -9,6 +9,7 @@ export default function Input({ setOutput, project, editorOptions }) {
     const [, setLoading] = useLoading()
     const [code,] = useState("// Press Ctr/Cmd + Enter to run code \necho 'Welcome to Tinker 2'")
     const monaco = useMonaco()
+
     let editorRef = useRef(null);
 
     const runCode = useCallback(() => {
