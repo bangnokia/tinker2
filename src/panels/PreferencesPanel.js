@@ -77,7 +77,7 @@ function PreferencesPanel() {
                     Layout
                 </label>
                 <div className="mt-1 sm:mt-0 sm:col-span-2 flex space-x-5">
-                    <div className="flex items-center space-x-2 block pt-2">
+                    <div className="flex items-center space-x-2 pt-2">
                         <input
                             id="layout-vertical"
                             name="layout"
@@ -95,7 +95,7 @@ function PreferencesPanel() {
                         </label>
                     </div>
 
-                    <div className="flex items-center space-x-2 block pt-2">
+                    <div className="flex items-center space-x-2 pt-2">
                         <input
                             id="layout-horizontal"
                             name="layout"
