@@ -11,6 +11,10 @@ module.exports = {
                 100: 'rgb(30, 30, 30)'
               },
               cyan: colors.cyan
+          },
+          cursor: {
+            'col-resize': 'col-resize',
+            'row-resize': 'row-resize',
           }
       },
   },
