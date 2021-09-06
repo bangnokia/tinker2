@@ -63,7 +63,7 @@ export default function Playground({ project }) {
 
                 <div className="pg-output overflow-hidden relative">
                     <Output {...{ output, editorOptions }} />
-                    <LoadingIndicator />
+                    {/* <LoadingIndicator /> */}
                 </div>
 
             </div>

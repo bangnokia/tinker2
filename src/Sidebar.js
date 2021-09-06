@@ -13,14 +13,7 @@ function Sidebar({ changeProject, setSettingsPanel }) {
 
     return (
         <div className="h-full w-12 flex-grow-0 flex-shrink-0 flex flex-col justify-between bg-transparent">
-            <div>
-                <button
-                    title="Play code"
-                    className="sidebar-icon"
-                    id="play-code-button"
-                    type="button">
-                    <PlayIcon />
-                </button>
+            <div className="pt-14">
                 <button
                     onClick={openFolderDialog}
                     title="Open folder"
@@ -70,12 +63,6 @@ function ServerIcon() {
         <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
         </svg>
-    )
-}
-
-function PlayIcon() {
-    return (
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
     )
 }
 
