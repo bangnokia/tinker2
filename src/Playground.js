@@ -5,7 +5,6 @@ import Split from 'split.js'
 import { PlaygroundProvider } from './contexts/PlaygroundContext';
 import Input from './playground/Input';
 import Output from './playground/Output';
-import LoadingIndicator from './LoadingIndicator';
 
 const editorOptions = {
     lineHeight: 32,
@@ -63,7 +62,6 @@ export default function Playground({ project }) {
 
                 <div className="pg-output overflow-hidden relative">
                     <Output {...{ output, editorOptions }} />
-                    {/* <LoadingIndicator /> */}
                 </div>
 
             </div>
