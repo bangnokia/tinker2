@@ -4,7 +4,9 @@ The source code of https://tinker2.com product.
 
 Tinker 2 helps you tinker with your any PHP application without without touching source code (locally or via SSH)
 
-Tinker 2 is small (less than 10MB on MacOS).
+Tinker 2 is small (less than 10MB on MacOS)
+
+![](./screenshot.png)
 
 ## Getting started
 
@@ -27,4 +29,4 @@ Tinker 2 doesn't ship with any default `Laravel` framework, which increase unnec
 -   [ ] 7.1 (not test yet)
 -   [ ] 7.0 (not test yet)
 
-![](./screenshot.png)
+)
