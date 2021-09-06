@@ -18,4 +18,13 @@ Tinker 2 doesn't ship with any default `Laravel` framework, which increase unnec
 -   [ ] Magento
 -   [x] Normal PHP project (with composer)
 
+## PHP versions supported
+
+-   [x] 8.0
+-   [x] 7.4
+-   [x] 7.3
+-   [ ] 7.2 (not test yet)
+-   [ ] 7.1 (not test yet)
+-   [ ] 7.0 (not test yet)
+
 ![](./screenshot.png)
