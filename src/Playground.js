@@ -32,6 +32,20 @@ export default function Playground({ project }) {
     const splitInstance = useRef(null)
     const layout = settings.layout === 'vertical' ? 'horizontal' : 'vertical'
 
+    const outputRef = useRef('');
+
+    const cleanOutput = function () {
+        outputRef.current = '';
+        setOutput('')
+    }
+
+    const appendOutput = function (line) {
+        // console.log('line ', line)
+        outputRef.current = outputRef.current.concat(line + '\n');
+        // console.log('current', outputRef.current)
+        setOutput(outputRef.current.trim());
+    }
+
     useEffect(() => {
         if (project.type === 'ssh') {
             uploadPsycho(project).then(function () {
@@ -52,13 +66,11 @@ export default function Playground({ project }) {
 
     return (
         <PlaygroundProvider>
-            <div
-                className={`flex h-full w-full ` + (layout === 'vertical' ? 'flex-col' : '')}
-                style={{
-                    backgroundColor: 'rgb(23, 23, 23)'
-                }}>
+            <div className={`flex h-full w-full ` + (layout === 'vertical' ? 'flex-col' : '')}
+                style={{ backgroundColor: 'rgb(23, 23, 23)' }}>
+
                 <div className="pg-input overflow-hidden">
-                    <Input {...{ setOutput, project, editorOptions }} />
+                    <Input {...{ setOutput, appendOutput, cleanOutput, project, editorOptions }} />
                 </div>
 
                 <div className="pg-output overflow-hidden relative">

@@ -6,30 +6,39 @@ async function execute({ code, project }) {
     const base64Code = Buffer.from(code).toString('base64');
     const psychoPath = await resolvePsychoPath(project.type)
 
+    let command = null;
     // The problem here is where is the path of psycho.phar when we build the production app
     switch (project.type) {
         case 'local':
-            const database = new DatabaseService();
+            command = makeCommandOnLocalMachine(project, base64Code, psychoPath)
+            break;
+
+        case 'ssh':
+            command = makeCommandOnRemoteServer(project, base64Code);
+            break;
+
+        default:
+            throw new Error(`Project type ${project.type} is not supported.`)
+    }
+
+    return command;
+}
+
+async function makeCommandOnLocalMachine(project, base64Code, psychoPath) {
+    const database = new DatabaseService();
             const phpBinary = (await database.get('settings')).default_php_binary
 
-            return await new Command(
+            return new Command(
                 phpBinary,
                 [
                     psychoPath,
                     '--target=' + project.path,
                     '--code=' + base64Code,
                 ]
-            ).execute();
-
-        case 'ssh':
-            return await executeOnRemoteServer(project, base64Code, psychoPath);
-
-        default:
-            throw new Error(`Project type ${project.type} is not supported.`)
-    }
+            );
 }
 
-async function executeOnRemoteServer(project, code, psychoPath = '/tmp/psycho.phar') {
+function makeCommandOnRemoteServer(project, code, psychoPath = '/tmp/psycho.phar') {
     const { user, host, port, private_key, path, php_binary } = project;
 
     const args = [
@@ -45,9 +54,7 @@ async function executeOnRemoteServer(project, code, psychoPath = '/tmp/psycho.ph
         `--code=${code}`
     ];
 
-    const command = new Command('ssh', args)
-
-    return await command.execute();
+    return new Command('ssh', args)
 }
 
 async function resolvePsychoPath(type) {
