@@ -28,5 +28,3 @@ Tinker 2 doesn't ship with any default `Laravel` framework, which increase unnec
 -   [ ] 7.2 (not test yet)
 -   [ ] 7.1 (not test yet)
 -   [ ] 7.0 (not test yet)
-
-)
