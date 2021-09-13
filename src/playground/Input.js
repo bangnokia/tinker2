@@ -37,10 +37,9 @@ export default function Input({ setOutput, project, editorOptions }) {
         }
     }, [monaco, runCode])
 
+
     function handleEditorDidMount(editor, monaco) {
-        console.log('did mount');
         editorRef.current = editor;
-        editorRef.current.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter, runCode)
         initVimMode(editorRef.current, document.getElementById("editor-status-bar"))
     }
 
