@@ -5,13 +5,16 @@ import { useState, useRef, useCallback, useEffect } from "react";
 import { registerPHPSnippetLanguage } from '../utils/registerPHPSnippetLanguage';
 import execute from "../executor";
 import { initVimMode } from 'monaco-vim';
+import { useSettings } from './../hooks/useSettings';
 
 export default function Input({ setOutput, project, editorOptions }) {
     const [loading, setLoading] = useLoading()
+    const [settings,] = useSettings();
     const [code,] = useState("// Press Ctr/Cmd + Enter to run code\n// If you can't typing, press 'i'\necho 'Welcome to Tinker 2'")
     const monaco = useMonaco()
 
     let editorRef = useRef(null);
+    let vimModeRef = useRef(null);
 
     const runCode = useCallback(() => {
         setLoading(true)
@@ -33,25 +36,37 @@ export default function Input({ setOutput, project, editorOptions }) {
 
             if (editorRef.current) {
                 editorRef.current.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter, runCode)
-
-                initVimMode(editorRef.current, document.getElementById("editor-status-bar"))
             }
         }
     }, [monaco, runCode])
 
+    useEffect(() => {
+        if (editorRef.current) {
+
+            if (settings.key_binding === 'vim') {
+                const opts = monaco.editor.EditorOption;
+                // fake the config of adapter
+                editorRef.current.getConfiguration = function () {
+                    return {
+                        readOnly: false,
+                        viewInfo: {
+                            cursorWidth: editorRef.current.getOption(opts.cursorWidth),
+                        },
+                        fontInfo: editorRef.current.getOption(opts.fontInfo),
+                    }
+                }
+                vimModeRef.current = initVimMode(editorRef.current, document.getElementById("editor-status-bar"))
+            } else {
+                if (vimModeRef.current) {
+                    vimModeRef.current.dispose();
+                }
+            }
+
+        }
+    }, [monaco, settings.key_binding])
+
     function handleEditorDidMount(editor, monaco) {
         editorRef.current = editor;
-        const opts = monaco.editor.EditorOption;
-        // fake the config of adapter
-        editorRef.current.getConfiguration = function () {
-            return {
-                readOnly: false,
-                viewInfo: {
-                    cursorWidth: editor.getOption(opts.cursorWidth),
-                },
-                fontInfo: editor.getOption(opts.fontInfo),
-            }
-        }
 
         setTimeout(() => monaco.editor.remeasureFonts(), 322);
     }
