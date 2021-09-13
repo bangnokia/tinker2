@@ -8,7 +8,7 @@ import { initVimMode } from 'monaco-vim';
 
 export default function Input({ setOutput, project, editorOptions }) {
     const [loading, setLoading] = useLoading()
-    const [code,] = useState("// Press Ctr/Cmd + Enter to run code \necho 'Welcome to Tinker 2'")
+    const [code,] = useState("// Press Ctr/Cmd + Enter to run code\n// If you can't typing, press 'i'\necho 'Welcome to Tinker 2'")
     const monaco = useMonaco()
 
     let editorRef = useRef(null);
