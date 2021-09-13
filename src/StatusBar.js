@@ -1,4 +1,5 @@
 import { useSettings } from "./hooks/useSettings";
+import DatabaseService from './services/DatabaseService';
 
 function StatusBar({ project, changeProject }) {
     const [settings, setSettings] = useSettings();
@@ -18,8 +19,9 @@ function StatusBar({ project, changeProject }) {
     }
 
     return (
-        <div className="status-bar w-full flex-shrink-0 flex flex-wrap items-center space-x-5 bg-dark-gray-100 h-6 px-3 text-sm font-mono text-white">
-            <div>
+        <div id="status-bar"
+            className="status-bar w-full flex-shrink-0 flex flex-wrap items-center space-x-5 bg-dark-gray-100 h-6 px-3 text-sm font-mono text-white">
+            <div className="flex-end">
                 <button
                     onClick={() => switchToDefaultProject()}
                     className="hover:text-cyan-500"
@@ -27,7 +29,7 @@ function StatusBar({ project, changeProject }) {
             </div>
 
             {/* Switch layout */}
-            <div className="flex">
+            <div className="flex flex-end">
                 <button onClick={() => toggleLayout()}
                     type="button"
                     className={`cursor-pointer hover:text-cyan-500 transition transform ` + (settings.layout === 'vertical' ? '' : 'rotate-90')}
@@ -35,6 +37,8 @@ function StatusBar({ project, changeProject }) {
                     <VerticalIcon />
                 </button>
             </div>
+
+            <div id="editor-status-bar"></div>
 
 
             <div className="flex-grow text-right">
