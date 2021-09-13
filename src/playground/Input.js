@@ -42,19 +42,18 @@ export default function Input({ setOutput, project, editorOptions }) {
     function handleEditorDidMount(editor, monaco) {
         editorRef.current = editor;
         const opts = monaco.editor.EditorOption;
-
         // fake the config of adapter
         editorRef.current.getConfiguration = function () {
-            const config = {
+            return {
                 readOnly: false,
                 viewInfo: {
                     cursorWidth: editor.getOption(opts.cursorWidth),
                 },
                 fontInfo: editor.getOption(opts.fontInfo),
             }
-
-            return config;
         }
+
+        setTimeout(() => monaco.editor.remeasureFonts(), 322);
     }
 
     return (
