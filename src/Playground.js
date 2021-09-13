@@ -9,8 +9,11 @@ import Output from './playground/Output';
 const editorOptions = {
     lineHeight: 32,
     fontSize: 15,
+    fontLigatures: true,
+    fontFamily: 'Fira Code',
     smoothScrolling: true,
     wordWrap: 'on',
+    cursorSmoothCaretAnimation: true,
     renderLineHighlight: 'none',
     renderWhitespace: false,
     scrollbar: {
