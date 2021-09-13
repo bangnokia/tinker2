@@ -10,12 +10,10 @@ const editorOptions = {
     lineHeight: 32,
     fontSize: 15,
     fontLigatures: true,
-    fontInfo: {
-        typicalFullwidthCharacterWidth: 12,
-    },
     fontFamily: 'Fira Code',
     smoothScrolling: true,
     wordWrap: 'on',
+    cursorSmoothCaretAnimation: true,
     renderLineHighlight: 'none',
     renderWhitespace: false,
     scrollbar: {

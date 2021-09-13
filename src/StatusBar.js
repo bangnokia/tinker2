@@ -37,7 +37,7 @@ function StatusBar({ project, changeProject }) {
                 </button>
             </div>
 
-            <div id="editor-status-bar"></div>
+            <div id="editor-status-bar" className="flex items-center justify-center overflow-hidden"></div>
 
 
             <div className="flex-grow text-right">

@@ -33,14 +33,28 @@ export default function Input({ setOutput, project, editorOptions }) {
 
             if (editorRef.current) {
                 editorRef.current.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter, runCode)
+
+                initVimMode(editorRef.current, document.getElementById("editor-status-bar"))
             }
         }
     }, [monaco, runCode])
 
-
     function handleEditorDidMount(editor, monaco) {
         editorRef.current = editor;
-        initVimMode(editorRef.current, document.getElementById("editor-status-bar"))
+        const opts = monaco.editor.EditorOption;
+
+        // fake the config of adapter
+        editorRef.current.getConfiguration = function () {
+            const config = {
+                readOnly: false,
+                viewInfo: {
+                    cursorWidth: editor.getOption(opts.cursorWidth),
+                },
+                fontInfo: editor.getOption(opts.fontInfo),
+            }
+
+            return config;
+        }
     }
 
     return (
