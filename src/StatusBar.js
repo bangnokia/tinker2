@@ -1,5 +1,4 @@
 import { useSettings } from "./hooks/useSettings";
-import DatabaseService from './services/DatabaseService';
 
 function StatusBar({ project, changeProject }) {
     const [settings, setSettings] = useSettings();
