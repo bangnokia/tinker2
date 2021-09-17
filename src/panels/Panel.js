@@ -2,7 +2,7 @@ function Panel({ name = 'Untitle', closePanel, children }) {
     return (
         <div className="h-full bg-white shadow-xl rounded-r-md p-5 relative overflow-y-auto">
 
-            <h1 className="text-indigo-600 text-2xl font-semibold tracking-tight">{name}</h1>
+            <h1 className="text-cyan-500 text-2xl font-semibold tracking-tight">{name}</h1>
 
             <div className="mt-5">
                 {children}
