@@ -1,4 +1,5 @@
 import { open } from "@tauri-apps/api/dialog";
+import { useHotkeys } from 'react-hotkeys-hook';
 
 function Sidebar({ changeProject, setSettingsPanel }) {
     function openFolderDialog() {
@@ -10,6 +11,8 @@ function Sidebar({ changeProject, setSettingsPanel }) {
             path: dir
         }));
     };
+
+    useHotkeys('Ctrl+o', () => openFolderDialog());
 
     return (
         <div className="h-full w-12 flex-grow-0 flex-shrink-0 flex flex-col justify-between bg-transparent">
@@ -37,7 +40,7 @@ function Sidebar({ changeProject, setSettingsPanel }) {
                     <SettingsIcon />
                 </button>
             </div>
-        </div >
+        </div>
     );
 }
 

@@ -1,4 +1,8 @@
+import { useHotkeys } from 'react-hotkeys-hook';
+
 function Panel({ name = 'Untitle', closePanel, children }) {
+    useHotkeys('esc', () => closePanel());
+
     return (
         <div className="h-full bg-white shadow-xl rounded-r-md p-5 relative overflow-y-auto">
 
