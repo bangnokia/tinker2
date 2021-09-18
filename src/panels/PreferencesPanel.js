@@ -114,6 +114,49 @@ function PreferencesPanel() {
                     </div>
                 </div>
             </div>
+
+            <div className="grid grid-cols-3 gap-4 items-start pt-3">
+                <label htmlFor="layout" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+                    Key binding
+                </label>
+                <div className="mt-1 sm:mt-0 sm:col-span-2 flex space-x-5">
+                    <div className="flex items-center space-x-2 pt-2">
+                        <input
+                            id="key-binding-normal"
+                            name="key_binding"
+                            type="radio"
+                            value="normal"
+                            className="form-radio focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
+                            checked={settings.key_binding === 'normal'}
+                            onChange={(e) => setSettings({
+                                ...settings,
+                                key_binding: e.target.value
+                            })}
+                        />
+                        <label htmlFor="key-binding-normal" className="ml-3 block text-sm font-medium text-gray-700">
+                            Normal
+                        </label>
+                    </div>
+
+                    <div className="flex items-center space-x-2 pt-2">
+                        <input
+                            id="key-binding-vim"
+                            name="key_binding"
+                            type="radio"
+                            value="vim"
+                            className="form-radio focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
+                            checked={settings.key_binding === 'vim'}
+                            onChange={(e) => setSettings({
+                                ...settings,
+                                key_binding: e.target.value
+                            })}
+                        />
+                        <label htmlFor="key-binding-vim" className="ml-3 block text-sm font-medium text-gray-700">
+                            Vim
+                        </label>
+                    </div>
+                </div>
+            </div>
         </form>
     )
 }
