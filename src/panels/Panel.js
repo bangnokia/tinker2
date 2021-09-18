@@ -1,10 +1,16 @@
 import { useHotkeys } from 'react-hotkeys-hook';
+import { useRef, useEffect } from 'react';
 
 function Panel({ name = 'Untitle', closePanel, children }) {
     useHotkeys('esc', () => closePanel());
+    const wrapper = useRef();
+
+    useEffect(() => {
+        wrapper.current.focus();
+    });
 
     return (
-        <div className="h-full bg-white shadow-xl rounded-r-md p-5 relative overflow-y-auto">
+        <div ref={wrapper} className="h-full bg-white shadow-xl rounded-r-md p-5 relative overflow-y-auto focus:outline-none" tabIndex="-1">
 
             <h1 className="text-cyan-500 text-2xl font-semibold tracking-tight">{name}</h1>
 
