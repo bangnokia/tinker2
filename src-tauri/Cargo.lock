@@ -31,7 +31,7 @@ checksum = "28ae2b3dec75a406790005a200b1bd89785afc02517a00ca99ecfe093ee9e6cf"
 
 [[package]]
 name = "app"
-version = "0.1.9"
+version = "0.1.11"
 dependencies = [
  "serde",
  "serde_json",
