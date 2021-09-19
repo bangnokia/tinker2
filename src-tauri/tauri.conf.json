@@ -68,9 +68,6 @@
                 "all": false,
                 "save": false
             },
-            "globalShortcut": {
-                "all": true
-            },
             "path": {
                 "all": true
             }
