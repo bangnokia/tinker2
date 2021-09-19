@@ -1,8 +1,8 @@
 [package]
 name = "app"
-version = "0.1.13"
+version = "0.1.15"
 description = "A Tauri App"
-authors = [ "you" ]
+authors = [ "bangnokia" ]
 license = ""
 repository = ""
 default-run = "app"
@@ -15,7 +15,7 @@ tauri-build = { version = "1.0.0-beta.4" }
 [dependencies]
 serde_json = "1.0"
 serde = { version = "1.0", features = [ "derive" ] }
-tauri = { git = "https://github.com/tauri-apps/tauri", branch = "next", features = ["dialog-open", "fs-create-dir", "fs-read-dir", "fs-read-text-file", "fs-write-file", "global-shortcut-all", "path-all", "shell-all", "updater"] }
+tauri = { git = "https://github.com/tauri-apps/tauri", branch = "next", features = ["dialog-open", "fs-create-dir", "fs-read-dir", "fs-read-text-file", "fs-write-file", "path-all", "shell-all", "updater"] }
 
 [features]
 default = [ "custom-protocol" ]

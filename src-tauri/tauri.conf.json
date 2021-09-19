@@ -1,7 +1,7 @@
 {
     "package": {
         "productName": "Tinker 2",
-        "version": "0.1.13"
+        "version": "0.1.15"
     },
     "build": {
         "distDir": "../build",
@@ -67,9 +67,6 @@
                 "open": true,
                 "all": false,
                 "save": false
-            },
-            "globalShortcut": {
-                "all": true
             },
             "path": {
                 "all": true
