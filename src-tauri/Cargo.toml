@@ -10,12 +10,12 @@ edition = "2018"
 build = "src/build.rs"
 
 [build-dependencies]
-tauri-build = { version = "1.0.0-beta.4" }
+tauri-build = { git = "https://github.com/tauri-apps/tauri", branch = "next" }
 
 [dependencies]
 serde_json = "1.0"
 serde = { version = "1.0", features = [ "derive" ] }
-tauri = { git = "https://github.com/tauri-apps/tauri", branch = "next", features = ["dialog-open", "fs-create-dir", "fs-read-dir", "fs-read-text-file", "fs-write-file", "path-all", "shell-all", "updater"] }
+tauri = { git = "https://github.com/tauri-apps/tauri", branch = "next", features = ["dialog-open", "fs-create-dir", "fs-read-dir", "fs-read-text-file", "fs-write-file", "path-all", "shell-all"], version = "1.0.0-beta.8" }
 
 [features]
 default = [ "custom-protocol" ]

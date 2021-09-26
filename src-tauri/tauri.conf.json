@@ -46,7 +46,7 @@
             }
         },
         "updater": {
-            "active": true,
+            "active": false,
             "endpoints": [
                 "https://tinker2.com/update/{{target}}/{{current_version}}"
             ],
