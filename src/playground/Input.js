@@ -10,7 +10,7 @@ import { useSettings } from './../hooks/useSettings';
 export default function Input({ setOutput, project, editorOptions }) {
     const [loading, setLoading] = useLoading()
     const [settings,] = useSettings();
-    const [code,] = useState("// Press Ctr/Cmd + Enter to run code\n// If you can't typing, press 'i'\necho 'Welcome to Tinker 2'")
+    const [code,] = useState("// Press Ctr/Cmd + Enter to run code\necho 'Welcome to Tinker 2'")
     const monaco = useMonaco()
 
     let editorRef = useRef(null);
@@ -68,7 +68,7 @@ export default function Input({ setOutput, project, editorOptions }) {
     function handleEditorDidMount(editor, monaco) {
         editorRef.current = editor;
 
-        setTimeout(() => monaco.editor.remeasureFonts(), 322);
+        setTimeout(() => monaco.editor.remeasureFonts(), 0);
     }
 
     return (

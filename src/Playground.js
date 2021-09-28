@@ -11,7 +11,7 @@ const editorOptions = {
     fontSize: 15,
     fontLigatures: true,
     fontFamily: 'Fira Code',
-    contextMenu: false,
+    contextmenu: false,
     smoothScrolling: true,
     scrollBeyondLastLine: true,
     wordWrap: 'on',
@@ -29,7 +29,8 @@ const editorOptions = {
     },
     minimap: {
         enabled: false
-    }
+    },
+    lineNumbersWidth: 0,
 }
 
 export default function Playground({ project }) {

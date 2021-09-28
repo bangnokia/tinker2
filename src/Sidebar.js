@@ -1,15 +1,5 @@
-import { open } from "@tauri-apps/api/dialog";
 
-function Sidebar({ changeProject, setSettingsPanel }) {
-    function openFolderDialog() {
-        open({
-            multiple: false,
-            directory: true
-        }).then(dir => dir && changeProject({
-            type: 'local',
-            path: dir
-        }));
-    };
+function Sidebar({ changeProject, setSettingsPanel, openFolderDialog }) {
 
     return (
         <div className="h-full w-12 flex-grow-0 flex-shrink-0 flex flex-col justify-between bg-transparent">
@@ -37,7 +27,7 @@ function Sidebar({ changeProject, setSettingsPanel }) {
                     <SettingsIcon />
                 </button>
             </div>
-        </div >
+        </div>
     );
 }
 
