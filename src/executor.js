@@ -67,9 +67,9 @@ export async function uploadPsycho(project) {
     const { user, host, port, private_key } = project;
 
     const args = [
-        await resolvePsychoPath('local'),
-        `-i ${private_key}`,
         `-P ${port}`,
+        `-i ${private_key}`,
+        await resolvePsychoPath('local'),
         `${user}@${host}:/tmp`,
     ];
 
