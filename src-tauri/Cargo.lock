@@ -285,6 +285,37 @@ dependencies = [
 ]
 
 [[package]]
+name = "com"
+version = "0.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "5a30a2b2a013da986dc5cc3eda3d19c0d59d53f835be1b2356eb8d00f000c793"
+dependencies = [
+ "com_macros",
+]
+
+[[package]]
+name = "com_macros"
+version = "0.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7606b05842fea68ddcc89e8053b8860ebcb2a0ba8d6abfe3a148e5d5a8d3f0c1"
+dependencies = [
+ "com_macros_support",
+ "proc-macro2",
+ "syn",
+]
+
+[[package]]
+name = "com_macros_support"
+version = "0.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "97e9a6d20f4ac8830e309a455d7e9416e65c6af5a97c88c55fbb4c2012e107da"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
+]
+
+[[package]]
 name = "const-sha1"
 version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2478,7 +2509,8 @@ dependencies = [
 [[package]]
 name = "tao"
 version = "0.5.2"
-source = "git+https://github.com/tauri-apps/tao?branch=next#45b1074d3776753def071b613340d81270909b75"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1aa57de7c282b68f8906278543a724ed8f5a2568f069dd0cc05fc10d1f07036b"
 dependencies = [
  "bitflags",
  "cairo-rs",
@@ -2509,8 +2541,7 @@ dependencies = [
  "scopeguard",
  "serde",
  "unicode-segmentation",
- "webview2-com-sys",
- "windows",
+ "winapi",
  "x11-dl",
 ]
 
@@ -2658,6 +2689,19 @@ dependencies = [
  "thiserror",
  "url",
  "zstd",
+]
+
+[[package]]
+name = "tauri-webview2"
+version = "0.1.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7685d17e9007618d13f011f916e28a8830c7108c46cf263bd3ab53a19e1a4fc3"
+dependencies = [
+ "com",
+ "once_cell",
+ "webview2-sys",
+ "widestring",
+ "winapi",
 ]
 
 [[package]]
@@ -3045,6 +3089,22 @@ dependencies = [
 ]
 
 [[package]]
+name = "webview2-sys"
+version = "0.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "24b7889e893ac4c50d7346356be3ce13a85e56512c38b8fde0526559b8012a4c"
+dependencies = [
+ "com",
+ "winapi",
+]
+
+[[package]]
+name = "widestring"
+version = "0.4.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c168940144dd21fd8046987c16a46a33d5fc84eec29ef9dcddc2ac9e31526b7c"
+
+[[package]]
 name = "wildmatch"
 version = "1.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3138,7 +3198,7 @@ dependencies = [
 [[package]]
 name = "wry"
 version = "0.12.2"
-source = "git+https://github.com/tauri-apps/wry?rev=e056fb2a15e29de1b8ed85a548cfeb1f85031357#e056fb2a15e29de1b8ed85a548cfeb1f85031357"
+source = "git+https://github.com/tauri-apps//wry.git?rev=9bc201d80811d27529024457c6700364088dc0dd#9bc201d80811d27529024457c6700364088dc0dd"
 dependencies = [
  "cocoa",
  "core-graphics 0.22.2",
@@ -3155,12 +3215,13 @@ dependencies = [
  "serde",
  "serde_json",
  "tao",
+ "tauri-webview2",
  "thiserror",
  "url",
  "webkit2gtk",
  "webkit2gtk-sys",
- "webview2-com",
- "windows",
+ "webview2-sys",
+ "winapi",
 ]
 
 [[package]]
