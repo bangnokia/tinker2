@@ -316,12 +316,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "const-sha1"
-version = "0.2.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "fb58b6451e8c2a812ad979ed1d83378caa5e927eef2622017a45f251457c2c9d"
-
-[[package]]
 name = "constant_time_eq"
 version = "0.1.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2133,9 +2127,9 @@ dependencies = [
 
 [[package]]
 name = "rfd"
-version = "0.5.0"
+version = "0.4.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "84b4745feef3bc92e709042c78d205e9a566ec46e18c58d4fac458e6fc12627e"
+checksum = "609ed912e110af7d7084b6b17d2a68b25e766208e015a37beba1be3c2d7cbb3b"
 dependencies = [
  "block",
  "dispatch",
@@ -2559,7 +2553,7 @@ dependencies = [
 [[package]]
 name = "tauri"
 version = "1.0.0-beta.8"
-source = "git+https://github.com/tauri-apps/tauri?branch=next#a6f270c235aa526514a072f567bb20bc0d979b23"
+source = "git+https://github.com/tauri-apps/tauri?rev=84f6e3e84a34b01b7fa04f5c4719acb921ef4263#84f6e3e84a34b01b7fa04f5c4719acb921ef4263"
 dependencies = [
  "attohttpc",
  "bincode",
@@ -2591,7 +2585,7 @@ dependencies = [
  "tauri-macros",
  "tauri-runtime",
  "tauri-runtime-wry",
- "tauri-utils",
+ "tauri-utils 1.0.0-beta.3 (git+https://github.com/tauri-apps/tauri?rev=84f6e3e84a34b01b7fa04f5c4719acb921ef4263)",
  "tempfile",
  "thiserror",
  "tokio",
@@ -2607,14 +2601,14 @@ source = "git+https://github.com/tauri-apps/tauri?branch=next#a6f270c235aa526514
 dependencies = [
  "anyhow",
  "serde_json",
- "tauri-utils",
+ "tauri-utils 1.0.0-beta.3 (git+https://github.com/tauri-apps/tauri?branch=next)",
  "winres",
 ]
 
 [[package]]
 name = "tauri-codegen"
 version = "1.0.0-beta.4"
-source = "git+https://github.com/tauri-apps/tauri?branch=next#a6f270c235aa526514a072f567bb20bc0d979b23"
+source = "git+https://github.com/tauri-apps/tauri?rev=84f6e3e84a34b01b7fa04f5c4719acb921ef4263#84f6e3e84a34b01b7fa04f5c4719acb921ef4263"
 dependencies = [
  "blake3",
  "kuchiki",
@@ -2623,7 +2617,7 @@ dependencies = [
  "regex",
  "serde",
  "serde_json",
- "tauri-utils",
+ "tauri-utils 1.0.0-beta.3 (git+https://github.com/tauri-apps/tauri?rev=84f6e3e84a34b01b7fa04f5c4719acb921ef4263)",
  "thiserror",
  "walkdir",
  "zstd",
@@ -2632,7 +2626,7 @@ dependencies = [
 [[package]]
 name = "tauri-macros"
 version = "1.0.0-beta.5"
-source = "git+https://github.com/tauri-apps/tauri?branch=next#a6f270c235aa526514a072f567bb20bc0d979b23"
+source = "git+https://github.com/tauri-apps/tauri?rev=84f6e3e84a34b01b7fa04f5c4719acb921ef4263#84f6e3e84a34b01b7fa04f5c4719acb921ef4263"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -2643,7 +2637,7 @@ dependencies = [
 [[package]]
 name = "tauri-runtime"
 version = "0.2.1"
-source = "git+https://github.com/tauri-apps/tauri?branch=next#a6f270c235aa526514a072f567bb20bc0d979b23"
+source = "git+https://github.com/tauri-apps/tauri?rev=84f6e3e84a34b01b7fa04f5c4719acb921ef4263#84f6e3e84a34b01b7fa04f5c4719acb921ef4263"
 dependencies = [
  "gtk",
  "http",
@@ -2651,25 +2645,25 @@ dependencies = [
  "infer",
  "serde",
  "serde_json",
- "tauri-utils",
+ "tauri-utils 1.0.0-beta.3 (git+https://github.com/tauri-apps/tauri?rev=84f6e3e84a34b01b7fa04f5c4719acb921ef4263)",
  "thiserror",
  "uuid",
- "webview2-com-sys",
+ "winapi",
 ]
 
 [[package]]
 name = "tauri-runtime-wry"
 version = "0.2.1"
-source = "git+https://github.com/tauri-apps/tauri?branch=next#a6f270c235aa526514a072f567bb20bc0d979b23"
+source = "git+https://github.com/tauri-apps/tauri?rev=84f6e3e84a34b01b7fa04f5c4719acb921ef4263#84f6e3e84a34b01b7fa04f5c4719acb921ef4263"
 dependencies = [
  "gtk",
  "ico",
  "infer",
  "png 0.16.8",
  "tauri-runtime",
- "tauri-utils",
+ "tauri-utils 1.0.0-beta.3 (git+https://github.com/tauri-apps/tauri?rev=84f6e3e84a34b01b7fa04f5c4719acb921ef4263)",
  "uuid",
- "webview2-com",
+ "winapi",
  "wry",
 ]
 
@@ -2677,6 +2671,24 @@ dependencies = [
 name = "tauri-utils"
 version = "1.0.0-beta.3"
 source = "git+https://github.com/tauri-apps/tauri?branch=next#a6f270c235aa526514a072f567bb20bc0d979b23"
+dependencies = [
+ "heck",
+ "html5ever",
+ "kuchiki",
+ "phf 0.10.0",
+ "proc-macro2",
+ "quote",
+ "serde",
+ "serde_json",
+ "thiserror",
+ "url",
+ "zstd",
+]
+
+[[package]]
+name = "tauri-utils"
+version = "1.0.0-beta.3"
+source = "git+https://github.com/tauri-apps/tauri?rev=84f6e3e84a34b01b7fa04f5c4719acb921ef4263#84f6e3e84a34b01b7fa04f5c4719acb921ef4263"
 dependencies = [
  "heck",
  "html5ever",
@@ -3054,41 +3066,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "webview2-com"
-version = "0.4.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f2294dee38668da0d71019097dddc6cef525fde7aa4784243dd83f0752e08aa5"
-dependencies = [
- "webview2-com-macros",
- "webview2-com-sys",
- "windows",
-]
-
-[[package]]
-name = "webview2-com-macros"
-version = "0.3.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2eba35fdbb8fbc8de7e7479532a356dbbf2754d8a6e9c9fbfa430896cbb1ca89"
-dependencies = [
- "proc-macro2",
- "quote",
- "syn",
-]
-
-[[package]]
-name = "webview2-com-sys"
-version = "0.4.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "14690dcb8b57c5238c4502cfc321f858fa1306edd4109e8e1d7ddee0c29b06a5"
-dependencies = [
- "regex",
- "serde",
- "serde_json",
- "thiserror",
- "windows",
-]
-
-[[package]]
 name = "webview2-sys"
 version = "0.1.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3140,51 +3117,6 @@ name = "winapi-x86_64-pc-windows-gnu"
 version = "0.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "712e227841d057c1ee1cd2fb22fa7e5a5461ae8e48fa2ca79ec42cfc1931183f"
-
-[[package]]
-name = "windows"
-version = "0.19.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ef84dd25f4c69a271b1bba394532bf400523b43169de21dfc715e8f8e491053d"
-dependencies = [
- "const-sha1",
- "windows_gen",
- "windows_macros",
-]
-
-[[package]]
-name = "windows_gen"
-version = "0.19.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ac7bb21b8ff5e801232b72a6ff554b4cc0cef9ed9238188c3ca78fe3968a7e5d"
-dependencies = [
- "windows_quote",
- "windows_reader",
-]
-
-[[package]]
-name = "windows_macros"
-version = "0.19.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5566b8c51118769e4a9094a688bf1233a3f36aacbfc78f3b15817fe0b6e0442f"
-dependencies = [
- "syn",
- "windows_gen",
- "windows_quote",
- "windows_reader",
-]
-
-[[package]]
-name = "windows_quote"
-version = "0.19.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "4af8236a9493c38855f95cdd11b38b342512a5df4ee7473cffa828b5ebb0e39c"
-
-[[package]]
-name = "windows_reader"
-version = "0.19.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2c8d5cf83fb08083438c5c46723e6206b2970da57ce314f80b57724439aaacab"
 
 [[package]]
 name = "winres"
