@@ -8,7 +8,7 @@ export default function Output({ output, editorOptions }) {
                     key="output"
                     language="php-snippet"
                     theme="vs-dark"
-                    value={output}
+                    value={output || "// Press Ctr/Cmd + Enter to run code"}
                     options={{
                         ...editorOptions,
                         readOnly: true,

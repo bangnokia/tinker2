@@ -17,7 +17,6 @@ const editorOptions = {
     wordWrap: 'on',
     wrappingStrategy: 'advance',
     automaticLayout: true,
-    cursorSmoothCaretAnimation: true,
     renderLineHighlight: 'none',
     renderWhitespace: false,
     scrollbar: {

@@ -10,7 +10,7 @@ import { useSettings } from './../hooks/useSettings';
 export default function Input({ setOutput, project, editorOptions }) {
     const [loading, setLoading] = useLoading()
     const [settings,] = useSettings();
-    const [code,] = useState("// Press Ctr/Cmd + Enter to run code\necho 'Welcome to Tinker 2'")
+    const [code,] = useState("")
     const monaco = useMonaco()
 
     let editorRef = useRef(null);
@@ -36,6 +36,7 @@ export default function Input({ setOutput, project, editorOptions }) {
 
             if (editorRef.current) {
                 editorRef.current.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter, runCode)
+                editorRef.current.focus();
             }
         }
     }, [monaco, runCode])
