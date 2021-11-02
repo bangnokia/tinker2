@@ -8,8 +8,8 @@ import Output from './playground/Output';
 
 const editorOptions = {
     lineHeight: 32,
-    fontSize: 15,
-    fontLigatures: true,
+    fontSize: 14,
+    // fontLigatures: true,
     // fontFamily: 'Fira Code',
     contextmenu: false,
     smoothScrolling: true,
