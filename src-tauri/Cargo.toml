@@ -20,3 +20,6 @@ tauri = { git = "https://github.com/tauri-apps/tauri", rev = "84f6e3e84a34b01b7f
 [features]
 default = [ "custom-protocol" ]
 custom-protocol = [ "tauri/custom-protocol" ]
+
+[patch."https://github.com/tauri-apps/wry"]
+wry = { git = "https://github.com/tauri-apps//wry.git", rev = "9bc201d80811d27529024457c6700364088dc0dd", default-features = false, features = [ "file-drop", "protocol" ] }
