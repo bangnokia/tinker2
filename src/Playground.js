@@ -10,7 +10,7 @@ const editorOptions = {
     lineHeight: 32,
     fontSize: 15,
     fontLigatures: true,
-    fontFamily: 'Fira Code',
+    // fontFamily: 'Fira Code',
     contextmenu: false,
     smoothScrolling: true,
     scrollBeyondLastLine: true,
