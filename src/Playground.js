@@ -5,13 +5,18 @@ import Split from 'split.js'
 import { PlaygroundProvider } from './contexts/PlaygroundContext';
 import Input from './playground/Input';
 import Output from './playground/Output';
-import LoadingIndicator from './LoadingIndicator';
 
 const editorOptions = {
     lineHeight: 32,
-    fontSize: 15,
+    fontSize: 14,
+    // fontLigatures: true,
+    // fontFamily: 'Fira Code',
+    contextmenu: false,
     smoothScrolling: true,
+    scrollBeyondLastLine: true,
     wordWrap: 'on',
+    wrappingStrategy: 'advance',
+    automaticLayout: true,
     renderLineHighlight: 'none',
     renderWhitespace: false,
     scrollbar: {
@@ -23,7 +28,8 @@ const editorOptions = {
     },
     minimap: {
         enabled: false
-    }
+    },
+    lineNumbersWidth: 0,
 }
 
 export default function Playground({ project }) {
@@ -75,7 +81,6 @@ export default function Playground({ project }) {
 
                 <div className="pg-output overflow-hidden relative">
                     <Output {...{ output, editorOptions }} />
-                    <LoadingIndicator />
                 </div>
 
             </div>

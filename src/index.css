@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+    /* @import "./fonts/fira_code/fira_code.css"; */
+
+    #editor-status-bar {
+        span:nth-child(2) {
+            @apply hidden;
+        }
+        input {
+            @apply bg-transparent focus:outline-none text-sm leading-3 p-0 m-0;
+        }
+    }
+}
 
 @layer components {
     .gutter {
@@ -14,6 +26,6 @@
         @apply cursor-col-resize;
     }
     .sidebar-icon {
-        @apply w-12 h-12 place-self-end flex items-center justify-center text-gray-500 hover:text-cyan-500;
+        @apply w-12 h-12 place-self-end flex items-center justify-center text-gray-500 hover:text-cyan-500 outline-none;
     }
 }

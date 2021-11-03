@@ -50,9 +50,12 @@ function ServersPanel({ changeProject }) {
     )
 }
 
-function ServerItem({ server, deleteServer, editServer, changeProject }) {
+function ServerItem({ server, deleteServer, editServer, changeProject, ...others }) {
     return (
-        <li onClick={() => changeProject(server)} className="flex items-center justify-between hover:bg-indigo-400 py-2 px-2 rounded">
+        <li onClick={() => changeProject(server)}
+            className="flex items-center justify-between hover:bg-indigo-400 py-2 px-2 rounded"
+            tabIndex="0"
+        >
             <div className="flex flex-col">
                 <div className="text-sm">
                     {server.label} ({server.host})

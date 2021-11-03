@@ -4,6 +4,8 @@ import Playground from './Playground';
 import Settings from './Settings';
 import Sidebar from './Sidebar';
 import { useSettings } from './hooks/useSettings';
+import { open } from "@tauri-apps/api/dialog";
+import { useHotkeys } from 'react-hotkeys-hook';
 
 // local project
 const defaultLocalProject = {
@@ -14,11 +16,27 @@ const defaultLocalProject = {
 function App() {
     const [project, setProject] = useState(defaultLocalProject);
     const [settingsPanel, setSettingsPanel] = useState()
-    const [settings,] = useSettings()
+    const [settings, setSettings] = useSettings()
+
+    // Setup keyboard shotcuts
+    useHotkeys('Cmd+o', () => openFolderDialog(), { enableOnTags: ['INPUT', 'TEXTAREA'] });
+    useHotkeys('Cmd+Shift+o', () => setSettingsPanel('servers'), { enableOnTags: ['INPUT', 'TEXTAREA'] })
+    useHotkeys('Cmd+,', () => setSettingsPanel('preferences'), { enableOnTags: ['INPUT', 'TEXTAREA'] })
+    useHotkeys('Cmd+\\', () => setSettings({ ...settings, layout: settings.layout === 'vertical' ? 'horizontal' : 'vertical' }), { enableOnTags: ['INPUT', 'TEXTAREA'] })
 
     const changeProject = function (project) {
         setProject(project)
     }
+
+    function openFolderDialog() {
+        open({
+            multiple: false,
+            directory: true
+        }).then(dir => dir && changeProject({
+            type: 'local',
+            path: dir
+        }));
+    };
 
     useEffect(() => {
         if (settings.default_php_binary) {
@@ -39,6 +57,7 @@ function App() {
             style={{ backgroundColor: 'rgb(30, 30, 30)' }}>
             <div className="flex flex-grow flex-shrink h-full overflow-hidden relative">
                 <Sidebar changeProject={changeProject}
+                    openFolderDialog={openFolderDialog}
                     setSettingsPanel={setSettingsPanel} />
 
                 <div className="flex w-full h-full relative">
