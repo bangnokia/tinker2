@@ -1,56 +1,18 @@
-import { useState, useEffect, useRef, useLayoutEffect } from 'react';
+import { useEffect, useRef, useLayoutEffect } from 'react';
 import { uploadPsycho } from './executor';
 import { useSettings } from './hooks/useSettings';
 import Split from 'split.js'
 import { PlaygroundProvider } from './contexts/PlaygroundContext';
 import Input from './playground/Input';
 import Output from './playground/Output';
+import editorOptions from './config/editor-options';
 
-const editorOptions = {
-    lineHeight: 32,
-    fontSize: 14,
-    // fontLigatures: true,
-    // fontFamily: 'Fira Code',
-    contextmenu: false,
-    smoothScrolling: true,
-    scrollBeyondLastLine: true,
-    wordWrap: 'on',
-    wrappingStrategy: 'advance',
-    automaticLayout: true,
-    renderLineHighlight: 'none',
-    renderWhitespace: false,
-    scrollbar: {
-        verticalScrollbarSize: 0,
-        verticalSliderSize: 0
-    },
-    semanticHighlighting: {
-        enabled: true
-    },
-    minimap: {
-        enabled: false
-    },
-    lineNumbersWidth: 0,
-}
-
-export default function Playground({ project }) {
-    const [output, setOutput] = useState('')
+export default function Playground({ project, children }) {
     const [settings,] = useSettings()
     const splitInstance = useRef(null)
     const layout = settings.layout === 'vertical' ? 'horizontal' : 'vertical'
 
-    const outputRef = useRef('');
-
-    const cleanOutput = function () {
-        outputRef.current = '';
-        setOutput('')
-    }
-
-    const appendOutput = function (line) {
-        // console.log('line ', line)
-        outputRef.current = outputRef.current.concat(line + '\n');
-        // console.log('current', outputRef.current)
-        setOutput(outputRef.current.trim());
-    }
+    console.log('render playground')
 
     useEffect(() => {
         if (project.type === 'ssh') {
@@ -76,11 +38,11 @@ export default function Playground({ project }) {
                 style={{ backgroundColor: 'rgb(23, 23, 23)' }}>
 
                 <div className="pg-input overflow-hidden">
-                    <Input {...{ setOutput, appendOutput, cleanOutput, project, editorOptions }} />
+                    <Input {...{ project, editorOptions }} />
                 </div>
 
                 <div className="pg-output overflow-hidden relative">
-                    <Output {...{ output, editorOptions }} />
+                    <Output {...{ editorOptions }} />
                 </div>
 
             </div>

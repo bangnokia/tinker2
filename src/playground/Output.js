@@ -1,6 +1,11 @@
 import Editor from "@monaco-editor/react"
+import { usePlayground } from '../contexts/PlaygroundContext';
 
-export default function Output({ output, editorOptions }) {
+export default function Output({ editorOptions }) {
+    const { output } = usePlayground()
+
+    console.log('rerender ouput')
+
     return (
         <>
             <div className="h-full">
@@ -8,7 +13,7 @@ export default function Output({ output, editorOptions }) {
                     key="output"
                     language="php-snippet"
                     theme="vs-dark"
-                    value={output || "// Press Ctr/Cmd + Enter to run code"}
+                    value={output === null ? "// Press Ctr/Cmd + Enter to run code" : output}
                     options={{
                         ...editorOptions,
                         readOnly: true,

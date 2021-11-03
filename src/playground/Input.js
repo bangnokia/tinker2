@@ -1,52 +1,23 @@
-import { useLoading } from '../contexts/PlaygroundContext';
+import { usePlayground } from '../contexts/PlaygroundContext';
 import Editor from "@monaco-editor/react";
 import { useMonaco } from '@monaco-editor/react';
-import { useState, useRef, useCallback, useEffect } from "react";
+import { useState, useRef, useCallback, useEffect, useMemo } from "react";
 import { registerPHPSnippetLanguage } from '../utils/registerPHPSnippetLanguage';
-import execute from "../executor";
 import { initVimMode } from 'monaco-vim';
 import { useSettings } from './../hooks/useSettings';
 
-export default function Input({ setOutput, project, editorOptions }) {
-    const [loading, setLoading] = useLoading()
+export default function Input({ project, editorOptions }) {
+    const { loading, executeCode } = usePlayground()
     const [settings,] = useSettings();
-    const [code,] = useState("")
+    const [code,] = useState("foreach (range(1,5) as $item) {echo $item.PHP_EOL;sleep(1);}")
     const monaco = useMonaco()
 
     let editorRef = useRef(null);
     let vimModeRef = useRef(null);
 
-    const runCode = useCallback(async () => {
-        setLoading(true)
+    console.log('rerender input')
 
-        const command = await execute({ code: editorRef.current.getValue(), project })
-
-        cleanOutput()
-
-        command.on('error', error => console.log('error') && setOutput(error))
-        command.stdout.on('data', line => {
-            console.log('stdout ', line);
-            appendOutput(line)
-        })
-        command.stderr.on('data', line => {
-            console.log('stderr ', line)
-        })
-        command.on('close', () => setLoading(false))
-
-        command.spawn();
-        // .then(({ stdout }) => {
-        //     console.log('stdout', stdout)
-        //     try {
-        //         const result = JSON.parse(stdout.trim())
-        //         console.log(result)
-        //         setOutput(result.output)
-        //     } catch (ex) {
-        //         console.log('ex', ex)
-        //         setOutput(stdout.trim())
-        //     }
-        // })
-        // .finally(() => setLoading(false))
-    }, [appendOutput, cleanOutput, project, setLoading, setOutput])
+    const runCode = useCallback(() => executeCode(project, editorRef.current.getValue()), [executeCode, project])
 
     useEffect(() => {
         if (monaco) {
@@ -86,18 +57,15 @@ export default function Input({ setOutput, project, editorOptions }) {
 
     function handleEditorDidMount(editor, monaco) {
         editorRef.current = editor;
-
-        setTimeout(() => monaco.editor.remeasureFonts(), 0);
     }
 
-    return (
-        <>
+    return useMemo(() => {
+        return <>
             <Editor
                 key="tinker-pad"
                 theme="vs-dark"
                 language="php-snippet"
                 value={code}
-                // onChange={(value) => setCode(value)}
                 onMount={handleEditorDidMount}
                 options={editorOptions}
             />
@@ -108,7 +76,7 @@ export default function Input({ setOutput, project, editorOptions }) {
                 <PlayIcon />
             </button>
         </>
-    )
+    }, [code, editorOptions, loading, runCode])
 }
 
 
