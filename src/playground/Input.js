@@ -9,7 +9,7 @@ import { useSettings } from './../hooks/useSettings';
 export default function Input({ project, editorOptions, outputMode }) {
     const { loading, executeCode, killProcess } = usePlayground()
     const [settings,] = useSettings();
-    const [code,] = useState("foreach (range(1,3) as $item) {echo $item.PHP_EOL;sleep(1);}")
+    const [code,] = useState("")
     const monaco = useMonaco()
 
     let editorRef = useRef(null);
