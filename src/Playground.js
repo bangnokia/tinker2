@@ -7,7 +7,7 @@ import Input from './playground/Input';
 import Output from './playground/Output';
 import editorOptions from './config/editor-options';
 
-export default function Playground({ project, children }) {
+export default function Playground({ project }) {
     const [settings,] = useSettings()
     const splitInstance = useRef(null)
     const layout = settings.layout === 'vertical' ? 'horizontal' : 'vertical'
@@ -36,7 +36,7 @@ export default function Playground({ project, children }) {
                 style={{ backgroundColor: 'rgb(23, 23, 23)' }}>
 
                 <div className="pg-input overflow-hidden">
-                    <Input {...{ project, editorOptions }} />
+                    <Input {...{ project, editorOptions, outputMode: settings.output_mode }} />
                 </div>
 
                 <div className="pg-output overflow-hidden relative">

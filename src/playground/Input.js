@@ -6,10 +6,10 @@ import { registerPHPSnippetLanguage } from '../utils/registerPHPSnippetLanguage'
 import { initVimMode } from 'monaco-vim';
 import { useSettings } from './../hooks/useSettings';
 
-export default function Input({ project, editorOptions }) {
+export default function Input({ project, editorOptions, outputMode }) {
     const { loading, executeCode, killProcess } = usePlayground()
     const [settings,] = useSettings();
-    const [code,] = useState("foreach (range(1,5) as $item) {echo $item.PHP_EOL;sleep(1);}")
+    const [code,] = useState("foreach (range(1,3) as $item) {echo $item.PHP_EOL;sleep(1);}")
     const monaco = useMonaco()
 
     let editorRef = useRef(null);
@@ -19,9 +19,9 @@ export default function Input({ project, editorOptions }) {
         if (loading) {
             killProcess()
         } else {
-            executeCode(project, editorRef.current.getValue())
+            executeCode(project, editorRef.current.getValue(), outputMode)
         }
-    }, [executeCode, killProcess, loading, project])
+    }, [executeCode, killProcess, loading, project, outputMode])
 
     useEffect(() => {
         if (monaco) {
@@ -49,7 +49,9 @@ export default function Input({ project, editorOptions }) {
                         fontInfo: editorRef.current.getOption(opts.fontInfo),
                     }
                 }
-                vimModeRef.current = initVimMode(editorRef.current, document.getElementById("editor-status-bar"))
+                if (!vimModeRef.current) {
+                    vimModeRef.current = initVimMode(editorRef.current, document.getElementById("editor-status-bar"))
+                }
             } else {
                 if (vimModeRef.current) {
                     vimModeRef.current.dispose();
@@ -80,7 +82,8 @@ export default function Input({ project, editorOptions }) {
                 <PlayIcon />
             </button>
         </>
-    }, [code, editorOptions, loading, runCode])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [code, loading, outputMode])
 }
 
 

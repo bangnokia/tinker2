@@ -30,16 +30,14 @@ export function PlaygroundProvider(props) {
         setOutput(outputRef.current.trim());
     }
 
-
-    const executeCode = async (project, code) => {
-        console.log('in input callback')
+    const executeCode = async (project, code, mode) => {
         setLoading(true)
 
-        const command = await execute({ code, project })
+        const command = await execute({ code, project, mode })
 
         cleanOutput()
 
-        command.on('error', error => console.log('error') && setOutput(error))
+        command.on('error', error => setOutput(error))
         command.stdout.on('data', line => appendOutput(line))
         command.stderr.on('data', line => appendOutput(line))
         command.on('close', () => setLoading(false))

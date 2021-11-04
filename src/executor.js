@@ -2,19 +2,18 @@ import { Command } from '@tauri-apps/api/shell';
 import { currentDir, resourceDir } from '@tauri-apps/api/path';
 import DatabaseService from './services/DatabaseService';
 
-async function execute({ code, project }) {
+async function execute({ code, project, mode = 'sync' }) {
     const base64Code = Buffer.from(code).toString('base64');
     const psychoPath = await resolvePsychoPath(project.type)
-
     let command = null;
-    // The problem here is where is the path of psycho.phar when we build the production app
+
     switch (project.type) {
         case 'local':
-            command = makeCommandOnLocalMachine(project, base64Code, psychoPath)
+            command = makeCommandOnLocalMachine(project, base64Code, psychoPath, mode)
             break;
 
         case 'ssh':
-            command = makeCommandOnRemoteServer(project, base64Code);
+            command = makeCommandOnRemoteServer(project, base64Code, mode);
             break;
 
         default:
@@ -24,21 +23,22 @@ async function execute({ code, project }) {
     return command;
 }
 
-async function makeCommandOnLocalMachine(project, base64Code, psychoPath) {
+async function makeCommandOnLocalMachine(project, base64Code, psychoPath, mode) {
     const database = new DatabaseService();
-            const phpBinary = (await database.get('settings')).default_php_binary
+    const phpBinary = (await database.get('settings')).default_php_binary
 
-            return new Command(
-                phpBinary,
-                [
-                    psychoPath,
-                    '--target=' + project.path,
-                    '--code=' + base64Code,
-                ]
-            );
+    return new Command(
+        phpBinary,
+        [
+            psychoPath,
+            '--target=' + project.path,
+            '--code=' + base64Code,
+            '--mode=' + mode
+        ]
+    );
 }
 
-function makeCommandOnRemoteServer(project, code, psychoPath = '/tmp/psycho.phar') {
+function makeCommandOnRemoteServer(project, code, psychoPath = '/tmp/psycho.phar', mode) {
     const { user, host, port, private_key, path, php_binary } = project;
 
     const args = [
@@ -51,7 +51,8 @@ function makeCommandOnRemoteServer(project, code, psychoPath = '/tmp/psycho.phar
         php_binary,
         psychoPath,
         `--target=${path}`,
-        `--code=${code}`
+        `--code=${code}`,
+        `--mode=${mode}`
     ];
 
     return new Command('ssh', args)
