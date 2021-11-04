@@ -2,34 +2,43 @@ import { Command } from '@tauri-apps/api/shell';
 import { currentDir, resourceDir } from '@tauri-apps/api/path';
 import DatabaseService from './services/DatabaseService';
 
-async function execute({ code, project }) {
+async function execute({ code, project, mode = 'sync' }) {
     const base64Code = Buffer.from(code).toString('base64');
     const psychoPath = await resolvePsychoPath(project.type)
+    let command = null;
 
-    // The problem here is where is the path of psycho.phar when we build the production app
     switch (project.type) {
         case 'local':
-            const database = new DatabaseService();
-            const phpBinary = (await database.get('settings')).default_php_binary
-
-            return await new Command(
-                phpBinary,
-                [
-                    psychoPath,
-                    '--target=' + project.path,
-                    '--code=' + base64Code,
-                ]
-            ).execute();
+            command = makeCommandOnLocalMachine(project, base64Code, psychoPath, mode)
+            break;
 
         case 'ssh':
-            return await executeOnRemoteServer(project, base64Code, psychoPath);
+            command = makeCommandOnRemoteServer(project, base64Code, mode);
+            break;
 
         default:
             throw new Error(`Project type ${project.type} is not supported.`)
     }
+
+    return command;
 }
 
-async function executeOnRemoteServer(project, code, psychoPath = '/tmp/psycho.phar') {
+async function makeCommandOnLocalMachine(project, base64Code, psychoPath, mode) {
+    const database = new DatabaseService();
+    const phpBinary = (await database.get('settings')).default_php_binary
+
+    return new Command(
+        phpBinary,
+        [
+            psychoPath,
+            '--target=' + project.path,
+            '--code=' + base64Code,
+            '--mode=' + mode
+        ]
+    );
+}
+
+function makeCommandOnRemoteServer(project, code, psychoPath = '/tmp/psycho.phar', mode) {
     const { user, host, port, private_key, path, php_binary } = project;
 
     const args = [
@@ -42,12 +51,11 @@ async function executeOnRemoteServer(project, code, psychoPath = '/tmp/psycho.ph
         php_binary,
         psychoPath,
         `--target=${path}`,
-        `--code=${code}`
+        `--code=${code}`,
+        `--mode=${mode}`
     ];
 
-    const command = new Command('ssh', args)
-
-    return await command.execute();
+    return new Command('ssh', args)
 }
 
 async function resolvePsychoPath(type) {

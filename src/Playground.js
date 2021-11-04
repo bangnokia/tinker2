@@ -1,39 +1,13 @@
-import { useState, useEffect, useRef, useLayoutEffect } from 'react';
+import { useEffect, useRef, useLayoutEffect } from 'react';
 import { uploadPsycho } from './executor';
 import { useSettings } from './hooks/useSettings';
 import Split from 'split.js'
 import { PlaygroundProvider } from './contexts/PlaygroundContext';
 import Input from './playground/Input';
 import Output from './playground/Output';
-
-const editorOptions = {
-    lineHeight: 32,
-    fontSize: 14,
-    // fontLigatures: true,
-    // fontFamily: 'Fira Code',
-    contextmenu: false,
-    smoothScrolling: true,
-    scrollBeyondLastLine: true,
-    wordWrap: 'on',
-    wrappingStrategy: 'advance',
-    automaticLayout: true,
-    renderLineHighlight: 'none',
-    renderWhitespace: false,
-    scrollbar: {
-        verticalScrollbarSize: 0,
-        verticalSliderSize: 0
-    },
-    semanticHighlighting: {
-        enabled: true
-    },
-    minimap: {
-        enabled: false
-    },
-    lineNumbersWidth: 0,
-}
+import editorOptions from './config/editor-options';
 
 export default function Playground({ project }) {
-    const [output, setOutput] = useState('')
     const [settings,] = useSettings()
     const splitInstance = useRef(null)
     const layout = settings.layout === 'vertical' ? 'horizontal' : 'vertical'
@@ -58,17 +32,15 @@ export default function Playground({ project }) {
 
     return (
         <PlaygroundProvider>
-            <div
-                className={`flex h-full w-full ` + (layout === 'vertical' ? 'flex-col' : '')}
-                style={{
-                    backgroundColor: 'rgb(23, 23, 23)'
-                }}>
+            <div className={`flex h-full w-full ` + (layout === 'vertical' ? 'flex-col' : '')}
+                style={{ backgroundColor: 'rgb(23, 23, 23)' }}>
+
                 <div className="pg-input overflow-hidden">
-                    <Input {...{ setOutput, project, editorOptions }} />
+                    <Input {...{ project, editorOptions, outputMode: settings.output_mode }} />
                 </div>
 
                 <div className="pg-output overflow-hidden relative">
-                    <Output {...{ output, editorOptions }} />
+                    <Output {...{ editorOptions }} />
                 </div>
 
             </div>

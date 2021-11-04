@@ -1,34 +1,27 @@
-import { useLoading } from '../contexts/PlaygroundContext';
+import { usePlayground } from '../contexts/PlaygroundContext';
 import Editor from "@monaco-editor/react";
 import { useMonaco } from '@monaco-editor/react';
-import { useState, useRef, useCallback, useEffect } from "react";
+import { useState, useRef, useCallback, useEffect, useMemo } from "react";
 import { registerPHPSnippetLanguage } from '../utils/registerPHPSnippetLanguage';
-import execute from "../executor";
 import { initVimMode } from 'monaco-vim';
 import { useSettings } from './../hooks/useSettings';
 
-export default function Input({ setOutput, project, editorOptions }) {
-    const [loading, setLoading] = useLoading()
+export default function Input({ project, editorOptions, outputMode }) {
+    const { loading, executeCode, killProcess } = usePlayground()
     const [settings,] = useSettings();
-    const [code,] = useState("")
+    const [code,] = useState("foreach (range(1,3) as $item) {echo $item.PHP_EOL;sleep(1);}")
     const monaco = useMonaco()
 
     let editorRef = useRef(null);
     let vimModeRef = useRef(null);
 
     const runCode = useCallback(() => {
-        setLoading(true)
-        execute({ code: editorRef.current.getValue(), project })
-            .then(({ stdout }) => {
-                try {
-                    const result = JSON.parse(stdout.trim())
-                    setOutput(result.output)
-                } catch (ex) {
-                    setOutput(stdout.trim())
-                }
-            })
-            .finally(() => setLoading(false))
-    }, [project, setLoading, setOutput])
+        if (loading) {
+            killProcess()
+        } else {
+            executeCode(project, editorRef.current.getValue(), outputMode)
+        }
+    }, [executeCode, killProcess, loading, project, outputMode])
 
     useEffect(() => {
         if (monaco) {
@@ -56,7 +49,9 @@ export default function Input({ setOutput, project, editorOptions }) {
                         fontInfo: editorRef.current.getOption(opts.fontInfo),
                     }
                 }
-                vimModeRef.current = initVimMode(editorRef.current, document.getElementById("editor-status-bar"))
+                if (!vimModeRef.current) {
+                    vimModeRef.current = initVimMode(editorRef.current, document.getElementById("editor-status-bar"))
+                }
             } else {
                 if (vimModeRef.current) {
                     vimModeRef.current.dispose();
@@ -68,18 +63,15 @@ export default function Input({ setOutput, project, editorOptions }) {
 
     function handleEditorDidMount(editor, monaco) {
         editorRef.current = editor;
-
-        setTimeout(() => monaco.editor.remeasureFonts(), 0);
     }
 
-    return (
-        <>
+    return useMemo(() => {
+        return <>
             <Editor
                 key="tinker-pad"
                 theme="vs-dark"
                 language="php-snippet"
                 value={code}
-                // onChange={(value) => setCode(value)}
                 onMount={handleEditorDidMount}
                 options={editorOptions}
             />
@@ -90,7 +82,8 @@ export default function Input({ setOutput, project, editorOptions }) {
                 <PlayIcon />
             </button>
         </>
-    )
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [code, loading, outputMode])
 }
 
 
