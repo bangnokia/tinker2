@@ -16,6 +16,7 @@ export function usePlayground() {
 export function PlaygroundProvider(props) {
     const [loading, setLoading] = useState(false)
     const [output, setOutput] = useState(null)
+    const [process, setProcess] = useState(null)
 
     const outputRef = useRef('');
 
@@ -43,10 +44,19 @@ export function PlaygroundProvider(props) {
         command.stderr.on('data', line => appendOutput(line))
         command.on('close', () => setLoading(false))
 
-        command.spawn();
+        const child = await command.spawn();
+        setProcess(child)
+    }
+
+    const killProcess = async function () {
+        if (process) {
+            await process.kill();
+            setLoading(false)
+            setProcess(null)
+        }
     }
 
     return (
-        <PlaygroundContext.Provider value={{ loading, setLoading, output, setOutput, appendOutput, cleanOutput, executeCode }} {...props} />
+        <PlaygroundContext.Provider value={{ loading, setLoading, output, setOutput, appendOutput, cleanOutput, executeCode, killProcess }} {...props} />
     )
 }

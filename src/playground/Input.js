@@ -7,7 +7,7 @@ import { initVimMode } from 'monaco-vim';
 import { useSettings } from './../hooks/useSettings';
 
 export default function Input({ project, editorOptions }) {
-    const { loading, executeCode } = usePlayground()
+    const { loading, executeCode, killProcess } = usePlayground()
     const [settings,] = useSettings();
     const [code,] = useState("foreach (range(1,5) as $item) {echo $item.PHP_EOL;sleep(1);}")
     const monaco = useMonaco()
@@ -15,9 +15,13 @@ export default function Input({ project, editorOptions }) {
     let editorRef = useRef(null);
     let vimModeRef = useRef(null);
 
-    console.log('rerender input')
-
-    const runCode = useCallback(() => executeCode(project, editorRef.current.getValue()), [executeCode, project])
+    const runCode = useCallback(() => {
+        if (loading) {
+            killProcess()
+        } else {
+            executeCode(project, editorRef.current.getValue())
+        }
+    }, [executeCode, killProcess, loading, project])
 
     useEffect(() => {
         if (monaco) {

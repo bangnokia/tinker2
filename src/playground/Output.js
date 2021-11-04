@@ -4,8 +4,6 @@ import { usePlayground } from '../contexts/PlaygroundContext';
 export default function Output({ editorOptions }) {
     const { output } = usePlayground()
 
-    console.log('rerender ouput')
-
     return (
         <>
             <div className="h-full">

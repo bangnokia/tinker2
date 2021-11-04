@@ -2,7 +2,7 @@ const editorOptions = {
     lineHeight: 32,
     fontSize: 14,
     // fontLigatures: true,
-    // fontFamily: 'Fira Code',
+    fontFamily: 'monospace',
     contextmenu: false,
     smoothScrolling: true,
     scrollBeyondLastLine: true,
@@ -23,5 +23,5 @@ const editorOptions = {
     },
     lineNumbersWidth: 0,
 }
- 
+
 export default editorOptions;
