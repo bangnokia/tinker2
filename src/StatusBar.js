@@ -20,7 +20,7 @@ function StatusBar({ project, changeProject }) {
     function toggleOutputMode() {
         setSettings({
             ...settings,
-            'output_mode': (settings.output_mode && settings.output_mode === 'sync') ? 'realtime' : 'sync'
+            'output_mode': (settings.output_mode && settings.output_mode === 'buffered') ? 'stream' : 'buffered'
         })
     }
 
@@ -48,8 +48,8 @@ function StatusBar({ project, changeProject }) {
             <div className="flex flex-end">
                 <button onClick={() => toggleOutputMode()}
                     type="button"
-                    className={`cursor-pointer hover:text-cyan-400 transition transform ` + (settings.output_mode === 'sync' ? '' : 'text-cyan-500')}
-                    title="Toggle output mode sync or realtime">
+                    className={`cursor-pointer hover:text-cyan-400 transition transform ` + (settings.output_mode === 'buffered' ? '' : 'text-cyan-500')}
+                    title="Toggle output mode buffered or stream">
                     <StatusOnlineIcon />
                 </button>
             </div>

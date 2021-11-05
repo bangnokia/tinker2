@@ -12,14 +12,22 @@ export default function Input({ project, editorOptions, outputMode }) {
     const [code,] = useState("")
     const monaco = useMonaco()
 
+    console.log('input project', project)
+
     let editorRef = useRef(null);
     let vimModeRef = useRef(null);
 
     const runCode = useCallback(() => {
+        const code = editorRef.current.getValue();
+
+        if (!code) {
+            return;
+        }
+
         if (loading) {
             killProcess()
         } else {
-            executeCode(project, editorRef.current.getValue(), outputMode)
+            executeCode(project, code, outputMode)
         }
     }, [executeCode, killProcess, loading, project, outputMode])
 
@@ -83,7 +91,7 @@ export default function Input({ project, editorOptions, outputMode }) {
             </button>
         </>
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [code, loading, outputMode])
+    }, [code, loading, outputMode, project])
 }
 
 

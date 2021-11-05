@@ -32,18 +32,24 @@ export function PlaygroundProvider(props) {
 
     const executeCode = async (project, code, mode) => {
         setLoading(true)
+        cleanOutput()
 
         const command = await execute({ code, project, mode })
 
-        cleanOutput()
+        if (mode === 'stream') {
 
-        command.on('error', error => setOutput(error))
-        command.stdout.on('data', line => appendOutput(line))
-        command.stderr.on('data', line => appendOutput(line))
-        command.on('close', () => setLoading(false))
+            command.on('error', error => setOutput(error))
+            command.stdout.on('data', line => appendOutput(line))
+            command.stderr.on('data', line => appendOutput(line))
+            command.on('close', () => setLoading(false))
 
-        const child = await command.spawn();
-        setProcess(child)
+            const child = await command.spawn();
+            setProcess(child)
+        } else {
+            const result = await command.execute();
+            setOutput(result.stdout + result.stderr)
+            setLoading(false)
+        }
     }
 
     const killProcess = async function () {

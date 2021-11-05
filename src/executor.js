@@ -2,7 +2,7 @@ import { Command } from '@tauri-apps/api/shell';
 import { currentDir, resourceDir } from '@tauri-apps/api/path';
 import DatabaseService from './services/DatabaseService';
 
-async function execute({ code, project, mode = 'sync' }) {
+async function execute({ code, project, mode = 'buffered' }) {
     const base64Code = Buffer.from(code).toString('base64');
     const psychoPath = await resolvePsychoPath(project.type)
     let command = null;
@@ -13,7 +13,7 @@ async function execute({ code, project, mode = 'sync' }) {
             break;
 
         case 'ssh':
-            command = makeCommandOnRemoteServer(project, base64Code, mode);
+            command = makeCommandOnRemoteServer(project, base64Code, psychoPath, mode);
             break;
 
         default:

@@ -12,6 +12,8 @@ export default function Playground({ project }) {
     const splitInstance = useRef(null)
     const layout = settings.layout === 'vertical' ? 'horizontal' : 'vertical'
 
+    console.log('project', project)
+
     useEffect(() => {
         if (project.type === 'ssh') {
             uploadPsycho(project).then(function () {
@@ -36,7 +38,7 @@ export default function Playground({ project }) {
                 style={{ backgroundColor: 'rgb(23, 23, 23)' }}>
 
                 <div className="pg-input overflow-hidden">
-                    <Input {...{ project, editorOptions, outputMode: settings.output_mode }} />
+                    <Input {...{ project, editorOptions, outputMode: settings.output_mode || 'buffered' }} />
                 </div>
 
                 <div className="pg-output overflow-hidden relative">
