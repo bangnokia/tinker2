@@ -45,6 +45,7 @@ function makeCommandOnRemoteServer(project, code, psychoPath = '/tmp/psycho.phar
         '-C',
         '-o StrictHostKeyChecking=no',
         '-o UserKnownHostsFile=/dev/null',
+        '-o LogLevel=Error',
         `-i ${private_key}`,
         `-p ${port}`,
         `${user}@${host}`,
