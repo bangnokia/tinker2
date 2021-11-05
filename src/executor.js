@@ -43,10 +43,10 @@ function makeCommandOnRemoteServer(project, code, psychoPath = '/tmp/psycho.phar
 
     const args = [
         '-C',
-        '-o StrictHostKeyChecking=no',
-        '-o UserKnownHostsFile=/dev/null',
-        '-o LogLevel=Error',
-        `-i ${private_key}`,
+        '-oStrictHostKeyChecking=no',
+        '-oUserKnownHostsFile=/dev/null',
+        '-oLogLevel=Error',
+        '-i' + private_key,
         `-p ${port}`,
         `${user}@${host}`,
         php_binary,

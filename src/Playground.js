@@ -12,8 +12,6 @@ export default function Playground({ project }) {
     const splitInstance = useRef(null)
     const layout = settings.layout === 'vertical' ? 'horizontal' : 'vertical'
 
-    console.log('project', project)
-
     useEffect(() => {
         if (project.type === 'ssh') {
             uploadPsycho(project).then(function () {

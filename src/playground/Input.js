@@ -12,8 +12,6 @@ export default function Input({ project, editorOptions, outputMode }) {
     const [code,] = useState("")
     const monaco = useMonaco()
 
-    console.log('input project', project)
-
     let editorRef = useRef(null);
     let vimModeRef = useRef(null);
 
