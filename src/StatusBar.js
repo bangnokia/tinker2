@@ -44,7 +44,7 @@ function StatusBar({ project, changeProject }) {
                 </button>
             </div>
 
-            {/* Output mode */}
+            {/* Toggle output mode */}
             <div className="flex flex-end">
                 <button onClick={() => toggleOutputMode()}
                     type="button"
@@ -54,9 +54,14 @@ function StatusBar({ project, changeProject }) {
                 </button>
             </div>
 
+            {/* Vim mode */}
             <div id="editor-status-bar" className="flex items-center justify-center overflow-hidden"></div>
 
+            {/* Pursechase status */}
+            { !settings.is_valid ? (<div class="flex flex-end text-gray-700">Unregistered</div>) : null }
 
+
+            {/* Current project */}
             <div className="flex-grow text-right">
                 <BadgeType project={project} />
                 <span className="ml-2">{project.path || '/blackhole :)'}</span>

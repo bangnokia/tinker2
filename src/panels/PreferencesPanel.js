@@ -8,9 +8,9 @@ import { validateLicenseKey } from '../services/validate-license-key';
 function PreferencesPanel() {
     const [settings, setSettings] = useSettings()
     const [detecting, setDetecting] = useState(false)
-    const [licenseKey, setLicenceKey] = useState('');
+    const [licenseKey, setLicenceKey] = useState(settings.license_key);
 
-    const selectPhpBinary = function () {
+    const selectPhpBinary = function() {
         open({
             multiple: false,
             directory: false,
@@ -22,7 +22,7 @@ function PreferencesPanel() {
         })
     }
 
-    const selectDefaultProject = function () {
+    const selectDefaultProject = function() {
         open({
             multiple: false,
             directory: true,
@@ -34,7 +34,7 @@ function PreferencesPanel() {
         })
     }
 
-    const detectPhpPath = async function () {
+    const detectPhpPath = async function() {
         setDetecting(true)
         const result = await (
             new Command(process.platform === 'win32' ? 'where' : 'which', 'php')
@@ -46,9 +46,28 @@ function PreferencesPanel() {
         })
     }
 
-    const useLicense = function () {
-        console.log('use this license ' + licenseKey);
-        validateLicenseKey(licenseKey).then(response => console.log(response));
+    const useLicense = async function() {
+        try {
+            const result = await validateLicenseKey(licenseKey);
+
+            if (result.is_valid) {
+                // save to files
+                setSettings({
+                    ...settings,
+                    'license_key': licenseKey,
+                    'is_valid': true
+                })
+                alert('Thank you for your purchase <3!');
+            } else {
+                alert('Your license is seem invalid');
+                setSettings({
+                    ...settings,
+                    'is_valid': false
+                })
+            }
+        } catch (ex) {
+            alert('Can not connect to license server!')
+        }
     }
 
     return (
@@ -176,7 +195,7 @@ function PreferencesPanel() {
                     License key
                 </label>
                 <div className="mt-1 sm:mt-0 sm:col-span-2 flex space-x-1">
-                    <input onChange={(e) => setLicenceKey(e.target.value)} value={settings.license_key} type="text" id="license_key" className="form-input max-w-lg block w-full shadow-sm focus:ring-cyan-500 focus:border-cyan-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md" />
+                    <input onChange={(e) => setLicenceKey(e.target.value.trim())} value={licenseKey} type="text" id="license_key" className="form-input max-w-lg block w-full shadow-sm focus:ring-cyan-500 focus:border-cyan-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md" />
                     <Button onClick={useLicense}>Use License</Button>
                 </div>
             </div>
