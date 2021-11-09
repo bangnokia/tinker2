@@ -1,14 +1,16 @@
 import Button from "../buttons/Button"
 import { open } from "@tauri-apps/api/dialog"
 import { useSettings } from "../hooks/useSettings"
+import {useLicense} from '../hooks/useLicense';
 import { Command } from "@tauri-apps/api/shell";
 import { useState } from "react";
 import { validateLicenseKey } from '../services/validate-license-key';
 
 function PreferencesPanel() {
     const [settings, setSettings] = useSettings()
+    const [license, setLicense] = useLicense();
     const [detecting, setDetecting] = useState(false)
-    const [licenseKey, setLicenceKey] = useState(settings.license_key);
+    const [licenseKey, setLicenceKey] = useState(license.key);
 
     const selectPhpBinary = function() {
         open({
@@ -46,23 +48,21 @@ function PreferencesPanel() {
         })
     }
 
-    const useLicense = async function() {
+    const validateLicense = async function() {
         try {
             const result = await validateLicenseKey(licenseKey);
 
             if (result.is_valid) {
                 // save to files
-                setSettings({
-                    ...settings,
-                    license_key: licenseKey,
-                    license_key_is_valid: true
+                setLicense({
+                    key: licenseKey,
+                    is_valid: true
                 })
                 alert('Thank you for your purchase <3!');
             } else {
-                setSettings({
-                    ...settings,
-                    license_key: licenseKey,
-                    license_key_is_valid: false
+                setLicense({
+                    key: licenseKey,
+                    is_valid: false
                 })
                 alert('Your license is seem invalid!');
             }
@@ -197,7 +197,7 @@ function PreferencesPanel() {
                 </label>
                 <div className="mt-1 sm:mt-0 sm:col-span-2 flex space-x-1">
                     <input onChange={(e) => setLicenceKey(e.target.value.trim())} value={licenseKey} type="text" id="license_key" className="form-input max-w-lg block w-full shadow-sm focus:ring-cyan-500 focus:border-cyan-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md" />
-                    <Button onClick={useLicense}>Use License</Button>
+                    <Button onClick={validateLicense}>Use License</Button>
                 </div>
             </div>
         </form>

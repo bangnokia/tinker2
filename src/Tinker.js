@@ -4,6 +4,7 @@ import DatabaseService from "./services/DatabaseService"
 import App from "./App"
 import SplashScreen from "./SplashScreen"
 import { SettingsProvider } from "./contexts/SettingsContext"
+import {LicenseProvider} from './contexts/LicenseContext'
 
 export default function Tinker2() {
     const [hasDataFile, setHasDataFile] = useState(false)
@@ -36,7 +37,9 @@ export default function Tinker2() {
             ready
                 ?
                 <SettingsProvider defaultValue={defaultSettings}>
-                    <App />
+                    <LicenseProvider>
+                        <App />
+                    </LicenseProvider>
                 </SettingsProvider>
                 :
                 <SplashScreen />

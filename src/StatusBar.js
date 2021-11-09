@@ -1,7 +1,9 @@
 import { useSettings } from "./hooks/useSettings";
+import { useLicense } from './hooks/useLicense';
 
 function StatusBar({ project, changeProject }) {
     const [settings, setSettings] = useSettings();
+    const [license,] = useLicense();
 
     function toggleLayout() {
         setSettings({
@@ -58,7 +60,7 @@ function StatusBar({ project, changeProject }) {
             <div id="editor-status-bar" className="flex items-center justify-center overflow-hidden"></div>
 
             {/* Pursechase status */}
-            { !settings.license_key_is_valid ? (<div class="flex flex-end text-gray-700">Unregistered</div>) : null }
+            {!license.is_valid ? (<div className="flex flex-end text-gray-700">Unregistered</div>) : null}
 
 
             {/* Current project */}
@@ -66,7 +68,6 @@ function StatusBar({ project, changeProject }) {
                 <BadgeType project={project} />
                 <span className="ml-2">{project.path || '/blackhole :)'}</span>
             </div>
-
         </div>
     );
 }
