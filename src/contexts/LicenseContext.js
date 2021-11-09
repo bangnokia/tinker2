@@ -7,7 +7,7 @@ export const LicenseContext = createContext();
 export function LicenseProvider(props) {
     const [license, setLicense] = usePersistState('license', {
         key: '',
-        is_valid: true
+        is_valid: false
     });
 
     useEffect(() => {

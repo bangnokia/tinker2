@@ -5,6 +5,8 @@ function StatusBar({ project, changeProject }) {
     const [settings, setSettings] = useSettings();
     const [license,] = useLicense();
 
+    console.log(license)
+
     function toggleLayout() {
         setSettings({
             ...settings,
@@ -60,7 +62,7 @@ function StatusBar({ project, changeProject }) {
             <div id="editor-status-bar" className="flex items-center justify-center overflow-hidden"></div>
 
             {/* Pursechase status */}
-            {!license.is_valid ? (<div className="flex flex-end text-gray-700">Unregistered</div>) : null}
+            {!license.is_valid ? <div className="flex flex-end text-gray-700">Unregistered</div> : null}
 
 
             {/* Current project */}
