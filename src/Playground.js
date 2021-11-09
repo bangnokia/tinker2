@@ -7,9 +7,11 @@ import Input from './playground/Input';
 import Output from './playground/Output';
 import editorOptions from './config/editor-options';
 import { randomQuotes } from './services/random-quotes';
+import { useLicense } from './hooks/useLicense';
 
 export default function Playground({ project }) {
     const [settings,] = useSettings()
+    const [license,] = useLicense()
     const [count, setCount] = useState(0); // count how many times user play code, for free users only
     const splitInstance = useRef(null)
     const layout = settings.layout === 'vertical' ? 'horizontal' : 'vertical'
@@ -19,11 +21,11 @@ export default function Playground({ project }) {
     }
 
     useEffect(() => {
-        if (!settings.license_key_is_valid && count === Math.round(3.22 * 10)) {
+        if (!license.is_valid && count === Math.round(3.22 * 10)) {
             alert(randomQuotes())
             setCount(0);
         }
-    }, [count, settings.license_key_is_valid]);
+    }, [count, license.is_valid]);
 
     useEffect(() => {
         if (project.type === 'ssh') {
