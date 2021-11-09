@@ -54,16 +54,17 @@ function PreferencesPanel() {
                 // save to files
                 setSettings({
                     ...settings,
-                    'license_key': licenseKey,
-                    'is_valid': true
+                    license_key: licenseKey,
+                    license_key_is_valid: true
                 })
                 alert('Thank you for your purchase <3!');
             } else {
-                alert('Your license is seem invalid');
                 setSettings({
                     ...settings,
-                    'is_valid': false
+                    license_key: licenseKey,
+                    license_key_is_valid: false
                 })
+                alert('Your license is seem invalid!');
             }
         } catch (ex) {
             alert('Can not connect to license server!')

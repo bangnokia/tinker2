@@ -6,7 +6,7 @@ import { registerPHPSnippetLanguage } from '../utils/registerPHPSnippetLanguage'
 import { initVimMode } from 'monaco-vim';
 import { useSettings } from './../hooks/useSettings';
 
-export default function Input({ project, editorOptions, outputMode }) {
+export default function Input({ project, editorOptions, outputMode, increaseCount }) {
     const { loading, executeCode, killProcess } = usePlayground()
     const [settings,] = useSettings();
     const [code,] = useState("")
@@ -26,8 +26,9 @@ export default function Input({ project, editorOptions, outputMode }) {
             killProcess()
         } else {
             executeCode(project, code, outputMode)
+            increaseCount();
         }
-    }, [executeCode, killProcess, loading, project, outputMode])
+    }, [executeCode, killProcess, loading, project, outputMode, increaseCount])
 
     useEffect(() => {
         if (monaco) {
