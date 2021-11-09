@@ -3,13 +3,21 @@
   windows_subsystem = "windows"
 )]
 
-use tauri::{Menu, MenuItem, Submenu};
+use tauri::{Menu, MenuItem, Submenu, CustomMenuItem};
 
 fn main() {
   let menu = make_menu();
 
   tauri::Builder::default()
     .menu(menu)
+    .on_menu_event(|event| {
+        match event.menu_item_id() {
+            "license" => {
+                println!("clicked on license menu");
+            }
+            _ => {}
+        }
+    })
     .run(tauri::generate_context!())
     .expect("error while running tauri application");
 }
@@ -43,8 +51,15 @@ fn make_menu() -> Menu {
       .add_native_item(MenuItem::SelectAll),
   );
 
+  let help_submenu = Submenu::new(
+      "Help",
+      Menu::new()
+      .add_item(CustomMenuItem::new("license", "Enter license"))
+  );
+
   Menu::new()
     .add_submenu(main_submenu)
     .add_submenu(file_submenu)
     .add_submenu(edit_submenu)
+    .add_submenu(help_submenu)
 }

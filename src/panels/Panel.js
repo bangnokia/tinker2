@@ -10,7 +10,8 @@ function Panel({ name = 'Untitle', closePanel, children }) {
     });
 
     return (
-        <div ref={wrapper} className="h-full bg-white shadow-xl rounded-r-md p-5 relative overflow-y-auto focus:outline-none" tabIndex="-1">
+        <div ref={wrapper}
+            className="h-full shadow-xl bg-white bg-opacity-90 rounded-r-md p-5 relative overflow-y-auto focus:outline-none" tabIndex="-1">
 
             <h1 className="text-cyan-500 text-2xl font-semibold tracking-tight">{name}</h1>
 

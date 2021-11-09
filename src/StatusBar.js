@@ -39,7 +39,7 @@ function StatusBar({ project, changeProject }) {
                 <button onClick={() => toggleLayout()}
                     type="button"
                     className={`cursor-pointer hover:text-cyan-400 transition transform ` + (settings.layout === 'vertical' ? '' : 'rotate-90')}
-                    title="toggle layout">
+                    title="Toggle layout">
                     <VerticalIcon />
                 </button>
             </div>
@@ -49,7 +49,7 @@ function StatusBar({ project, changeProject }) {
                 <button onClick={() => toggleOutputMode()}
                     type="button"
                     className={`cursor-pointer hover:text-cyan-400 transition transform ` + (settings.output_mode === 'buffered' ? '' : 'text-cyan-500')}
-                    title="Toggle output mode buffered or stream">
+                    title="Toggle output buffered or stream">
                     <StatusOnlineIcon />
                 </button>
             </div>

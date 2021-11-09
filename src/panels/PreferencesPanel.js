@@ -3,10 +3,12 @@ import { open } from "@tauri-apps/api/dialog"
 import { useSettings } from "../hooks/useSettings"
 import { Command } from "@tauri-apps/api/shell";
 import { useState } from "react";
+import { validateLicenseKey } from '../services/validate-license-key';
 
 function PreferencesPanel() {
     const [settings, setSettings] = useSettings()
     const [detecting, setDetecting] = useState(false)
+    const [licenseKey, setLicenceKey] = useState('');
 
     const selectPhpBinary = function () {
         open({
@@ -44,8 +46,15 @@ function PreferencesPanel() {
         })
     }
 
+    const useLicense = function () {
+        console.log('use this license ' + licenseKey);
+        validateLicenseKey(licenseKey).then(response => console.log(response));
+    }
+
     return (
         <form className="w-full" style={{ width: '690px' }}>
+
+            {/* PHP binary */}
             <div className="grid grid-cols-3 gap-4 items-start pt-3">
                 <label htmlFor="default_php_binary" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
                     PHP binary
@@ -62,6 +71,7 @@ function PreferencesPanel() {
                 </div>
             </div>
 
+            {/* Default project */}
             <div className="grid grid-cols-3 gap-4 items-start pt-3">
                 <label htmlFor="default_project" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
                     Default project
@@ -72,6 +82,7 @@ function PreferencesPanel() {
                 </div>
             </div>
 
+            {/* Layout */}
             <div className="grid grid-cols-3 gap-4 items-start pt-3">
                 <label htmlFor="layout" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
                     Layout
@@ -115,6 +126,7 @@ function PreferencesPanel() {
                 </div>
             </div>
 
+            {/* Key binding */}
             <div className="grid grid-cols-3 gap-4 items-start pt-3">
                 <label htmlFor="layout" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
                     Key binding
@@ -155,6 +167,17 @@ function PreferencesPanel() {
                             Vim
                         </label>
                     </div>
+                </div>
+            </div>
+
+            {/* License */}
+            <div className="grid grid-cols-3 gap-4 items-start pt-3">
+                <label htmlFor="default_php_binary" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+                    License key
+                </label>
+                <div className="mt-1 sm:mt-0 sm:col-span-2 flex space-x-1">
+                    <input onChange={(e) => setLicenceKey(e.target.value)} value={settings.license_key} type="text" id="license_key" className="form-input max-w-lg block w-full shadow-sm focus:ring-cyan-500 focus:border-cyan-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md" />
+                    <Button onClick={useLicense}>Use License</Button>
                 </div>
             </div>
         </form>

@@ -70,6 +70,10 @@
             },
             "path": {
                 "all": true
+            },
+            "http": {
+                "all": true,
+                "request": true
             }
         },
         "windows": [
