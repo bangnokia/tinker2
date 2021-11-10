@@ -52,7 +52,7 @@ function StatusBar({ project, changeProject }) {
             <div className="flex flex-end">
                 <button onClick={() => toggleOutputMode()}
                     type="button"
-                    className={`cursor-pointer hover:text-cyan-400 transition transform ` + (settings.output_mode === 'buffered' ? '' : 'text-cyan-500')}
+                    className={`cursor-pointer hover:text-cyan-400 transition transform ` + (settings.output_mode === 'stream' ? 'text-cyan-500' : '')}
                     title="Toggle output buffered or stream">
                     <StatusOnlineIcon />
                 </button>

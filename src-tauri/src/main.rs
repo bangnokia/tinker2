@@ -3,7 +3,7 @@
   windows_subsystem = "windows"
 )]
 
-use tauri::{Menu, MenuItem, Submenu, CustomMenuItem};
+use tauri::{Menu, MenuItem, Submenu};
 
 fn main() {
   let menu = make_menu();
@@ -51,15 +51,8 @@ fn make_menu() -> Menu {
       .add_native_item(MenuItem::SelectAll),
   );
 
-  let help_submenu = Submenu::new(
-      "Help",
-      Menu::new()
-      .add_item(CustomMenuItem::new("license", "Enter license"))
-  );
-
   Menu::new()
     .add_submenu(main_submenu)
     .add_submenu(file_submenu)
     .add_submenu(edit_submenu)
-    .add_submenu(help_submenu)
 }
