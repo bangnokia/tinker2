@@ -5,8 +5,6 @@ function StatusBar({ project, changeProject }) {
     const [settings, setSettings] = useSettings();
     const [license,] = useLicense();
 
-    console.log(license)
-
     function toggleLayout() {
         setSettings({
             ...settings,
