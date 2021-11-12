@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { ensureDataFileExists } from "./helpers"
+import { ensureDataFileExists, ensureSnippetsFileExists, ensureFileExists, snippetsFile } from "./helpers"
 import DatabaseService from "./services/DatabaseService"
 import App from "./App"
 import SplashScreen from "./SplashScreen"
@@ -30,6 +30,8 @@ export default function Tinker2() {
                 setLoaded(true)
             })
         })
+
+        ensureFileExists(snippetsFile());
     }, [])
 
     return (

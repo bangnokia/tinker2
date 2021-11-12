@@ -2,8 +2,8 @@ import { readTextFile, BaseDirectory, writeFile } from "@tauri-apps/api/fs";
 import { dataFile } from "../helpers";
 
 export default class DatabaseService {
-    constructor() {
-        this.dataFile = dataFile();
+    constructor(file = null) {
+        this.dataFile = file || dataFile();
         this.data = null;
     }
 

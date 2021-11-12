@@ -1,12 +1,18 @@
 # Tinker 2
 
-The source code of https://tinker2.com product.
+The source code of https://tinker2.app product.
 
 Tinker 2 helps you tinker with your any PHP application without without touching source code (locally or via SSH)
 
 Tinker 2 is small (less than 10MB on MacOS)
 
 ![](./screenshot.png)
+
+## Todo lot of shit
+
+- [ ] Animate for the Panel component.
+- [ ] Refactor all icon components to a common file.
+- [ ] What's wrong with database files based.
 
 ## Getting started
 
