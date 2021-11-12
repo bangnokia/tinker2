@@ -16,7 +16,7 @@ export default function Playground({ project }) {
     const splitInstance = useRef(null)
     const layout = settings.layout === 'vertical' ? 'horizontal' : 'vertical'
 
-    const increaseCount = function () {
+    const increaseCount = function() {
         setCount(count + 1);
     }
 
@@ -29,7 +29,7 @@ export default function Playground({ project }) {
 
     useEffect(() => {
         if (project.type === 'ssh') {
-            uploadPsycho(project).then(function () {
+            uploadPsycho(project).then(function() {
                 console.log('uploaded psycho' + (new Date()).toString())
             })
         }

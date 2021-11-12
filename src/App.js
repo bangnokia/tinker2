@@ -22,6 +22,7 @@ function App() {
     useHotkeys('Cmd+o', () => openFolderDialog(), { enableOnTags: ['INPUT', 'TEXTAREA'] });
     useHotkeys('Cmd+Shift+o', () => setSettingsPanel('servers'), { enableOnTags: ['INPUT', 'TEXTAREA'] })
     useHotkeys('Cmd+,', () => setSettingsPanel('preferences'), { enableOnTags: ['INPUT', 'TEXTAREA'] })
+    useHotkeys('Cmd+b', () => setSettingsPanel('snippets'), { enableOnTags: ['INPUT', 'TEXTAREA'] })
     useHotkeys('Cmd+\\', () => setSettings({ ...settings, layout: settings.layout === 'vertical' ? 'horizontal' : 'vertical' }), { enableOnTags: ['INPUT', 'TEXTAREA'] })
 
     const changeProject = function (project) {
