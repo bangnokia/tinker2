@@ -9,7 +9,7 @@ import { useSettings } from './../hooks/useSettings';
 export default function Input({ project, editorOptions, outputMode, increaseCount }) {
     const { loading, executeCode, killProcess } = usePlayground()
     const [settings,] = useSettings();
-    const [code,] = useState("")
+    const [code,] = useState('')
     const monaco = useMonaco()
 
     let editorRef = useRef(null);
