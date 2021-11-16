@@ -30,7 +30,7 @@ export default function Playground({ project }) {
     useEffect(() => {
         if (project.type === 'ssh') {
             uploadPsycho(project).then(function() {
-                console.log('uploaded psycho' + (new Date()).toString())
+                //console.log('uploaded psycho' + (new Date()).toString())
             })
         }
     }, [project])

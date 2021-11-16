@@ -75,7 +75,7 @@ export default function Input({ project, editorOptions, outputMode, increaseCoun
     return useMemo(() => {
         return <>
             <Editor
-                key="tinker-pad"
+               key="tinker-pad"
                 theme="vs-dark"
                 language="php-snippet"
                 value={code}
