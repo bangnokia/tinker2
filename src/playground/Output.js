@@ -10,7 +10,6 @@ export default function Output({ editorOptions, outputMode }) {
         editorRef.current = editor
     }
 
-    console.log(outputMode)
     useEffect(() => {
         if (outputMode === 'buffered' && editorRef.current) {
             editorRef.current.setScrollPosition({ scrollTop: 0 })
