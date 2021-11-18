@@ -6,7 +6,7 @@ export default function Output({ editorOptions, outputMode }) {
     const { output } = usePlayground()
     const editorRef = useRef(null)
 
-    const handleEditorOnMount = function(editor, monaco) {
+    const handleEditorOnMount = function (editor, monaco) {
         editorRef.current = editor
     }
 
@@ -14,7 +14,7 @@ export default function Output({ editorOptions, outputMode }) {
         if (outputMode === 'buffered' && editorRef.current) {
             editorRef.current.setScrollPosition({ scrollTop: 0 })
         }
-    }, [outputMode, editorRef.current, output]);
+    }, [outputMode]);
 
     return useMemo(() => {
         return (
@@ -37,5 +37,5 @@ export default function Output({ editorOptions, outputMode }) {
                 </div>
             </>
         )
-    }, [output])
+    }, [editorOptions, output])
 }
