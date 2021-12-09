@@ -1,5 +1,6 @@
 import { useHotkeys } from 'react-hotkeys-hook';
 import { useRef, useEffect } from 'react';
+import DatabaseService from '../services/DatabaseService';
 
 function Panel({ name = 'Untitle', closePanel, children }) {
     useHotkeys('esc', () => closePanel());
@@ -11,18 +12,26 @@ function Panel({ name = 'Untitle', closePanel, children }) {
 
     return (
         <div ref={wrapper}
-            className="h-full shadow-xl bg-white bg-opacity-90 rounded-r-md p-5 relative overflow-y-auto focus:outline-none" tabIndex="-1">
+            className="h-full relative top-0 shadow-xl bg-white rounded-r-md p-5 pt-0 overflow-y-auto focus:outline-none" tabIndex="-1">
 
-            <h1 className="text-cyan-500 text-2xl font-semibold tracking-tight">{name}</h1>
+            <div>
+                <div className="fixed top-0 z-20 py-5 bg-white">
+                    <div className="flex items-center justify-between space-x-5">
+                        {/* Close button */}
+                        <button type="button" onClick={closePanel} className="transition hover:text-gray-500">
+                            <CloseIcon />
+                        </button>
 
-            <div className="mt-5">
-                {children}
+                        <h1 className="text-cyan-500 text-2xl font-semibold tracking-tight">{name}</h1>
+                    </div>
+                </div>
+
+                <div className="mt-20 z-10">
+                    {children}
+                </div>
+
             </div>
 
-            {/* Close button */}
-            <div onClick={closePanel} className="absolute top-6 right-6 cursor-pointer transition hover:text-gray-500">
-                <CloseIcon />
-            </div>
         </div>
     )
 }
