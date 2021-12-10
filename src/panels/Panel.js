@@ -1,6 +1,5 @@
 import { useHotkeys } from 'react-hotkeys-hook';
 import { useRef, useEffect } from 'react';
-import DatabaseService from '../services/DatabaseService';
 
 function Panel({ name = 'Untitle', closePanel, children }) {
     useHotkeys('esc', () => closePanel());

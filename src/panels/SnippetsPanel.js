@@ -1,32 +1,13 @@
 import { useState } from 'react';
+import { useSnippets } from '../hooks/useSnippets';
 
 export default function SnippetsPanel() {
-    const [snippets, setSnippets] = useState([
-        {
-            id: 1,
-            content: `User::first();`
-        },
-        {
-            id: 2,
-            content: `foreach (range(1, 10) as $item) {
-            echo $item;
-            }`
-        },
-        {
-            id: 3,
-            content: `clgt`
-        }
-    ])
+    const [snippets, addSnippet, deleteSnippet] = useSnippets();
 
     const [previewCode, setPreviewCode] = useState();
 
-    const deleteSnippet = function (id) {
-        setSnippets(snippets.filter((snippet) => id !== snippet.id));
-    }
-
     const randomSnippet = function () {
-        const foo = { id: (new Date()).getTime(), content: 'this is ' + (new Date()).toString() };
-        setSnippets([...snippets, foo]);
+        addSnippet('this is ' + (new Date()).toString());
     }
 
     const setSnippetToInput = function (code) {
