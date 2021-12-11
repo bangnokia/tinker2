@@ -14,6 +14,7 @@ export default function Input({ project, editorOptions, outputMode, increaseCoun
 
     let editorRef = useRef(null);
     let vimModeRef = useRef(null);
+    const inputEditorOptions = { ...editorOptions, ...{ contextmenu: true } }
 
     const runCode = useCallback(() => {
         const code = editorRef.current.getValue();
@@ -35,7 +36,23 @@ export default function Input({ project, editorOptions, outputMode, increaseCoun
             registerPHPSnippetLanguage(monaco.languages)
 
             if (editorRef.current) {
+
+                console.log('set monaco action')
+
                 editorRef.current.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter, runCode)
+                editorRef.current.addAction({
+                    id: 'context-add-to-snippets',
+                    label: 'Add to snippets',
+                    keybindings: [],
+                    precondition: null,
+                    keybindingContext: null,
+                    contextMenuGroupId: 'navigation',
+                    contextMenuOrder: 1.5,
+                    run: function (editor) {
+                        alert("i'm running => " + editor.getPosition());
+                    }
+                });
+
                 editorRef.current.focus();
             }
         }
@@ -80,7 +97,7 @@ export default function Input({ project, editorOptions, outputMode, increaseCoun
                 language="php-snippet"
                 value={code}
                 onMount={handleEditorDidMount}
-                options={editorOptions}
+                options={inputEditorOptions}
             />
             <button
                 type="button"
@@ -90,7 +107,7 @@ export default function Input({ project, editorOptions, outputMode, increaseCoun
             </button>
         </>
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [code, loading, outputMode, project])
+    }, [loading, outputMode, project])
 }
 
 
