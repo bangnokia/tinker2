@@ -17,6 +17,7 @@ export function PlaygroundProvider(props) {
     const [loading, setLoading] = useState(false)
     const [output, setOutput] = useState(null)
     const [process, setProcess] = useState(null)
+    const [shouldRunCode, setShouldRunCode] = useState(false)
 
     const outputRef = useRef('');
 
@@ -60,7 +61,33 @@ export function PlaygroundProvider(props) {
         }
     }
 
+
+    const runCode = function (project, code, outputMode) {
+        if (!code) {
+            return;
+        }
+
+        if (loading) {
+            killProcess()
+        } else {
+            executeCode(project, code, outputMode)
+            // increaseCount();
+        }
+    };
+
     return (
-        <PlaygroundContext.Provider value={{ loading, setLoading, output, setOutput, appendOutput, cleanOutput, executeCode, killProcess }} {...props} />
+        <PlaygroundContext.Provider value={{
+            loading,
+            setLoading,
+            output,
+            setOutput,
+            shouldRunCode,
+            setShouldRunCode,
+            runCode,
+            appendOutput,
+            cleanOutput,
+            executeCode,
+            killProcess,
+        }} {...props} />
     )
 }

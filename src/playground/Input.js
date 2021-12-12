@@ -1,45 +1,41 @@
 import { usePlayground } from '../contexts/PlaygroundContext';
 import Editor from "@monaco-editor/react";
 import { useMonaco } from '@monaco-editor/react';
-import { useState, useRef, useCallback, useEffect, useMemo } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
 import { registerPHPSnippetLanguage } from '../utils/registerPHPSnippetLanguage';
 import { initVimMode } from 'monaco-vim';
 import { useSettings } from './../hooks/useSettings';
 
 export default function Input({ project, editorOptions, outputMode, increaseCount }) {
-    const { loading, executeCode, killProcess } = usePlayground()
-    const [settings,] = useSettings();
-    const [code,] = useState("")
+    const { loading, shouldRunCode, setShouldRunCode, runCode } = usePlayground()
+    const [settings,] = useSettings()
+    const [code,] = useState('')
     const monaco = useMonaco()
 
     let editorRef = useRef(null);
     let vimModeRef = useRef(null);
     const inputEditorOptions = { ...editorOptions, ...{ contextmenu: true } }
 
-    const runCode = useCallback(() => {
-        const code = editorRef.current.getValue();
-
-        if (!code) {
-            return;
-        }
-
-        if (loading) {
-            killProcess()
-        } else {
-            executeCode(project, code, outputMode)
-            increaseCount();
-        }
-    }, [executeCode, killProcess, loading, project, outputMode, increaseCount])
-
     useEffect(() => {
         if (monaco) {
             registerPHPSnippetLanguage(monaco.languages)
 
             if (editorRef.current) {
-
                 console.log('set monaco action')
+                editorRef.current.addCommand(
+                    monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter,
+                    () => runCode(project, editorRef.current.getValue(), outputMode)
+                )
+                editorRef.current.focus();
+            }
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [monaco, outputMode])
 
-                editorRef.current.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter, runCode)
+    useEffect(() => {
+        if (editorRef.current) {
+            // react hot reload will dupplicates this action
+            if (!editorRef.current.getAction('context-add-to-snippets')) {
                 editorRef.current.addAction({
                     id: 'context-add-to-snippets',
                     label: 'Add to snippets',
@@ -49,14 +45,22 @@ export default function Input({ project, editorOptions, outputMode, increaseCoun
                     contextMenuGroupId: 'navigation',
                     contextMenuOrder: 1.5,
                     run: function (editor) {
-                        alert("i'm running => " + editor.getPosition());
+                        alert(editorRef.current.getValue());
                     }
                 });
-
-                editorRef.current.focus();
             }
+
+            editorRef.current.focus();
         }
-    }, [monaco, runCode])
+    }, [monaco])
+
+
+    useEffect(() => {
+        if (shouldRunCode) {
+            setShouldRunCode(false)
+            runCode(project, editorRef.current.getValue(), outputMode)
+        }
+    }, [outputMode, project, runCode, setShouldRunCode, shouldRunCode])
 
     useEffect(() => {
         if (editorRef.current) {
@@ -81,7 +85,6 @@ export default function Input({ project, editorOptions, outputMode, increaseCoun
                     vimModeRef.current.dispose();
                 }
             }
-
         }
     }, [monaco, settings.key_binding])
 
@@ -99,20 +102,8 @@ export default function Input({ project, editorOptions, outputMode, increaseCoun
                 onMount={handleEditorDidMount}
                 options={inputEditorOptions}
             />
-            <button
-                type="button"
-                onClick={runCode}
-                className={'absolute top-1 -left-12 text-gray-500 hover:text-cyan-500 ' + (loading ? 'animate-spin text-cyan-500' : '')}>
-                <PlayIcon />
-            </button>
+
         </>
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [loading, outputMode, project])
-}
-
-
-function PlayIcon() {
-    return (
-        <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-    )
 }
