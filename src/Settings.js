@@ -4,11 +4,11 @@ import PreferencesPanel from "./panels/PreferencesPanel";
 import SnippetsPanel from "./panels/SnippetsPanel";
 
 function Settings({ setSettingsPanel, settingsPanel: panel, changeProject }) {
-    const closePanel = function() {
+    const closePanel = function () {
         setSettingsPanel('')
     }
 
-    const useProject = function(server) {
+    const useProject = function (server) {
         closePanel();
         changeProject(server)
     }
@@ -43,7 +43,7 @@ function Settings({ setSettingsPanel, settingsPanel: panel, changeProject }) {
 
             {panel === 'snippets' && (
                 <Panel closePanel={closePanel} name="Snippets">
-                    <SnippetsPanel />
+                    <SnippetsPanel closePanel={closePanel} />
                 </Panel>
             )}
         </div>

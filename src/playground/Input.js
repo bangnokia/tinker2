@@ -7,15 +7,16 @@ import { initVimMode } from 'monaco-vim';
 import { useSettings } from './../hooks/useSettings';
 import { useSnippets } from '../hooks/useSnippets';
 
-export default function Input({ project, editorOptions, outputMode, increaseCount }) {
+export default function Input({ project, editorOptions, outputMode }) {
     const { shouldRunCode, setShouldRunCode, runCode } = usePlayground()
     const [settings,] = useSettings();
     const [code,] = useState('')
     const monaco = useMonaco()
-    const [, addSnippet,] = useSnippets();
+    const { addSnippet, currentSnippet } = useSnippets();
 
     let editorRef = useRef(null);
     let vimModeRef = useRef(null);
+
     const inputEditorOptions = { ...editorOptions, ...{ contextmenu: true } }
 
     useEffect(() => {
@@ -56,6 +57,12 @@ export default function Input({ project, editorOptions, outputMode, increaseCoun
         }
     }, [monaco, addSnippet])
 
+    useEffect(() => {
+        // set snippet code to editor
+        if (editorRef.current && currentSnippet) {
+            editorRef.current.getModel().setValue(currentSnippet)
+        }
+    }, [monaco, currentSnippet])
 
     useEffect(() => {
         if (shouldRunCode) {
@@ -94,8 +101,7 @@ export default function Input({ project, editorOptions, outputMode, increaseCoun
         editorRef.current = editor;
     }
 
-    // return useMemo(() => {
-    return <>
+    return (
         <Editor
             key="tinker-pad"
             theme="vs-dark"
@@ -104,8 +110,5 @@ export default function Input({ project, editorOptions, outputMode, increaseCoun
             onMount={handleEditorDidMount}
             options={inputEditorOptions}
         />
-
-    </>
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    // }, [loading, outputMode, project])
+    )
 }

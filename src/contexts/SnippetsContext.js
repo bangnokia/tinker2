@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext, useState } from "react";
 import usePersistState from "../hooks/usePersistState";
 
 export const SnippetsContext = createContext();
@@ -6,6 +6,8 @@ export const SnippetsContext = createContext();
 export function SnippetsProvider({ defaultValue = null, ...otherProps }) {
     // we should pass proper defaultValue from App component
     const [snippets, setSnippets] = usePersistState('snippets', defaultValue);
+    const [currentSnippet, setCurrentSnippet] = useState(null);
+
 
     const addSnippet = (snippet) => {
         setSnippets(snippets => [{
@@ -19,6 +21,6 @@ export function SnippetsProvider({ defaultValue = null, ...otherProps }) {
     }
 
     return (
-        <SnippetsContext.Provider value={[snippets, addSnippet, deleteSnippet]} {...otherProps} />
+        <SnippetsContext.Provider value={{ snippets, addSnippet, deleteSnippet, currentSnippet, setCurrentSnippet }} {...otherProps} />
     );
 }

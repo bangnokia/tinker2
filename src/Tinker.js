@@ -10,7 +10,6 @@ import { SnippetsProvider } from "./contexts/SnippetsContext"
 const db = new DatabaseService();
 
 export default function Tinker2() {
-    console.clear();
     const [hasDataFile, setHasDataFile] = useState(false)
     const [loaded, setLoaded] = useState(false)
     const [settings, setSettings] = useState(null)

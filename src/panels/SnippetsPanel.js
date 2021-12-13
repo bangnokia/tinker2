@@ -1,13 +1,9 @@
 import { useState } from 'react';
 import { useSnippets } from '../hooks/useSnippets';
 
-export default function SnippetsPanel() {
-    const [snippets, addSnippet, deleteSnippet] = useSnippets();
+export default function SnippetsPanel({ closePanel }) {
+    const { snippets, deleteSnippet, setCurrentSnippet } = useSnippets();
     const [previewCode, setPreviewCode] = useState();
-
-    const randomSnippet = function () {
-        addSnippet('this is ' + (new Date()).toString());
-    }
 
     const handleMouseOver = function (code) {
         setPreviewCode(code);
@@ -15,12 +11,14 @@ export default function SnippetsPanel() {
 
     const setSnippetToInput = function (code) {
         // set current input content with snippet code
+        setCurrentSnippet(code);
+        closePanel();
     }
 
     return (
         <div style={{ minWidth: '500px' }} className="h-full overflow-scroll">
 
-            <button className="absolute top-0 right-0 border border-gray-500 text-gray-500 rounded" type="button" onClick={randomSnippet} > Random</button>
+            {/* <button className="absolute top-0 right-0 border border-gray-500 text-gray-500 rounded" type="button" onClick={randomSnippet} > Random</button> */}
             {/* <div>
                 <input className="form-input py-3 text-base max-w-lg block w-full form-control" type="text" placeholder="Search" />
             </div> */}

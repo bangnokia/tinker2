@@ -57,17 +57,19 @@ function App() {
         <div className="font-sans h-screen flex flex-col bg-gray-500 overflow-hidden"
             style={{ backgroundColor: 'rgb(30, 30, 30)' }}>
             <div className="flex flex-grow flex-shrink h-full overflow-hidden relative">
+
                 <Sidebar changeProject={changeProject}
                     openFolderDialog={openFolderDialog}
                     setSettingsPanel={setSettingsPanel} />
 
                 <div className="flex w-full h-full relative">
+
                     <Playground project={project} />
-                    {
-                        settingsPanel && <Settings
-                            changeProject={changeProject}
-                            settingsPanel={settingsPanel}
-                            setSettingsPanel={setSettingsPanel} />
+
+                    {settingsPanel && <Settings
+                        changeProject={changeProject}
+                        settingsPanel={settingsPanel}
+                        setSettingsPanel={setSettingsPanel} />
                     }
                 </div>
             </div>
