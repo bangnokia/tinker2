@@ -13,22 +13,8 @@ function Settings({ setSettingsPanel, settingsPanel: panel, changeProject }) {
         changeProject(server)
     }
 
-    /**
-    const panels = {
-        servers: <ServersPanel changeProject={useProject} />,
-        preferences: <PreferencesPanel />,
-        snippets: <SnippetsPanel />
-    };
-    */
-
     return (
         <div className="absolute left-0 top-0 h-full w-full backdrop-filter backdrop-blur-sm flex">
-            {/*
-            <Panel closePanel={closePanel} name="List servers">
-                { panels[panel] }
-            </Panel>
-            */}
-
             {panel === 'servers' && (
                 <Panel closePanel={closePanel} name="List servers">
                     <ServersPanel changeProject={useProject} />
@@ -37,7 +23,7 @@ function Settings({ setSettingsPanel, settingsPanel: panel, changeProject }) {
 
             {panel === 'preferences' && (
                 <Panel closePanel={closePanel} name="Preferences">
-                    <PreferencesPanel />
+                    <PreferencesPanel closePanel={closePanel} />
                 </Panel>
             )}
 

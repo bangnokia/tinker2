@@ -7,7 +7,7 @@ import { useState } from "react";
 import { validateLicenseKey } from '../services/validate-license-key';
 import ActionButton from "../buttons/ActionButton";
 
-function PreferencesPanel() {
+function PreferencesPanel({ closePanel }) {
     const [settings, setSettings] = useSettings()
     const [license, setLicense] = useLicense();
     const [detecting, setDetecting] = useState(false)
@@ -16,8 +16,6 @@ function PreferencesPanel() {
     const [defaultProject, setDefaultProject] = useState(() => settings.default_project)
     const [layout, setLayout] = useState(() => settings.layout)
     const [keybinding, setKeybinding] = useState(() => settings.key_binding || 'normal')
-
-    console.log('preference panel', settings)
 
     const selectPhpBinary = function () {
         open({
@@ -90,6 +88,7 @@ function PreferencesPanel() {
             layout: layout,
             key_binding: keybinding
         })
+        closePanel()
     }
 
     return (
