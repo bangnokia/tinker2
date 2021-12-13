@@ -47,7 +47,7 @@ export default function SnippetsPanel({ closePanel }) {
                 </div>
 
                 {/* preview panel */}
-                <div class="flex items-start content-center justify-center p-2">
+                <div className="flex items-start content-center justify-center p-2">
                     <textarea
                         tabIndex="-1"
                         className="form-textarea w-96 h-64 form-control"

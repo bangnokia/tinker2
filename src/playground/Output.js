@@ -1,6 +1,6 @@
 import Editor from "@monaco-editor/react"
 import { usePlayground } from '../contexts/PlaygroundContext';
-import { useRef, useEffect, useMemo } from "react";
+import { useRef, useLayoutEffect, useMemo } from "react";
 
 export default function Output({ editorOptions, outputMode }) {
     const { output, } = usePlayground()
@@ -10,11 +10,11 @@ export default function Output({ editorOptions, outputMode }) {
         editorRef.current = editor
     }
 
-    useEffect(() => {
-        if (outputMode === 'buffered' && editorRef.current) {
+    useLayoutEffect(() => {
+        if (outputMode === 'buffered' && editorRef.current && output) {
             editorRef.current.setScrollPosition({ scrollTop: 0 })
         }
-    }, [outputMode]);
+    }, [outputMode, output]);
 
     return useMemo(() => {
         return (
