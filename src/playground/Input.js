@@ -5,12 +5,14 @@ import { useState, useRef, useEffect, useMemo } from "react";
 import { registerPHPSnippetLanguage } from '../utils/registerPHPSnippetLanguage';
 import { initVimMode } from 'monaco-vim';
 import { useSettings } from './../hooks/useSettings';
+import { useSnippets } from '../hooks/useSnippets';
 
 export default function Input({ project, editorOptions, outputMode, increaseCount }) {
     const { loading, shouldRunCode, setShouldRunCode, runCode } = usePlayground()
     const [settings,] = useSettings()
     const [code,] = useState('')
     const monaco = useMonaco()
+    const [, addSnippet,] = useSnippets();
 
     let editorRef = useRef(null);
     let vimModeRef = useRef(null);
@@ -20,6 +22,7 @@ export default function Input({ project, editorOptions, outputMode, increaseCoun
         if (monaco) {
             registerPHPSnippetLanguage(monaco.languages)
 
+            // set hotkeys for execute code
             if (editorRef.current) {
                 console.log('set monaco action')
                 editorRef.current.addCommand(
@@ -33,6 +36,7 @@ export default function Input({ project, editorOptions, outputMode, increaseCoun
     }, [monaco, outputMode])
 
     useEffect(() => {
+        // add code to snippets context menu
         if (editorRef.current) {
             // react hot reload will dupplicates this action
             if (!editorRef.current.getAction('context-add-to-snippets')) {
@@ -45,14 +49,15 @@ export default function Input({ project, editorOptions, outputMode, increaseCoun
                     contextMenuGroupId: 'navigation',
                     contextMenuOrder: 1.5,
                     run: function (editor) {
-                        alert(editorRef.current.getValue());
+                        console.log('code', editor.getValue())
+                        addSnippet(editor.getValue())
                     }
                 });
             }
 
             editorRef.current.focus();
         }
-    }, [monaco])
+    }, [monaco, addSnippet])
 
 
     useEffect(() => {

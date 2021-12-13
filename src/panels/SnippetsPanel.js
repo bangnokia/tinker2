@@ -17,7 +17,7 @@ export default function SnippetsPanel() {
     return (
         <div style={{ minWidth: '500px' }}>
 
-            <button button className="border border-gray-500 text-blue-500 rounded" type="button" onClick={randomSnippet} > Random</button>
+            <button className="border border-gray-500 text-blue-500 rounded" type="button" onClick={randomSnippet} > Random</button>
 
             <div className="w-full flex gap-x-10">
                 {/* list snippet */}

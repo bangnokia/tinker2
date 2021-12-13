@@ -6,6 +6,8 @@ import SplashScreen from "./SplashScreen"
 import { SettingsProvider } from "./contexts/SettingsContext"
 import { LicenseProvider } from "./contexts/LicenseContext"
 
+const db = new DatabaseService();
+
 export default function Tinker2() {
     const [hasDataFile, setHasDataFile] = useState(false)
     const [loaded, setLoaded] = useState(false)
@@ -20,8 +22,6 @@ export default function Tinker2() {
     useEffect(() => {
         ensureDataFileExists().then(() => {
             setHasDataFile(true)
-
-            const db = new DatabaseService();
 
             db.get('settings').then(settings => {
                 if (settings) {
