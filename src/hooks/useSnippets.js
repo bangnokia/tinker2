@@ -1,25 +1,12 @@
-import usePersistState from './usePersistState';
+import { SnippetsContext } from '../contexts/SnippetsContext';
+import { useContext } from 'react';
 
 export function useSnippets() {
-    const [snippets, setSnippets] = usePersistState('snippets', []);
+    const context = useContext(SnippetsContext)
 
-    const addSnippet = (snippet) => {
-        console.log('adding snippet', snippet);
-        let newSnippets = [...snippets, {
-            id: (new Date()).getTime(),
-            content: snippet
-        }];
-
-        console.log('new snippets', newSnippets);
-
-        setSnippets(newSnippets);
+    if (!context) {
+        throw new Error("useSnippets must be use within a SnippetsProvider.")
     }
 
-    const deleteSnippet = (id) => {
-        let newSnippets = snippets.filter((snippet) => snippet.id !== id);
-
-        setSnippets(newSnippets);
-    }
-
-    return [snippets, addSnippet, deleteSnippet];
+    return context
 }

@@ -6,7 +6,9 @@ export const SettingsContext = createContext();
 
 export function SettingsProvider({ defaultValue = null, ...otherProps }) {
     // we should pass proper defaultValue from App component
-    const [settings, setSettings] = usePersistState('settings', defaultValue)
+    const [settings, setSettings] = usePersistState('settings', defaultValue);
+
+    console.log('settings provider', settings)
 
     useEffect(() => {
         const database = new DatabaseService();

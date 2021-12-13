@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
 import DatabaseService from "../services/DatabaseService";
 
-const database = new DatabaseService();
+const db = new DatabaseService();
 
-function usePersistState(key, defaultValue = '') {
-    const [state, setState] = useState(() => database.get(key, defaultValue));
+function usePersistState(key, defaultValue = undefined) {
+    const [state, setState] = useState(defaultValue);
 
     useEffect(() => {
-        database.set(key, state);
+        if (state !== undefined) {
+            db.set(key, state);
+        }
     }, [key, state])
 
     return [state, setState]

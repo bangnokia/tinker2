@@ -5,42 +5,49 @@ import App from "./App"
 import SplashScreen from "./SplashScreen"
 import { SettingsProvider } from "./contexts/SettingsContext"
 import { LicenseProvider } from "./contexts/LicenseContext"
+import { SnippetsProvider } from "./contexts/SnippetsContext"
 
 const db = new DatabaseService();
 
 export default function Tinker2() {
+    console.clear();
     const [hasDataFile, setHasDataFile] = useState(false)
     const [loaded, setLoaded] = useState(false)
-    const [defaultSettings, setDetaultSettings] = useState({
-        default_php_binary: '',
-        default_project: '',
-        layout: 'vertical'
-    })
+    const [settings, setSettings] = useState(null)
+    const [snippets, setSnippets] = useState(null)
 
-    const ready = hasDataFile && loaded;
+    const ready = settings && hasDataFile && loaded;
 
     useEffect(() => {
-        ensureDataFileExists().then(() => {
+        async function init() {
+            await ensureDataFileExists()
             setHasDataFile(true)
 
-            db.get('settings').then(settings => {
-                if (settings) {
-                    setDetaultSettings(settings)
-                }
-                setLoaded(true)
+            const settings = await db.get('settings', {
+                default_php_binary: '',
+                default_project: '',
+                layout: 'vertical'
             })
-        })
+            setSettings(settings)
 
-        ensureFileExists(snippetsFile());
+            const snippets = await db.get('snippets', [])
+            setSnippets(snippets)
+
+            setLoaded(true)
+        }
+
+        init();
     }, [])
 
     return (
         <>{
             ready
                 ?
-                <SettingsProvider defaultValue={defaultSettings}>
+                <SettingsProvider defaultValue={settings}>
                     <LicenseProvider>
-                        <App />
+                        <SnippetsProvider defaultValue={snippets}>
+                            <App />
+                        </SnippetsProvider>
                     </LicenseProvider>
                 </SettingsProvider>
                 :

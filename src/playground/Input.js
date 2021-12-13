@@ -8,8 +8,8 @@ import { useSettings } from './../hooks/useSettings';
 import { useSnippets } from '../hooks/useSnippets';
 
 export default function Input({ project, editorOptions, outputMode, increaseCount }) {
-    const { loading, shouldRunCode, setShouldRunCode, runCode } = usePlayground()
-    const [settings,] = useSettings()
+    const { shouldRunCode, setShouldRunCode, runCode } = usePlayground()
+    const [settings,] = useSettings();
     const [code,] = useState('')
     const monaco = useMonaco()
     const [, addSnippet,] = useSnippets();
@@ -49,13 +49,10 @@ export default function Input({ project, editorOptions, outputMode, increaseCoun
                     contextMenuGroupId: 'navigation',
                     contextMenuOrder: 1.5,
                     run: function (editor) {
-                        console.log('code', editor.getValue())
                         addSnippet(editor.getValue())
                     }
                 });
             }
-
-            editorRef.current.focus();
         }
     }, [monaco, addSnippet])
 
@@ -97,18 +94,18 @@ export default function Input({ project, editorOptions, outputMode, increaseCoun
         editorRef.current = editor;
     }
 
-    return useMemo(() => {
-        return <>
-            <Editor
-                key="tinker-pad"
-                theme="vs-dark"
-                language="php-snippet"
-                value={code}
-                onMount={handleEditorDidMount}
-                options={inputEditorOptions}
-            />
+    // return useMemo(() => {
+    return <>
+        <Editor
+            key="tinker-pad"
+            theme="vs-dark"
+            language="php-snippet"
+            value={code}
+            onMount={handleEditorDidMount}
+            options={inputEditorOptions}
+        />
 
-        </>
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [loading, outputMode, project])
+    </>
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, [loading, outputMode, project])
 }
