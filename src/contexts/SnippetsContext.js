@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext } from "react";
 import usePersistState from "../hooks/usePersistState";
 
 export const SnippetsContext = createContext();
@@ -8,10 +8,10 @@ export function SnippetsProvider({ defaultValue = null, ...otherProps }) {
     const [snippets, setSnippets] = usePersistState('snippets', defaultValue);
 
     const addSnippet = (snippet) => {
-        setSnippets(snippets => [...snippets, {
+        setSnippets(snippets => [{
             id: (new Date()).getTime(),
             content: snippet
-        }]);
+        }, ...snippets]);
     }
 
     const deleteSnippet = (id) => {

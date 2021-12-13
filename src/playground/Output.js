@@ -1,14 +1,10 @@
 import Editor from "@monaco-editor/react"
 import { usePlayground } from '../contexts/PlaygroundContext';
 import { useRef, useEffect, useMemo } from "react";
-import { useSnippets } from '../hooks/useSnippets';
 
 export default function Output({ editorOptions, outputMode }) {
-    const { output, setOutput } = usePlayground()
+    const { output, } = usePlayground()
     const editorRef = useRef(null)
-    const [snippets,] = useSnippets()
-
-    setOutput(snippets.map(snippet => snippet.content).join('\n'))
 
     const handleEditorOnMount = function (editor, monaco) {
         editorRef.current = editor

@@ -13,6 +13,10 @@
             @apply bg-transparent focus:outline-none text-sm leading-3 p-0 m-0;
         }
     }
+
+    .form-control {
+        @apply shadow-sm focus:ring-cyan-500 hover:border-cyan-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md;
+    }
 }
 
 @layer components {

@@ -1,7 +1,7 @@
 import { usePlayground } from '../contexts/PlaygroundContext';
 import Editor from "@monaco-editor/react";
 import { useMonaco } from '@monaco-editor/react';
-import { useState, useRef, useEffect, useMemo } from "react";
+import { useState, useRef, useEffect } from "react";
 import { registerPHPSnippetLanguage } from '../utils/registerPHPSnippetLanguage';
 import { initVimMode } from 'monaco-vim';
 import { useSettings } from './../hooks/useSettings';

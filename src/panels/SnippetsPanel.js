@@ -3,11 +3,14 @@ import { useSnippets } from '../hooks/useSnippets';
 
 export default function SnippetsPanel() {
     const [snippets, addSnippet, deleteSnippet] = useSnippets();
-
     const [previewCode, setPreviewCode] = useState();
 
     const randomSnippet = function () {
         addSnippet('this is ' + (new Date()).toString());
+    }
+
+    const handleMouseOver = function (code) {
+        setPreviewCode(code);
     }
 
     const setSnippetToInput = function (code) {
@@ -15,20 +18,24 @@ export default function SnippetsPanel() {
     }
 
     return (
-        <div style={{ minWidth: '500px' }}>
+        <div style={{ minWidth: '500px' }} className="h-full overflow-scroll">
 
-            <button className="border border-gray-500 text-blue-500 rounded" type="button" onClick={randomSnippet} > Random</button>
+            <button className="absolute top-0 right-0 border border-gray-500 text-gray-500 rounded" type="button" onClick={randomSnippet} > Random</button>
+            {/* <div>
+                <input className="form-input py-3 text-base max-w-lg block w-full form-control" type="text" placeholder="Search" />
+            </div> */}
 
-            <div className="w-full flex gap-x-10">
+            <div className="flex gap-x-5 h-full overflow-y-scroll">
+
                 {/* list snippet */}
-                <div className="w-full h-full flex flex-col gap-y-2 overflow-auto">
+                <div className="w-96 h-full flex flex-col gap-y-2 overflow-y-scroll p-2">
                     {snippets.map(function (snippet, index) {
                         return (
-                            <div key={snippet.id} className="w-96 relative cursor-pointer">
+                            <div key={snippet.id} className="w-full relative cursor-pointer">
                                 <textarea
-                                    onMouseOver={() => setPreviewCode(snippet.content)}
+                                    onMouseOver={() => handleMouseOver(snippet.content)}
                                     onClick={() => setSnippetToInput(snippet.content)}
-                                    className="p-2 rounded w-full h-20 overflow-y-auto bg-gray-300 border-2 hover:border-cyan-500 focus:outline-none focus:border-cyan-500" defaultValue={snippet.content} />
+                                    className="form-textarea max-w-full w-full h-20 form-control cursor-pointer" defaultValue={snippet.content} />
                                 <button
                                     className="absolute right-2 top-2"
                                     tabIndex="-1"
@@ -42,11 +49,11 @@ export default function SnippetsPanel() {
                 </div>
 
                 {/* preview panel */}
-                <div>
+                <div class="flex items-start content-center justify-center p-2">
                     <textarea
                         tabIndex="-1"
-                        className="p-2 rounded w-96 h-64 overflow-y-auto"
-                        defaultValue={previewCode}></textarea>
+                        className="form-textarea w-96 h-64 form-control"
+                        value={previewCode}></textarea>
                 </div>
             </div>
 

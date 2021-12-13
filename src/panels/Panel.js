@@ -11,27 +11,24 @@ function Panel({ name = 'Untitle', closePanel, children }) {
 
     return (
         <div ref={wrapper}
-            className="h-full relative top-0 shadow-xl bg-white rounded-r-md p-5 pt-0 overflow-y-auto focus:outline-none" tabIndex="-1">
+            className="h-full flex flex-col relative top-0 shadow-xl bg-white rounded-r-md focus:outline-none" tabIndex="-1">
 
-            <div>
-                <div className="fixed top-0 z-20 py-5 bg-white">
-                    <div className="flex items-center justify-between space-x-5">
-                        {/* Close button */}
-                        <button type="button" onClick={closePanel} className="transition hover:text-gray-500">
-                            <CloseIcon />
-                        </button>
+            <div className="p-5 bg-white w-full">
+                <div className="flex items-center space-x-5 w-full">
+                    {/* Close button */}
+                    <button type="button" onClick={closePanel} className="transition hover:text-gray-500">
+                        <CloseIcon />
+                    </button>
 
-                        <h1 className="text-cyan-500 text-2xl font-semibold tracking-tight">{name}</h1>
-                    </div>
+                    <h1 className="text-cyan-500 text-2xl font-semibold tracking-tight">{name}</h1>
                 </div>
-
-                <div className="mt-20 z-10">
-                    {children}
-                </div>
-
             </div>
 
-        </div>
+            <div className="z-10 p-5 h-full overflow-y-auto">
+                {children}
+            </div>
+
+        </div >
     )
 }
 

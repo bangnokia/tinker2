@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { ensureDataFileExists, ensureFileExists, snippetsFile } from "./helpers"
+import { ensureDataFileExists } from "./helpers"
 import DatabaseService from "./services/DatabaseService"
 import App from "./App"
 import SplashScreen from "./SplashScreen"

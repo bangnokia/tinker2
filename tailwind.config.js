@@ -22,7 +22,9 @@ module.exports = {
         },
     },
     variants: {
-        extend: {}
+        extend: {
+            ringWidth: ['hover', 'active']
+        }
     },
     plugins: [
         require("@tailwindcss/forms")({
