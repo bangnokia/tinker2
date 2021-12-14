@@ -12,6 +12,11 @@ function ServersPanel({ changeProject }) {
         (new RemoteServerService()).index().then(data => setServers(data))
     }
 
+    const addServer = function (server) {
+        setOpenForm(true)
+        setServer(null)
+    }
+
     const deleteServer = function (server) {
         const newServers = servers.filter((i) => i.id && i.id !== server.id);
         setServers(newServers);
@@ -28,20 +33,21 @@ function ServersPanel({ changeProject }) {
     return (
         <div className="flex space-x-10">
             <div className="w-80">
-                <ActionButton className="mb-5" onClick={() => setOpenForm(!openForm)}>
+                <ActionButton className="mb-5" onClick={() => addServer()}>
                     <svg className="-ml-1 mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" /></svg>
                     Add server
                 </ActionButton>
                 <ul>
                     {
                         servers.map((server, index) => (
-                            <ServerItem server={server} key={index} {...{ editServer, deleteServer, changeProject }} />
+                            <ServerItem server={server} key={server.id} {...{ editServer, deleteServer, changeProject }} />
                         ))
                     }
                 </ul>
             </div>
             <div>
                 {openForm && <ServerForm
+                    key={server ? server.id : 'new'}
                     server={server}
                     loadServers={loadServers}
                     setOpenForm={setOpenForm} />}

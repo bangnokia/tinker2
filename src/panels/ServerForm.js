@@ -3,8 +3,8 @@ import ActionButton from "../buttons/ActionButton";
 import Button from "../buttons/Button";
 import RemoteServerService from "../services/RemoteServerService";
 
-function ServerForm({ server: serverObject, index = null, loadServers, setOpenForm }) {
-    const [server, setServer] = useState(serverObject || {
+function ServerForm({ server: initialServer, loadServers, setOpenForm }) {
+    const [server, setServer] = useState(initialServer || {
         id: '',
         type: 'ssh',
         label: '',
