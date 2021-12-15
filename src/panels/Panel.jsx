@@ -3,16 +3,9 @@ import { useRef, useEffect } from 'react';
 
 function Panel({ name = 'Untitle', closePanel, children }) {
     useHotkeys('esc', () => closePanel());
-    const wrapper = useRef();
-
-    useEffect(() => {
-        wrapper.current.focus();
-    });
 
     return (
-        <div ref={wrapper}
-            className="h-full flex flex-col relative top-0 shadow-xl bg-white rounded-r-md focus:outline-none" tabIndex="-1">
-
+        <div className="h-full flex flex-col relative top-0 shadow-xl bg-white rounded-r-md focus:outline-none" tabIndex="-1">
             <div className="p-5 bg-white w-full">
                 <div className="flex items-center space-x-5 w-full">
                     {/* Close button */}
