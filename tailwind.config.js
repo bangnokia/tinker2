@@ -1,12 +1,11 @@
 const colors = require('tailwindcss/colors')
 
 module.exports = {
-    purge: ['./src/**/*.{js,jsx,ts,tsx,css}', './public/index.html'],
-    darkMode: false, // or 'media' or 'class'
+    content: ['./src/**/*.{js,jsx,ts,tsx,css}', './public/index.html'],
     theme: {
         extend: {
             colors: {
-                gray: colors.trueGray,
+                gray: colors.neutral,
                 'dark-gray': {
                     100: 'rgb(30, 30, 30)'
                 },
@@ -20,11 +19,6 @@ module.exports = {
                 'row-resize': 'row-resize',
             }
         },
-    },
-    variants: {
-        extend: {
-            ringWidth: ['hover', 'active']
-        }
     },
     plugins: [
         require("@tailwindcss/forms")({

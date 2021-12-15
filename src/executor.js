@@ -3,7 +3,8 @@ import { currentDir, resourceDir } from '@tauri-apps/api/path';
 import DatabaseService from './services/DatabaseService';
 
 async function execute({ code, project, mode = 'buffered' }) {
-    const base64Code = Buffer.from(code).toString('base64');
+    // const base64Code = Buffer.from(code).toString('base64');
+    const base64Code = btoa(code);
     const psychoPath = await resolvePsychoPath(project.type)
     let command = null;
 

@@ -3,8 +3,6 @@
 @tailwind utilities;
 
 @layer base {
-    /* @import "./fonts/fira_code/fira_code.css"; */
-
     #editor-status-bar {
         span:nth-child(2) {
             @apply hidden;

@@ -4,7 +4,7 @@ import { useMonaco } from '@monaco-editor/react';
 import { useState, useRef, useEffect } from "react";
 import { registerPHPSnippetLanguage } from '../utils/registerPHPSnippetLanguage';
 import { initVimMode } from 'monaco-vim';
-import { useSettings } from './../hooks/useSettings';
+import { useSettings } from '../hooks/useSettings';
 import { useSnippets } from '../hooks/useSnippets';
 
 export default function Input({ project, editorOptions, outputMode }) {
