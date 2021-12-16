@@ -14,7 +14,7 @@ function Settings({ setSettingsPanel, settingsPanel: panel, changeProject }) {
     }
 
     return (
-        <div className="absolute left-0 top-0 h-full w-full backdrop-filter backdrop-blur-sm flex">
+        <div className="absolute flex left-0 top-0 h-full w-full backdrop-filter backdrop-blur-sm">
             {panel === 'servers' && (
                 <Panel closePanel={closePanel} name="List servers">
                     <ServersPanel changeProject={useProject} />

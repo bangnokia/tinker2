@@ -54,8 +54,7 @@ function App() {
     }, [project.path, settings.default_php_binary, settings.default_project])
 
     return (
-        <div className="font-sans h-screen flex flex-col bg-gray-500 overflow-hidden"
-            style={{ backgroundColor: 'rgb(30, 30, 30)' }}>
+        <div className="font-sans h-screen flex flex-col bg-gray-500 overflow-hidden bg-dark-gray">
             <div className="flex flex-grow flex-shrink h-full overflow-hidden relative">
 
                 <Sidebar changeProject={changeProject}

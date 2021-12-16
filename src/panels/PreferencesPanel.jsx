@@ -98,7 +98,7 @@ function PreferencesPanel({ closePanel }) {
 
                 {/* PHP binary */}
                 <div className="grid grid-cols-3 gap-4 items-start pt-3">
-                    <label htmlFor="default_php_binary" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+                    <label htmlFor="default_php_binary" className="block text-sm font-medium text-gray-500 sm:mt-px sm:pt-2">
                         PHP binary
                     </label>
                     <div className="mt-1 sm:mt-0 sm:col-span-2 flex space-x-1">
@@ -112,7 +112,7 @@ function PreferencesPanel({ closePanel }) {
 
                 {/* Default project */}
                 <div className="grid grid-cols-3 gap-4 items-start pt-3">
-                    <label htmlFor="default_project" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+                    <label htmlFor="default_project" className="block text-sm font-medium text-gray-500 sm:mt-px sm:pt-2">
                         Default project
                     </label>
                     <div className="mt-1 sm:mt-0 sm:col-span-2 flex space-x-1">
@@ -123,7 +123,7 @@ function PreferencesPanel({ closePanel }) {
 
                 {/* Layout */}
                 <div className="grid grid-cols-3 gap-4 items-start pt-3">
-                    <label htmlFor="layout" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+                    <label htmlFor="layout" className="block text-sm font-medium text-gray-500 sm:mt-px sm:pt-2">
                         Layout
                     </label>
                     <div className="mt-1 sm:mt-0 sm:col-span-2 flex space-x-5">
@@ -137,7 +137,7 @@ function PreferencesPanel({ closePanel }) {
                                 checked={layout === 'vertical'}
                                 onChange={(e) => setLayout(e.target.value)}
                             />
-                            <label htmlFor="layout-vertical" className="ml-3 block text-sm font-medium text-gray-700">
+                            <label htmlFor="layout-vertical" className="ml-3 block text-sm font-medium text-gray-500">
                                 Vertical
                             </label>
                         </div>
@@ -152,7 +152,7 @@ function PreferencesPanel({ closePanel }) {
                                 checked={layout === 'horizontal'}
                                 onChange={(e) => setLayout(e.target.value)}
                             />
-                            <label htmlFor="layout-horizontal" className="ml-3 block text-sm font-medium text-gray-700">
+                            <label htmlFor="layout-horizontal" className="ml-3 block text-sm font-medium text-gray-500">
                                 Horizontal
                             </label>
                         </div>
@@ -161,7 +161,7 @@ function PreferencesPanel({ closePanel }) {
 
                 {/* Key binding */}
                 <div className="grid grid-cols-3 gap-4 items-start pt-3">
-                    <label htmlFor="layout" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+                    <label htmlFor="layout" className="block text-sm font-medium text-gray-500 sm:mt-px sm:pt-2">
                         Key binding
                     </label>
                     <div className="mt-1 sm:mt-0 sm:col-span-2 flex space-x-5">
@@ -175,7 +175,7 @@ function PreferencesPanel({ closePanel }) {
                                 checked={keybinding === 'normal'}
                                 onChange={(e) => setKeybinding(e.target.value)}
                             />
-                            <label htmlFor="key-binding-normal" className="ml-3 block text-sm font-medium text-gray-700">
+                            <label htmlFor="key-binding-normal" className="ml-3 block text-sm font-medium text-gray-500">
                                 Normal
                             </label>
                         </div>
@@ -190,7 +190,7 @@ function PreferencesPanel({ closePanel }) {
                                 checked={keybinding === 'vim'}
                                 onChange={(e) => setKeybinding(e.target.value)}
                             />
-                            <label htmlFor="key-binding-vim" className="ml-3 block text-sm font-medium text-gray-700">
+                            <label htmlFor="key-binding-vim" className="ml-3 block text-sm font-medium text-gray-500">
                                 Vim
                             </label>
                         </div>
@@ -199,7 +199,7 @@ function PreferencesPanel({ closePanel }) {
 
                 {/* Save button */}
                 <div className="grid grid-cols-3 gap-4 items-start pt-3">
-                    <label className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+                    <label className="block text-sm font-medium text-gray-500 sm:mt-px sm:pt-2">
                     </label>
                     <div className="mt-1 sm:mt-0 sm:col-span-2 flex space-x-1">
                         <ActionButton type="submit">Save settings</ActionButton>
@@ -211,7 +211,7 @@ function PreferencesPanel({ closePanel }) {
             <div>
                 {/* License */}
                 <div className="grid grid-cols-3 gap-4 items-start pt-3">
-                    <label htmlFor="license_key" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+                    <label htmlFor="license_key" className="block text-sm font-medium text-gray-500 sm:mt-px sm:pt-2">
                         License key
                     </label>
                     <div className="mt-1 sm:mt-0 sm:col-span-2 flex space-x-1">

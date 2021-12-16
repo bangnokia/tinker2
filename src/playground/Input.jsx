@@ -104,7 +104,7 @@ export default function Input({ project, editorOptions, outputMode }) {
     return (
         <Editor
             key="tinker-pad"
-            theme="vs-dark"
+            theme="gruv"
             language="php-snippet"
             value={code}
             onMount={handleEditorDidMount}

@@ -53,19 +53,19 @@ export default function SnippetsPanel({ closePanel }) {
     }, [search])
 
     return (
-        <div style={{ minWidth: '500px' }} className="h-full overflow-scroll w-full">
+        <div style={{ minWidth: '500px' }} className="h-full overflow-scroll w-full h-full overflow-hidden flex flex-col gap-y-5">
 
-            <div class="w-full px-2 pt-2">
+            <div className="w-full px-2 pt-2">
                 <input
                     onChange={(e) => setSearch(e.target.value)}
                     onKeyDown={handleKeyDown}
                     ref={searchInputRef}
-                    className="form-input form-control w-full max-w-full"
+                    className="form-input form-control w-full max-w-full bg-gray-200"
                     placeholder="Search snippet..."
                     id="search-input" />
             </div>
 
-            <div className="flex gap-x-5 h-full overflow-y-scroll">
+            <div className="flex gap-x-5 max-h-full overflow-y-scroll">
                 {/* list snippet */}
                 <div className="w-96 h-full flex flex-col gap-y-2 overflow-y-scroll p-2">
                     {searchingSnippets.map(function(snippet, i) {
@@ -74,7 +74,7 @@ export default function SnippetsPanel({ closePanel }) {
                                 <textarea
                                     onMouseOver={() => handleMouseOver(snippet.content)}
                                     onClick={() => setSnippetToInput(snippet.content)}
-                                    className={`form-textarea max-w-full w-full h-20 form-control cursor-pointer ${i === index ? ' border-cyan-500' : ''}`}
+                                    className={`form-textarea max-w-full w-full h-20 form-control border-2 bg-gray-200 cursor-pointer ${i === index ? ' border-cyan-500' : ''}`}
                                     defaultValue={snippet.content} />
                                 <button
                                     className="absolute right-2 top-2"
@@ -92,7 +92,7 @@ export default function SnippetsPanel({ closePanel }) {
                 <div className="flex items-start content-center justify-center p-2">
                     <textarea
                         tabIndex="-1"
-                        className="form-textarea w-96 h-64 form-control"
+                        className="form-textarea w-96 h-64 form-control bg-gray-300"
                         value={previewCode}></textarea>
                 </div>
             </div>

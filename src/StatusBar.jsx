@@ -28,7 +28,7 @@ function StatusBar({ project, changeProject }) {
 
     return (
         <div id="status-bar"
-            className="status-bar w-full flex-shrink-0 flex flex-wrap items-center space-x-5 bg-dark-gray-100 h-6 px-3 text-xs font-mono text-white">
+            className="status-bar w-full flex-shrink-0 flex flex-wrap items-center space-x-5 bg-dark-gray h-6 px-3 text-xs font-mono text-white">
             <div className="flex-end">
                 <button
                     onClick={() => switchToDefaultProject()}

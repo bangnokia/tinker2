@@ -7,9 +7,9 @@ module.exports = {
             colors: {
                 gray: colors.neutral,
                 'dark-gray': {
-                    100: 'rgb(30, 30, 30)'
-                },
-                cyan: colors.cyan
+                    100: 'rgb(40, 40, 40)',
+                    DEFAULT: 'rgb(40, 40, 40)',
+                }
             },
             fontFamily: {
                 'fira-code': ["'Fira Code'", 'serif']

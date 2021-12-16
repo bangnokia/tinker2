@@ -17,7 +17,7 @@ function ServerForm({ server: initialServer, loadServers, setOpenForm }) {
         php_binary: 'php',
     })
 
-    const handleChange = function (e) {
+    const handleChange = function(e) {
         const name = e.target.name;
         const value = e.target.value;
 
@@ -27,7 +27,7 @@ function ServerForm({ server: initialServer, loadServers, setOpenForm }) {
         })
     }
 
-    const submit = function (e) {
+    const submit = function(e) {
         e.preventDefault();
 
         const remoteServerService = new RemoteServerService();
@@ -65,11 +65,15 @@ function ServerForm({ server: initialServer, loadServers, setOpenForm }) {
 function FormGroup({ label, id, name, value, type = 'text', required, onChange, ...otherProps }) {
     return (
         <div className="grid grid-cols-3 gap-4 items-start pt-3">
-            <label htmlFor={name} className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+            <label htmlFor={name} className="block text-sm font-medium text-gray-500 sm:mt-px sm:pt-2">
                 {label} {required && <span className="text-red-500">*</span>}
             </label>
             <div className="mt-1 sm:mt-0 sm:col-span-2">
-                <input {...{ type, name, id, value, onChange, required }} {...otherProps} className="form-input max-w-lg block w-full shadow-sm focus:ring-cyan-500 focus:border-cyan-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md" />
+                <input
+                    {...{ type, name, id, value, onChange, required }}
+                    {...otherProps}
+                    className="form-input max-w-lg block w-full bg-gray-200 shadow-sm focus:ring-cyan-500 focus:border-cyan-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md" id
+                />
             </div>
         </div>
     )
