@@ -7,7 +7,7 @@ function Panel({ name = 'Untitle', closePanel, children }) {
         <div
             className="h-full flex flex-col relative top-0 shadow-xl bg-[#282828] border-none border-2 border-r-white rounded-r-md focus:outline-none"
             tabIndex="-1">
-            <div div className="p-5 bg-dark-gray w-full" >
+            <div className="p-5 bg-dark-gray w-full" >
                 <div className="flex items-center space-x-5 w-full">
                     {/* Close button */}
                     <button type="button" onClick={closePanel} className="transition hover:text-gray-500 text-gray-400">
