@@ -10,13 +10,11 @@ fn main() {
 
   tauri::Builder::default()
     .menu(menu)
-    .on_menu_event(|event| {
-        match event.menu_item_id() {
-            "license" => {
-                println!("clicked on license menu");
-            }
-            _ => {}
-        }
+    .on_menu_event(|event| match event.menu_item_id() {
+      "license" => {
+        println!("clicked on license menu");
+      }
+      _ => {}
     })
     .run(tauri::generate_context!())
     .expect("error while running tauri application");
