@@ -2,7 +2,7 @@
 function Sidebar({ changeProject, setSettingsPanel, openFolderDialog }) {
 
     return (
-        <div className="h-full w-12 flex-grow-0 flex-shrink-0 flex flex-col justify-between bg-transparent">
+        <div className="h-full bg-[#282828] w-12 flex-grow-0 flex-shrink-0 flex flex-col justify-between bg-transparent">
             <div className="pt-14">
 
                 {/* Open folder */}

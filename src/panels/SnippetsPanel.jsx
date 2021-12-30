@@ -8,11 +8,11 @@ export default function SnippetsPanel({ closePanel }) {
     const [index, setIndex] = useState(0)
     const searchInputRef = useRef(null)
 
-    const handleMouseOver = function(code) {
+    const handleMouseOver = function (code) {
         setPreviewCode(code);
     }
 
-    const setSnippetToInput = function(code) {
+    const setSnippetToInput = function (code) {
         // set current input content with snippet code
         setCurrentSnippet(code);
         closePanel();
@@ -20,7 +20,7 @@ export default function SnippetsPanel({ closePanel }) {
 
     const searchingSnippets = snippets.filter((s) => s.content.toLowerCase().indexOf(search.toLowerCase()) !== -1);
 
-    const handleKeyDown = function(e) {
+    const handleKeyDown = function (e) {
         switch (e.keyCode) {
             case 27: // esc
                 closePanel();
@@ -53,7 +53,7 @@ export default function SnippetsPanel({ closePanel }) {
     }, [search])
 
     return (
-        <div style={{ minWidth: '500px' }} className="h-full overflow-scroll w-full h-full overflow-hidden flex flex-col gap-y-5">
+        <div style={{ minWidth: '500px' }} className="h-full overflow-scroll w-full flex flex-col gap-y-5">
 
             <div className="w-full px-2 pt-2">
                 <input
@@ -68,7 +68,7 @@ export default function SnippetsPanel({ closePanel }) {
             <div className="flex gap-x-5 max-h-full overflow-y-scroll">
                 {/* list snippet */}
                 <div className="w-96 h-full flex flex-col gap-y-2 overflow-y-scroll p-2">
-                    {searchingSnippets.map(function(snippet, i) {
+                    {searchingSnippets.map(function (snippet, i) {
                         return (
                             <div key={snippet.id} className="w-full relative cursor-pointer">
                                 <textarea

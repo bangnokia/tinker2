@@ -6,6 +6,7 @@ import Sidebar from './Sidebar';
 import { useSettings } from './hooks/useSettings';
 import { open } from "@tauri-apps/api/dialog";
 import { useHotkeys } from 'react-hotkeys-hook';
+import DatabaseService from './services/DatabaseService';
 
 // local project
 const defaultLocalProject = {
@@ -54,22 +55,24 @@ function App() {
     }, [project.path, settings.default_php_binary, settings.default_project])
 
     return (
-        <div className="font-sans h-screen flex flex-col bg-gray-500 overflow-hidden bg-dark-gray">
+        <div className="font-sans h-screen flex flex-col bg-dark-gray overflow-hidden">
             <div className="flex flex-grow flex-shrink h-full overflow-hidden relative">
 
                 <Sidebar changeProject={changeProject}
                     openFolderDialog={openFolderDialog}
                     setSettingsPanel={setSettingsPanel} />
 
-                <div className="flex w-full h-full relative">
-
+                <div className="flex w-full h-full relative z-10">
                     <Playground project={project} />
 
-                    {settingsPanel && <Settings
-                        changeProject={changeProject}
-                        settingsPanel={settingsPanel}
-                        setSettingsPanel={setSettingsPanel} />
-                    }
+                    <div className={`w-screen absolute h-full z-0 left-0 flex transition-all transform ` + (settingsPanel ? 'translate-x-0' : '-translate-x-[150vw]')}>
+                        {settingsPanel &&
+                            <Settings
+                                changeProject={changeProject}
+                                settingsPanel={settingsPanel}
+                                setSettingsPanel={setSettingsPanel} />
+                        }
+                    </div>
                 </div>
             </div>
 
