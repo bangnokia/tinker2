@@ -6,18 +6,12 @@ import Sidebar from './Sidebar';
 import { useSettings } from './hooks/useSettings';
 import { open } from "@tauri-apps/api/dialog";
 import { useHotkeys } from 'react-hotkeys-hook';
-import DatabaseService from './services/DatabaseService';
 
-// local project
-const defaultLocalProject = {
-    type: 'local',
-    path: ''
-}
-
-function App() {
-    const [project, setProject] = useState(defaultLocalProject);
+function App({ defaultProject }) {
     const [settingsPanel, setSettingsPanel] = useState()
     const [settings, setSettings] = useSettings()
+    const [project, setProject] = useState(defaultProject);
+
 
     // Setup keyboard shotcuts
     useHotkeys('Cmd+o', () => openFolderDialog(), { enableOnTags: ['INPUT', 'TEXTAREA'] });
@@ -41,18 +35,10 @@ function App() {
     };
 
     useEffect(() => {
-        if (settings.default_php_binary) {
-            if (!project.path) {
-                setProject({
-                    type: 'local',
-                    path: settings.default_project || ''
-                })
-            }
-        } else {
+        if (!project.path) {
             setSettingsPanel('preferences')
         }
-
-    }, [project.path, settings.default_php_binary, settings.default_project])
+    }, [project.path])
 
     return (
         <div className="font-sans h-screen flex flex-col bg-dark-gray overflow-hidden">

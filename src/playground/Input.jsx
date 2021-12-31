@@ -6,6 +6,8 @@ import { registerPHPSnippetLanguage } from '../utils/registerPHPSnippetLanguage'
 import { initVimMode } from 'monaco-vim';
 import { useSettings } from '../hooks/useSettings';
 import { useSnippets } from '../hooks/useSnippets';
+import Dupplicate from '../icons/Dupplicate';
+import Share from '../icons/Share';
 
 export default function Input({ project, editorOptions, outputMode }) {
     const { shouldRunCode, setShouldRunCode, runCode } = usePlayground()

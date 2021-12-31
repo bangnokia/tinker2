@@ -6,6 +6,8 @@ import SplashScreen from "./SplashScreen"
 import { SettingsProvider } from "./contexts/SettingsContext"
 import { LicenseProvider } from "./contexts/LicenseContext"
 import { SnippetsProvider } from "./contexts/SnippetsContext"
+import { getMatches } from '@tauri-apps/api/cli'
+import { currentDir, normalize } from '@tauri-apps/api/path'
 
 const db = new DatabaseService();
 
@@ -14,6 +16,7 @@ export default function Tinker2() {
     const [loaded, setLoaded] = useState(false)
     const [settings, setSettings] = useState(null)
     const [snippets, setSnippets] = useState(null)
+    const [defaultProject, setDefaultProject] = useState(null)
 
     const ready = settings && hasDataFile && loaded;
 
@@ -32,6 +35,16 @@ export default function Tinker2() {
             const snippets = await db.get('snippets', [])
             setSnippets(snippets)
 
+
+            const matches = await getMatches();
+            const dir = matches.args.directory.value
+            let startupDir = null;
+            if (dir !== false) {
+                const normalizeDir = await normalize(dir)
+                startupDir = normalizeDir === '/' || normalizeDir === '.' ? await currentDir() : normalizeDir;
+            }
+
+            setDefaultProject({ type: 'local', path: startupDir || settings.default_project })
             setLoaded(true)
         }
 
@@ -45,7 +58,9 @@ export default function Tinker2() {
                 <SettingsProvider defaultValue={settings}>
                     <LicenseProvider>
                         <SnippetsProvider defaultValue={snippets}>
-                            <App />
+                            <App
+                                defaultProject={defaultProject}
+                            />
                         </SnippetsProvider>
                     </LicenseProvider>
                 </SettingsProvider>

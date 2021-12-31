@@ -10,6 +10,20 @@
         "beforeBuildCommand": "yarn build"
     },
     "tauri": {
+        "cli": {
+            "description": "Launch at current directory",
+            "longDescription": null,
+            "beforeHelp": null,
+            "afterHelp": null,
+            "args": [
+                {
+                    "name": "directory",
+                    "description": "working directory",
+                    "takesValue": true,
+                    "index": 1
+                }
+            ]
+        },
         "bundle": {
             "active": true,
             "targets": ["all"],
