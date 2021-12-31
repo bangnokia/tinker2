@@ -1,6 +1,6 @@
 {
     "package": {
-        "productName": "Tinker 2",
+        "productName": "Tinker2",
         "version": "0.3.6"
     },
     "build": {
@@ -43,12 +43,12 @@
             "longDescription": "",
             "deb": {
                 "depends": [],
-                "useBootstrapper": false
+                "useBootstrapper": true
             },
             "macOS": {
                 "frameworks": [],
                 "minimumSystemVersion": "",
-                "useBootstrapper": false,
+                "useBootstrapper": true,
                 "exceptionDomain": "",
                 "signingIdentity": null,
                 "entitlements": null
