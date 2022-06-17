@@ -7,7 +7,7 @@ import { SettingsProvider } from "./contexts/SettingsContext"
 import { LicenseProvider } from "./contexts/LicenseContext"
 import { SnippetsProvider } from "./contexts/SnippetsContext"
 import { getMatches } from '@tauri-apps/api/cli'
-import { currentDir, normalize } from '@tauri-apps/api/path'
+import { appDir, normalize } from '@tauri-apps/api/path'
 
 const db = new DatabaseService();
 
@@ -41,7 +41,7 @@ export default function Tinker2() {
             let startupDir = null;
             if (dir !== false) {
                 const normalizeDir = await normalize(dir)
-                startupDir = normalizeDir === '/' || normalizeDir === '.' ? await currentDir() : normalizeDir;
+                startupDir = normalizeDir === '/' || normalizeDir === '.' ? await appDir() : normalizeDir;
             }
 
             setDefaultProject({ type: 'local', path: startupDir || settings.default_project })

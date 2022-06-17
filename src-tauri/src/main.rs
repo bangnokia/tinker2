@@ -3,7 +3,7 @@
   windows_subsystem = "windows"
 )]
 
-use tauri::{Menu, MenuItem, Submenu};
+use tauri::{AboutMetadata, Menu, MenuItem, Submenu};
 
 fn main() {
   let menu = make_menu();
@@ -24,7 +24,10 @@ fn make_menu() -> Menu {
   let main_submenu = Submenu::new(
     "Tinker 2",
     Menu::new()
-      .add_native_item(MenuItem::About("Tinker 2".to_string()))
+      .add_native_item(MenuItem::About(
+        "Tinker 2".to_string(),
+        AboutMetadata::new(),
+      ))
       .add_native_item(MenuItem::EnterFullScreen)
       .add_native_item(MenuItem::Quit),
   );

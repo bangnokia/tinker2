@@ -1,5 +1,5 @@
 import { Command } from '@tauri-apps/api/shell';
-import { currentDir, resourceDir } from '@tauri-apps/api/path';
+import { appDir, resourceDir } from '@tauri-apps/api/path';
 import DatabaseService from './services/DatabaseService';
 
 async function execute({ code, project, mode = 'buffered' }) {
@@ -63,7 +63,7 @@ function makeCommandOnRemoteServer(project, code, psychoPath = '/tmp/psycho.phar
 async function resolvePsychoPath(type) {
     if (type === 'local') {
         if (process.env.NODE_ENV === 'development') {
-            return (await currentDir()) + "bin/psycho.phar"
+            return (await appDir()) + "bin/psycho.phar"
         }
 
         return (await resourceDir()) + 'bin/psycho.phar';
