@@ -62,9 +62,9 @@ function makeCommandOnRemoteServer(project, code, psychoPath = '/tmp/psycho.phar
 
 async function resolvePsychoPath(type) {
     if (type === 'local') {
-        if (process.env.NODE_ENV === 'development') {
-            return (await appDir()) + "bin/psycho.phar"
-        }
+        // if (process.env.NODE_ENV === 'development') {
+        //     return (await appDir()) + "bin/psycho.phar"
+        // }
 
         return (await resourceDir()) + 'bin/psycho.phar';
     }
