@@ -2,6 +2,7 @@ import Editor from "@monaco-editor/react"
 import { usePlayground } from '../contexts/PlaygroundContext';
 import { useRef, useLayoutEffect, useMemo } from "react";
 
+
 export default function Output({ editorOptions, outputMode }) {
     const { output, } = usePlayground()
     const editorRef = useRef(null)

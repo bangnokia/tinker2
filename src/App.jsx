@@ -6,6 +6,10 @@ import Sidebar from './Sidebar';
 import { useSettings } from './hooks/useSettings';
 import { open } from "@tauri-apps/api/dialog";
 import { useHotkeys } from 'react-hotkeys-hook';
+import { loader } from '@monaco-editor/react';
+loader.config({
+    paths: { vs: '/min/vs' }
+})
 
 function App({ defaultProject }) {
     const [settingsPanel, setSettingsPanel] = useState()

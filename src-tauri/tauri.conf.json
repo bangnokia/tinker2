@@ -83,23 +83,7 @@
             },
             "shell": {
                 "all": true,
-                "scope": [
-                    {
-                        "name": "ssh",
-                        "cmd": "ssh",
-                        "args": true
-                    },
-                    {
-                        "name": "scp",
-                        "cmd": "scp",
-                        "args": true
-                    },
-                    {
-                        "name": "php",
-                        "cmd": "php",
-                        "args": true
-                    }
-                ]
+                "scope": []
             },
             "dialog": {
                 "open": true,
