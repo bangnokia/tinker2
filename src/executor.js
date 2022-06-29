@@ -1,10 +1,10 @@
 import { Command } from '@tauri-apps/api/shell';
-import { appDir, resourceDir } from '@tauri-apps/api/path';
+import { resourceDir } from '@tauri-apps/api/path';
 import DatabaseService from './services/DatabaseService';
+import { encode } from 'js-base64'
 
 async function execute({ code, project, mode = 'buffered' }) {
-    // const base64Code = Buffer.from(code).toString('base64');
-    const base64Code = btoa(code);
+    const base64Code = encode(code);
     const psychoPath = await resolvePsychoPath(project.type)
     let command = null;
 
