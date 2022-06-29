@@ -38,7 +38,6 @@ export function PlaygroundProvider(props) {
         const command = await execute({ code, project, mode })
 
         if (mode === 'stream') {
-
             command.on('error', error => setOutput(error))
             command.stdout.on('data', line => appendOutput(line))
             command.stderr.on('data', line => appendOutput(line))
@@ -47,9 +46,14 @@ export function PlaygroundProvider(props) {
             const child = await command.spawn();
             setProcess(child)
         } else {
-            const result = await command.execute();
-            setOutput(result.stdout + result.stderr)
-            setLoading(false)
+            try {
+                const result = await command.execute();
+                setOutput(result.stdout + result.stderr)
+            } catch (ex) {
+                setOutput(ex)
+            } finally {
+                setLoading(false)
+            }
         }
     }
 
