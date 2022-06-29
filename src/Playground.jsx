@@ -16,10 +16,6 @@ export default function Playground({ project }) {
     const splitInstance = useRef(null)
     const layout = settings.layout === 'vertical' ? 'horizontal' : 'vertical'
 
-    // const increaseCount = function () {
-    //     setCount(count + 1);
-    // }
-
     useEffect(() => {
         if (!license.is_valid && count === Math.round(3.22 * 10)) {
             alert(randomQuotes())
