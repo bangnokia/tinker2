@@ -6,7 +6,7 @@
     "build": {
         "distDir": "../build",
         "devPath": "http://localhost:3000",
-        "beforeDevCommand": "",
+        "beforeDevCommand": "yarn dev",
         "beforeBuildCommand": "yarn build"
     },
     "tauri": {
@@ -26,7 +26,9 @@
         },
         "bundle": {
             "active": true,
-            "targets": ["all"],
+            "targets": [
+                "all"
+            ],
             "identifier": "com.daudau.tinker2",
             "icon": [
                 "icons/32x32.png",
@@ -35,7 +37,9 @@
                 "icons/icon.icns",
                 "icons/icon.ico"
             ],
-            "resources": ["./bin/"],
+            "resources": [
+                "./bin/"
+            ],
             "externalBin": [],
             "copyright": "",
             "category": "DeveloperTool",
@@ -43,12 +47,10 @@
             "longDescription": "",
             "deb": {
                 "depends": [],
-                "useBootstrapper": true
             },
             "macOS": {
                 "frameworks": [],
                 "minimumSystemVersion": "",
-                "useBootstrapper": true,
                 "exceptionDomain": "",
                 "signingIdentity": null,
                 "entitlements": null
@@ -61,19 +63,43 @@
         },
         "updater": {
             "active": true,
-            "endpoints": ["https://lab.daudau.cc/api/update/tinker-2/{{target}}/{{current_version}}"],
-            "dialog": true
+            "endpoints": [
+                "https://lab.daudau.cc/api/update/tinker-2/{{target}}/{{current_version}}"
+            ],
+            "dialog": true,
+            "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEEzMjVBM0M3QzRBMTBEM0YKUldRL0RhSEV4Nk1sbzc4N3QvVkZrQVlBVVNBOGo5SFd5NkFkK2l6K3BidFliTDlnSkdxcFpLSmUK"
         },
         "allowlist": {
             "all": false,
             "fs": {
-                "readTextFile": true,
+                "all": false,
+                "readFile": true,
                 "writeFile": true,
                 "readDir": true,
-                "createDir": true
+                "createDir": true,
+                "scope": [
+                    "**/*"
+                ]
             },
             "shell": {
-                "all": true
+                "all": true,
+                "scope": [
+                    {
+                        "name": "ssh",
+                        "cmd": "ssh",
+                        "args": true
+                    },
+                    {
+                        "name": "scp",
+                        "cmd": "scp",
+                        "args": true
+                    },
+                    {
+                        "name": "php",
+                        "cmd": "php",
+                        "args": true
+                    }
+                ]
             },
             "dialog": {
                 "open": true,
@@ -85,7 +111,11 @@
             },
             "http": {
                 "all": true,
-                "request": true
+                "request": true,
+                "scope": [
+                    "https://**",
+                    "https://**"
+                ]
             }
         },
         "windows": [
