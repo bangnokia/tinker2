@@ -1,7 +1,12 @@
 import { Command } from '@tauri-apps/api/shell';
+import { invoke } from '@tauri-apps/api/tauri';
 import { resourceDir } from '@tauri-apps/api/path';
 import DatabaseService from './services/DatabaseService';
 import { encode } from 'js-base64'
+
+export function makeCommand(project, code, mode) {
+    return 'whoami';
+}
 
 async function execute({ code, project, mode = 'buffered' }) {
     const base64Code = encode(code);
@@ -20,6 +25,10 @@ async function execute({ code, project, mode = 'buffered' }) {
         default:
             throw new Error(`Project type ${project.type} is not supported.`)
     }
+
+    // return invoke('execute_command', { command: 'whoami' });
+
+    return 'whoami';
 
     return command;
 }

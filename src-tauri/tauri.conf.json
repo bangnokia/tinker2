@@ -83,7 +83,18 @@
             },
             "shell": {
                 "all": true,
-                "scope": []
+                "scope": [
+                    {
+                        "name": "ssh",
+                        "cmd": "ssh",
+                        "args": true
+                    },
+                    {
+                        "name": "scp",
+                        "cmd": "scp",
+                        "args": true
+                    }
+                ]
             },
             "dialog": {
                 "open": true,

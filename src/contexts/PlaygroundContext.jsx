@@ -1,5 +1,6 @@
+import { invoke } from "@tauri-apps/api";
 import { useState, createContext, useContext, useRef } from "react";
-import execute from "../executor";
+import execute, { makeCommand } from "../executor";
 
 const PlaygroundContext = createContext();
 
@@ -35,7 +36,14 @@ export function PlaygroundProvider(props) {
         setLoading(true)
         cleanOutput()
 
-        const command = await execute({ code, project, mode })
+        const command = makeCommand(project, code, mode);
+        // console.log('commnand', command)
+        const output = await invoke('execute_command', { command: command });
+        console.log('output', output)
+        setLoading(false)
+        setOutput(output)
+        return;
+
 
         if (mode === 'stream') {
             command.on('error', error => setOutput(error))

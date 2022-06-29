@@ -3,19 +3,35 @@
   windows_subsystem = "windows"
 )]
 
+use std::process::Command;
 use tauri::{AboutMetadata, Menu, MenuItem, Submenu};
+
+#[tauri::command]
+fn execute_command(command: String) -> String {
+  let output = if cfg!(target_os = "windows") {
+    Command::new("cmd")
+      .args(&["/C", &command])
+      .output()
+      .expect("failed to execute process")
+  } else {
+    Command::new("sh")
+      .arg("-c")
+      .arg(&command)
+      .output()
+      .expect("failed to execute process")
+  };
+
+  let hello = output.stdout;
+
+  String::from_utf8(hello).unwrap()
+}
 
 fn main() {
   let menu = make_menu();
 
   tauri::Builder::default()
+    .invoke_handler(tauri::generate_handler![execute_command])
     .menu(menu)
-    .on_menu_event(|event| match event.menu_item_id() {
-      "license" => {
-        println!("clicked on license menu");
-      }
-      _ => {}
-    })
     .run(tauri::generate_context!())
     .expect("error while running tauri application");
 }
