@@ -4,18 +4,14 @@ import { resourceDir } from '@tauri-apps/api/path';
 import DatabaseService from './services/DatabaseService';
 import { encode } from 'js-base64'
 
-export function makeCommand(project, code, mode) {
-    return 'whoami';
-}
-
-async function execute({ code, project, mode = 'buffered' }) {
+export async function makeCommand(project, code, mode) {
     const base64Code = encode(code);
-    const psychoPath = await resolvePsychoPath(project.type)
+    const psychoPath = await resolvePsychoPath(project.type);
     let command = null;
 
     switch (project.type) {
         case 'local':
-            command = makeCommandOnLocalMachine(project, base64Code, psychoPath, mode)
+            command = await makeCommandOnLocalMachine(project, base64Code, psychoPath, mode)
             break;
 
         case 'ssh':
@@ -26,10 +22,6 @@ async function execute({ code, project, mode = 'buffered' }) {
             throw new Error(`Project type ${project.type} is not supported.`)
     }
 
-    // return invoke('execute_command', { command: 'whoami' });
-
-    return 'whoami';
-
     return command;
 }
 
@@ -37,15 +29,7 @@ async function makeCommandOnLocalMachine(project, base64Code, psychoPath, mode) 
     const database = new DatabaseService();
     const phpBinary = (await database.get('settings')).default_php_binary
 
-    return new Command(
-        phpBinary,
-        [
-            psychoPath,
-            '--target=' + project.path,
-            '--code=' + base64Code,
-            '--mode=' + mode
-        ]
-    );
+    return `${phpBinary} ${psychoPath} --target=${project.path} --code=${base64Code} --mode=${mode}`;
 }
 
 function makeCommandOnRemoteServer(project, code, psychoPath = '/tmp/psycho.phar', mode) {
@@ -66,7 +50,7 @@ function makeCommandOnRemoteServer(project, code, psychoPath = '/tmp/psycho.phar
         `--mode=${mode}`
     ];
 
-    return new Command('ssh', args)
+    return `ssh ${args.join(' ')}`;
 }
 
 async function resolvePsychoPath(type) {
@@ -92,5 +76,3 @@ export async function uploadPsycho(project) {
 
     return await command.execute();
 }
-
-export default execute

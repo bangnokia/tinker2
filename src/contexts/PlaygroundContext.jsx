@@ -1,6 +1,6 @@
 import { invoke } from "@tauri-apps/api";
 import { useState, createContext, useContext, useRef } from "react";
-import execute, { makeCommand } from "../executor";
+import { makeCommand } from "../executor";
 
 const PlaygroundContext = createContext();
 
@@ -22,7 +22,7 @@ export function PlaygroundProvider(props) {
 
     const outputRef = useRef('');
 
-    const cleanOutput = function () {
+    const clearOutput = function () {
         outputRef.current = '';
         setOutput('')
     }
@@ -34,35 +34,23 @@ export function PlaygroundProvider(props) {
 
     const executeCode = async (project, code, mode) => {
         setLoading(true)
-        cleanOutput()
+        clearOutput()
 
-        const command = makeCommand(project, code, mode);
-        // console.log('commnand', command)
-        const output = await invoke('execute_command', { command: command });
-        console.log('output', output)
-        setLoading(false)
-        setOutput(output)
-        return;
+        let output = '';
+        const command = await makeCommand(project, code, mode);
+        console.log('command', command)
 
-
-        if (mode === 'stream') {
-            command.on('error', error => setOutput(error))
-            command.stdout.on('data', line => appendOutput(line))
-            command.stderr.on('data', line => appendOutput(line))
-            command.on('close', () => setLoading(false))
-
-            const child = await command.spawn();
-            setProcess(child)
-        } else {
-            try {
-                const result = await command.execute();
-                setOutput(result.stdout + result.stderr)
-            } catch (ex) {
-                setOutput(ex)
-            } finally {
-                setLoading(false)
-            }
+        try {
+            output = await invoke('execute_command', { command: command });
+        } catch (ex) {
+            output = ex;
+        } finally {
+            setLoading(false)
         }
+
+        setOutput(output)
+
+        return;
     }
 
     const killProcess = async function () {
@@ -97,7 +85,7 @@ export function PlaygroundProvider(props) {
             setShouldRunCode,
             runCode,
             appendOutput,
-            cleanOutput,
+            cleanOutput: clearOutput,
             executeCode,
             killProcess,
         }} {...props} />
