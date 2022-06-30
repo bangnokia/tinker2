@@ -27,7 +27,12 @@
         "bundle": {
             "active": true,
             "targets": [
-                "all"
+                "deb",
+                "appimage",
+                "msi",
+                "app",
+                "dmg",
+                "updater"
             ],
             "identifier": "com.daudau.tinker2",
             "icon": [
@@ -41,7 +46,7 @@
                 "bin/psycho.phar"
             ],
             "externalBin": [],
-            "copyright": "",
+            "copyright": "@2022 daudau.cc",
             "category": "DeveloperTool",
             "shortDescription": "",
             "longDescription": "",
