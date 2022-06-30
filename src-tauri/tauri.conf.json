@@ -26,14 +26,7 @@
         },
         "bundle": {
             "active": true,
-            "targets": [
-                "deb",
-                "appimage",
-                "msi",
-                "app",
-                "dmg",
-                "updater"
-            ],
+            "targets": "all",
             "identifier": "com.daudau.tinker2",
             "icon": [
                 "icons/32x32.png",
