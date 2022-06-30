@@ -1,5 +1,5 @@
 import { Command } from '@tauri-apps/api/shell';
-import { resolveResource, resourceDir } from '@tauri-apps/api/path';
+import { resolveResource } from '@tauri-apps/api/path';
 import DatabaseService from './services/DatabaseService';
 import { encode } from 'js-base64'
 
