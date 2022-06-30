@@ -1,6 +1,5 @@
 import { Command } from '@tauri-apps/api/shell';
-import { invoke } from '@tauri-apps/api/tauri';
-import { resourceDir } from '@tauri-apps/api/path';
+import { resolveResource, resourceDir } from '@tauri-apps/api/path';
 import DatabaseService from './services/DatabaseService';
 import { encode } from 'js-base64'
 
@@ -29,7 +28,7 @@ async function makeCommandOnLocalMachine(project, base64Code, psychoPath, mode) 
     const database = new DatabaseService();
     const phpBinary = (await database.get('settings')).default_php_binary
 
-    return `${phpBinary} ${psychoPath} --target=${project.path} --code=${base64Code} --mode=${mode}`;
+    return `${phpBinary} '${psychoPath}' --target=${project.path} --code=${base64Code} --mode=${mode}`;
 }
 
 function makeCommandOnRemoteServer(project, code, psychoPath = '/tmp/psycho.phar', mode) {
@@ -55,7 +54,7 @@ function makeCommandOnRemoteServer(project, code, psychoPath = '/tmp/psycho.phar
 
 async function resolvePsychoPath(type) {
     if (type === 'local') {
-        return (await resourceDir()) + 'bin/psycho.phar';
+        return await resolveResource('bin/psycho.phar');
     }
 
     // remote on server, we have to ensure uploaded the psycho.phar first

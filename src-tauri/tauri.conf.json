@@ -38,7 +38,7 @@
                 "icons/icon.ico"
             ],
             "resources": [
-                "./bin/"
+                "bin/psycho.phar"
             ],
             "externalBin": [],
             "copyright": "",
@@ -46,7 +46,7 @@
             "shortDescription": "",
             "longDescription": "",
             "deb": {
-                "depends": [],
+                "depends": []
             },
             "macOS": {
                 "frameworks": [],
