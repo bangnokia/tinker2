@@ -28,6 +28,7 @@ Tinker 2 doesn't ship with any default `Laravel` framework, which increase unnec
 
 ## PHP versions supported
 
+-   [x] 8.1
 -   [x] 8.0
 -   [x] 7.4
 -   [x] 7.3
