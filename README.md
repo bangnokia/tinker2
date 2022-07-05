@@ -8,12 +8,6 @@ Tinker 2 is small (less than 10MB on MacOS)
 
 ![](./screenshot.png)
 
-## Todo lot of shit
-
-- [ ] Animate for the Panel component.
-- [ ] Refactor all icon components to a common file.
-- [ ] What's wrong with database files based.
-
 ## Getting started
 
 Tinker 2 doesn't ship with any default `Laravel` framework, which increase unnecessary app size. You should create an dummy project to set as inital project when open Tinker 2 (So you can have full control about what can be installed by default).
@@ -32,6 +26,6 @@ Tinker 2 doesn't ship with any default `Laravel` framework, which increase unnec
 -   [x] 8.0
 -   [x] 7.4
 -   [x] 7.3
--   [ ] 7.2 (not test yet)
--   [ ] 7.1 (not test yet)
--   [ ] 7.0 (not test yet)
+-   [ ] 7.2 (not tested yet)
+-   [ ] 7.1 (not tested yet)
+-   [ ] 7.0 (not tested yet)
