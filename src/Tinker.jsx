@@ -6,7 +6,7 @@ import SplashScreen from "./SplashScreen"
 import { SettingsProvider } from "./contexts/SettingsContext"
 import { LicenseProvider } from "./contexts/LicenseContext"
 import { SnippetsProvider } from "./contexts/SnippetsContext"
-import { getMatches } from '@tauri-apps/api/cli'
+// import { getMatches } from '@tauri-apps/api/cli'
 import { appDir, normalize } from '@tauri-apps/api/path'
 
 const db = new DatabaseService();
@@ -35,16 +35,15 @@ export default function Tinker2() {
             const snippets = await db.get('snippets', [])
             setSnippets(snippets)
 
+            // const matches = await getMatches();
+            // const dir = matches.args.directory.value
+            // let startupDir = null;
+            // if (dir !== false) {
+            //     const normalizeDir = await normalize(dir)
+            //     startupDir = normalizeDir === '/' || normalizeDir === '.' ? await appDir() : normalizeDir;
+            // }
 
-            const matches = await getMatches();
-            const dir = matches.args.directory.value
-            let startupDir = null;
-            if (dir !== false) {
-                const normalizeDir = await normalize(dir)
-                startupDir = normalizeDir === '/' || normalizeDir === '.' ? await appDir() : normalizeDir;
-            }
-
-            setDefaultProject({ type: 'local', path: startupDir || settings.default_project })
+            setDefaultProject({ type: 'local', path: settings.default_project })
             setLoaded(true)
         }
 
