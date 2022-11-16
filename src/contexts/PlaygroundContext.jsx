@@ -8,7 +8,7 @@ export function usePlayground() {
     const context = useContext(PlaygroundContext);
 
     if (!context) {
-        throw new Error("useSettings must be use within a SettingsProvider.")
+        throw new Error("usePlayground must be use within a PlaygroundContextProvider.")
     }
 
     return context
@@ -48,6 +48,7 @@ export function PlaygroundProvider(props) {
             setLoading(false)
         }
 
+        console.log('output ', output)
         setOutput(output)
 
         return;
@@ -61,16 +62,15 @@ export function PlaygroundProvider(props) {
         }
     }
 
-
-    const runCode = function (project, code, outputMode) {
+    const runCode = async function (project, code, outputMode) {
         if (!code) {
             return;
         }
 
         if (loading) {
-            killProcess()
+            await killProcess()
         } else {
-            executeCode(project, code, outputMode)
+            await executeCode(project, code, outputMode)
             // increaseCount();
         }
     };

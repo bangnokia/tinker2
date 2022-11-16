@@ -34,7 +34,7 @@ export default function Input({ project, editorOptions, outputMode }) {
             }
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [monaco, outputMode, project])
+    }, [monaco, outputMode, project, editorRef.current])
 
     useEffect(() => {
         // add code to snippets context menu
